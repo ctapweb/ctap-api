@@ -1,0 +1,30 @@
+{
+    "collection": {
+        "version": "1.0",
+        "href": "http://localhost:8080/annotators/language_detector",
+        "template": {
+            "data": [
+                {
+                    "name": "text-title",
+                    "prompt": "Text-title",
+                    "value": "Watch your step! Boy trips over skull of million-year-old Stegomastodon"
+                },
+                {
+                    "name": "text-content",
+                    "prompt": "Text-content",
+                    "value": "Jude Sparks was out on a family hike in the desert near Las Cruces, New Mexico, testing walkie-talkies. That's when the then-9-year-old boy tripped over a rocky mound.\nWhen Jude got up again, he examined what appeared to be two large, fossilized teeth jutting out from the terrain. Further up, he spotted what looked like a tusk.\nJude was intrigued.\nJude's brother, Hunter, who had been running behind him, didn't seem too impressed, however.\n\"Hunter said it was just a big, fat, rotten cow,\" Jude told KVIA News, which first reported the story. \"I didn't know what it was. I just knew it wasn't usual.\"\nThe boys' parents photographed the curious mass. They then helped Jude look up experts online that night. The family emailed Peter Houde, a biology professor at New Mexico State University who maintains a lab devoted to paleontological studies.\nExperts Take A Look\n\"I immediately recognized the importance of what it was,\" Houde told the news station. \"We went out there the very next day to have a look at it.\"\nIt turned out Jude's instincts were correct. He had discovered the fossilized skull of a Stegomastodon. The fossil was estimated to be more than 1 million years old. \nStegomastodons have long been extinct. They were an ancient relative of the elephant. Their two enormous tusks curved upward and stood nearly 9 feet tall.\nThe Stegomastodon skeleton that Jude discovered was a rare find. Both the animal's jawbone and a tusk were exposed to the surface of the fossil, Houde said in a paper published on his website.\n\"Fossil bones from the same animal are rarely found together in our area,\" Houde wrote. What's more, Stegomastodon fossils are extremely fragile, despite the animal's enormous size.\nThe Big Dig\n\"We're really, really grateful that (the Sparks family) contacted us,\" Houde told the New York Times. \"If they had tried to do it themselves,\" he added, \"it could have just destroyed the specimen.\" Instead, the Sparks reached out to the experts, which Houde emphasized is the right thing to do. Studying fossils \"really has to be done with great care and know-how,\" he said.\nAfter several months, Houde and his team finally got permission from the landowner to dig on the property. According to a university news release, they had to agree to keep the site a secret during the dig. \nIn May, Houde and a team began the weeklong, painstaking work of digging up the fossil. The collagen in the bones had long since decomposed, so the fossils \"can easily disintegrate under their own weight before your very eyes as soon as the sediments that cradle and support them are cleaned away,\" Houde wrote. Because of that, the excavation required exposing parts of the fossil, little by little, and allowing it to fully dry before applying a hardener.\nLittle by little, they unearthed a nearly complete skull, only missing a tusk.\n\"It's just been very exciting,\" Jude's mother, Michelle Sparks, told the news station. \"Especially for the boys because every child dreams of finding bones and them being actually old.\"\nFossil Will Eventually Be Displayed In A Museum\nJude, now 10, told KVIA News that most of his friends still don't believe that he found a fossil more than a million years old. That's OK, because he'll eventually be able to show them. Though Houde is continuing to study and preserve the fossil, he thinks it will eventually be available for public viewing at New Mexico State University's Vertebrate Museum.\n\"I have every hope and expectation that this specimen will ultimately end up on exhibit and this little boy will be able to show his friends and even his own children: 'Look what I found right here in Las Cruces,'\" Houde said in a university statement.\nIt wasn't the first time someone had made such a lucky fossil discovery. In 2014, a bachelor party camping at Elephant Butte State Park in southern New Mexico discovered a nearly complete fossilized skull of a Stegomastodom, now housed at the New Mexico Natural History Museum.\nIn 2015, a then-4-year-old boy named Wylie Brys happened upon the fossilized bones of a nodosaur while exploring land behind a Dallas-area shopping center.\n\"He's a little kid,\" his father, Tim Brys, told the Washington Post then. \"He likes playing in dirt as much as finding the fossils, I think.\""
+                },
+                {
+                    "name": "text-language",
+                    "prompt": "Text-language",
+                    "value": "en"
+                },
+                {
+                    "name": "file-type",
+                    "prompt": "File-type",
+                    "value": "text/plain"
+                }
+            ]
+        }
+    }
+}

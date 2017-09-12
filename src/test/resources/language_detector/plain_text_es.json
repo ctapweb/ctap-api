@@ -1,0 +1,30 @@
+{
+    "collection": {
+        "version": "1.0",
+        "href": "http://localhost:8080/annotators/language_detector",
+        "template": {
+            "data": [
+                {
+                    "name": "text-title",
+                    "prompt": "Text-title",
+                    "value": "Niño de nueve años descubre antiguo cráneo fosilizado"
+                },
+                {
+                    "name": "text-content",
+                    "prompt": "Text-content",
+                    "value": "Jude Sparks andaba de paseo con su familia en el desierto cerca de Las Cruces, Nuevo México, probando walkie-talkies. De pronto, el niño de 9 años tropezó con un montículo rocoso.\nCuando Jude se levantó de nuevo, examinó lo que parecían ser dos grandes dientes fosilizados sobresaliendo del suelo. Más adelante, vio algo que parecía un colmillo. Jude estaba intrigado.\nHunter, el hermano de Jude, quien había estado corriendo detrás de él, no parecía demasiado impresionado.\n\"Hunter dijo que solo era una vaca grande y gorda, podrida\", contó Jude al canal de televisión KVIA News, el primer medio en reportar la noticia. \"Yo no sabía qué era. Solo sabía que no era normal\".\nLos padres del niño fotografiaron la curiosa masa y después ayudaron a Jude a buscar expertos en Internet. Le enviaron un correo electrónico a Peter Houde, profesor de biología de la Universidad Estatal de Nuevo México, quien tiene un laboratorio dedicado a estudios paleontológicos.\nUn descubrimiento importante\n\"Yo reconocí inmediatamente la importancia de lo que era\", dijo Houde a la estación de noticias. \"Al día siguiente, fuimos a echarle un vistazo\".\nResultó que el instinto de Jude era correcto, pues había descubierto la calavera fosilizada de un stegomastodon. Se calcula que el fósil tiene un millón de años de edad.\nEl stegomastodon, un pariente antiguo del elefante, es una especie extinta desde hace años. Tenían dos enormes colmillos curvados hacia arriba y una estatura de casi 9 pies.\nEl esqueleto del stegamastodon que descubrió Jude fue un hallazgo poco común. Tanto la mandíbula como el colmillo del animal estaban expuestos en la superficie, dijo Houde en un artículo publicado en su sitio web.\nEn manos de expertos\n\"Estamos muy, muy agradecidos de que (la familia Sparks) nos haya contactado, porque si hubieran tratado de hacerlo por su cuenta, simplemente se hubiera podido destruir la muestra\", dijo Houde al periódico The New York Times. En cambio, los Sparks buscaron la ayuda de expertos, que es lo correcto, enfatizó Houde. El estudio de los fósiles \"debe hacerse realmente con mucho cuidado y conocimiento\" afirmó.\nDespués de varios meses, Houde y su equipo finalmente obtuvieron permiso del dueño del terreno para excavar en la propiedad. Se hizo bajo la condición de que el sitio permaneciera en secreto, según un comunicado de prensa de la universidad.\nEn mayo, Houde y un equipo comenzaron el minucioso trabajo de desenterrar el fósil. El proceso tomó una semana. Los huesos eran tan antiguos que podían deshacerse al limpiar los sedimentos que los mantienen y los sostienen, escribió Houde. Debido a esto, Houde y su equipo expusieron las partes del fósil poco a poco. Después, los dejaron secar por completo antes de aplicarles un endurecedor.\nPoco a poco, desenterraron una calavera casi completa a la que solo le faltaba un colmillo.\nAmigos de Jude aún no lo creen\n\"Ha sido muy emocionante\", dijo la madre de Jude, Michelle Sparks, a la estación de noticias. \"Especialmente para los niños, porque todos los niños sueñan con encontrar huesos y que sean realmente viejos\".\nJude, quien ahora tiene 10 años, dijo a KVIA News que la mayoría de sus amigos todavía no creen que él encontró un fósil de más de un millón de años, pero no importa, porque él podrá mostrárselos en un futuro. Aunque Houde sigue estudiando y preservando el fósil, él cree que tarde o temprano estará disponible para que el público lo vea en el Museo de Vertebrados de la Universidad Estatal de Nuevo México.\n\"Tengo la esperanza y la expectativa que esta muestra será exhibida y que este niño podrá mostrarla a sus amigos y hasta a sus propios hijos, y decirles: 'miren lo que encontré aquí en Las Cruces' \", dijo Houde en un comunicado de la universidad.\nOtros hallazgos afortunados\nNo es la primera vez que alguien ha hecho un descubrimiento afortunado de un fósil como este. En el 2014, un grupo de amigos que acampaba en el Elephant Butte State Park, en el sur de Nuevo México, descubrió una calavera casi completa de un stegomastodon. Actualmente, el fósil se encuentra en el Museo de Historia Natural de Nuevo México.\nEn el 2015, un niño que entonces tenía 4 años llamado Wylie Brys, exploraba el terreno detrás de un centro comercial en el área de Dallas y se encontró casualmente con los huesos fosilizados de un nodosaurio.\nWylie, a diferencia de Jude, quizás era demasiado joven para apreciar su suerte.\n\"Es un niño pequeño\", dijo entonces su padre, Tim Brys, a The Washington Post. \"Le gusta jugar con tierra tanto como encontrar fósiles, pienso yo\"."
+                },
+                {
+                    "name": "text-language",
+                    "prompt": "Text-language",
+                    "value": "es"
+                },
+                {
+                    "name": "file-type",
+                    "prompt": "File-type",
+                    "value": "text/plain"
+                }
+            ]
+        }
+    }
+}

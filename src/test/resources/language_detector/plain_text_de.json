@@ -1,0 +1,30 @@
+{
+    "collection": {
+        "version": "1.0",
+        "href": "http://localhost:8080/annotators/language_detector",
+        "template": {
+            "data": [
+                {
+                    "name": "text-title",
+                    "prompt": "Text-title",
+                    "value": "Scharfe Kritik am Dieselgipfel"
+                },
+                {
+                    "name": "text-content",
+                    "prompt": "Text-content",
+                    "value":"Software-Updates und Umtauschprämien für alte Dieselfahrzeuge sollen die Luft sauberer machen. Mit diesen Ergebnissen des Dieselgipfels sind Umweltverbände, Verbraucherschützer und Grüne alles andere als zufrieden.\n\n\"Vor die Wand gefahren\" hätten Bundesregierung und Autobranche den Dieselgipfel, beklagt Klaus Müller, Vorstand des Verbraucherzentrale Bundesverbands. Dass die Hersteller für die Kosten der Software-Updates bei Dieselautos aufkommen, sei \"eine Selbstverständlichkeit\", erklärte Verbraucherschützer  Müller. \"Dafür hätte es den Gipfel nicht gebraucht.\"\nVerbraucherverbände und Umweltschützer saßen beim Dieselgipfel nicht mit am Tisch - sie protestierten aber vor dem Bundesverkehrsministerium gegen die Luftverschmutzung durch Dieselfahrzeuge. Demonstranten trugen einen Mundschutz, Greenpeace-Aktivisten befestigten ein 20 Meter langes Banner an der Außenfassade des Bundesverkehrsministeriums, auf dem stand: \"Willkommen in Fort NOx\". Das ist die Abkürzung für Stickoxide, die vor allem von Diesel-Fahrzeugen ausgestoßen werden und in hoher Konzentration zu schweren Gesundheitsschäden führen können. Schätzungsweise 10.000 Menschen sterben jährlich in der Deutschland an den Folgen der Stickoxid-Belastung der Luft.\nGreenpeace-Banner am Verkehrsministerium in Berlin. NOx steht für Stickoxide.\nDie Verbände bezweifeln, dass die nun angekündigten Software-Updatesfür 5,3 Millionen neuere Diesel-Fahrzeuge und Umtauschprämien für ältere Diesel-Fahrzeuge daran schnell und nachhaltig etwas ändern werden. Verbraucherschützer Müller vermisst außerdem klare Zusagen der Industrie an die Autofahrer für den Fall, dass auch die Hardware der Autos nachgerüstet werden muss: \"Es muss klar sein, wer für spätere Folgeschäden zahlt.\"\nAuch die Umweltorganisation Greenpeace kritisierte die Gipfel-Beschlüsse: \"Statt Millionen Menschen vor Dieselabgasen zu schützen, legt die Bundesregierung heute einen sterbenden Motor unters Sauerstoffzelt.\" Saubere Diesel seien den Konzernen zu teuer, \"und die Politik lässt es ihnen durchgehen\".\n\"Grandios gescheitert\"\nFür die Deutsche Umwelthilfe (DUH) ist der Gipfel \"grandios gescheitert\". Nach Ansicht von Bundesgeschäftsführer Jürgen Resch können Software-Updates die Stickstoffemissionen nicht in ausreichendem Maß senken, da sie weniger als 20 Prozent der 15 Millionen deutschen Dieselfahrzeuge beträfen. Ab 2018, so die Prognose des Verbandes, werde es Fahrverbote für Dieselautos in Deutschland geben.\nErst in der vergangenen Woche hatte das Verwaltungsgericht Stuttgart der Deutschen Umwelthilfe Recht gegeben: Die von den Autobauern angekündigten Nachbesserungen reichten nicht aus, um die Luft zu verbessern, hatte das Gericht geurteilt. Nur Fahrverbote seien ein wirksames Mittel, um die Luftqualität zu verbessern. Insgesamt klagt der Verband in 16 deutschen Städten für reine Luft. Diese Klagen würden unverändert weiter betrieben, sagte DUH-Geschäftsführer Jürgen Resch nach dem Gipfel. Im Juni 2015 hatte die EU-Kommission bereits ein Vertragsverletzungsverfahren gegen Deutschland wegen anhaltender Überschreitung der Stickstoffdioxid-Grenzwerte eingeleitet.\n\n \nDieselverbot in Stuttgart: Interview mit Jürgen Resch, Deutsche Umwelthilfe\nAuch Grünen-Chef Cem Özdemir ist das Ergebnis des \"Dieselgipfelchens\" zu dürftig: Verkehrsminister Alexander Dobrindt (CSU) fehle der Mut,\"die Hersteller zu wirksamen Hardware-Nachrüstungen zu verdonnern\". So großzügig wie angekündigt seien die Software-Updates gar nicht: Die Hälfte der Fahrzeuge hätte \"wegen der Betrügereien bei Volkswagen\" sowieso zurück in die Werkstatt gemusst.\nGeradezu fahrlässig finden es die Grünen, dass Dobrindt es verpasst habe, die ausländischen Hersteller ebenfalls auf eine Senkung des Stickoxid-Ausstoßes zu verpflichten. Der Abgasskandal sei \"der Fukushima-Moment der Autoindustrie\". Nun müsse sich die deutsche Automobilwirtschaft der Entwicklung abgasfreier Autos zu wenden. Dem stimmt der SPD-Verkehrspolitiker Sören Bartol zu: Wenn Deutschland Automobilland Nummer eins bleiben wolle, müssten Hersteller endlich in alternative Antriebe investieren - am besten mit einer festen Quote für die Produktion von Elektrofahrzeugen. " 
+                },
+                {
+                    "name": "text-language",
+                    "prompt": "Text-language",
+                    "value": "de"
+                },
+                {
+                    "name": "file-type",
+                    "prompt": "File-type",
+                    "value": "text/plain"
+                }
+            ]
+        }
+    }
+}

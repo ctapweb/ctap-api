@@ -1,0 +1,30 @@
+{
+    "collection": {
+        "version": "1.0",
+        "href": "http://localhost:8080/annotators/language_detector",
+        "template": {
+            "data": [
+                {
+                    "name": "text-title",
+                    "prompt": "Text-title",
+                    "value": "title of text"
+                },
+                {
+                    "name": "text-content",
+                    "prompt": "Text-content",
+                    "value": "text content to be analyzed"
+                },
+                {
+                    "name": "text-language",
+                    "prompt": "Text-language",
+                    "value": "en"
+                },
+                {
+                    "name": "file-type",
+                    "prompt": "File-type",
+                    "value": "text/plain"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "collection": {
+        "version": "1.0",
+        "href": "http://localhost:8080/annotators/language_detector",
+        "template": {
+            "data": [
+                {
+                    "name": "text-title",
+                    "prompt": "Text-title",
+                    "value": "Diesel, quel avenir?"
+                },
+                {
+                    "name": "text-content",
+                    "prompt": "Text-content",
+                    "value": "Les journaux allemands reviennent sur le \"Forum national\" axé sur l'avenir du Diesel qui a démarré à Berlin. Mais la presse se penche aussi sur le dossier Donald Trump et \"l'affaire Russe.\"\n\n\"Les Allemands achètent moins de voitures diesel\", c'est avec ce titre que la Frankfurter Allgemeine Zeitung aborde la question du diesel. Selon le journal le débat autour du moteur diesel et tout le scandale que cela engendre a déjà pour conséquence un changement de comportement d'achat des Allemands.\n\"Le jour même où cadres automobiles, ministres, chefs d'Etats et de gouvernements sont réunis à Berlin pour discuter de l'avenir du moteur diesel en Allemagne, l'Autorité fédérale des transports a publié de nouveaux chiffres d'enregistrement. En Juillet, il y avait près de 13 pour cent en moins de nouvelles immatriculations de voitures avec des moteurs diesel qu'un an plus tôt\", relate  la Frankfurter Allgemeine Zeitung. \nAlors que le scandale de trucage d'émissions polluantes continue d'éclabousser les constructeurs automobiles allemands, à l'approche des législatives du 24 septembre, la question est devenue un sujet de rivalité entre sociaux-démocrates et conservateurs. \nLa Frankfurter Rundschau fait remarquer que la chancelière Angela Merkel préfère se tenir à l'écart \"de la vapeur Diesel\" en se faisant représenter à la rencontre de Berlin. \"Merkel ne veut pas courir le risque que Martin Schulz lui vole la vedette\" écrit le journal. Le candidat social-démocrate Martin Schulz qui a notamment jugé \"insupportable\" l'absence de la chancelière, actuellement en vacances.\nRencontre à Hambourg en juillet 2017 entre Donald Trump et Vladimir Poutine\nDonald Trump et \"l'affaire Russe\"\nDepuis sa prise de fonction, le président américain fait beaucoup parler de lui. Concernant le dossier qu'on peut appeler désormais \"l'affaire Russe\", la Süddeutsche Zeitung s'interroge. Donald Trump peut-il se débarrasser de \"l'affaire Russe\"? \nLe journal poursuit: \"Jusqu'à présent, il n'y a aucune preuve d'une coopération active entre l'équipe de Trump et le gouvernement russe dans la campagne électorale américaine. Cependant, la réunion du fils du président Donald Trump Junior avec un avocat proche du Kremlin soulève de nouvelles spéculations depuis que la porte-parole de Trump a reconnu que le président avait pris part à l'explication de son fils à la réunion.\"\nDie Tageszeitung signale que trois mois après le licenciement spectaculaire de James Comey, l'ancien patron du FBI, le bureau fédéral a un nouveau patron. Le Sénat américain a en effet approuvé à une large majorité la nomination de l'ancien procureur Christopher Wray au poste de directeur de la police fédérale. \nLors de son audition au Sénat précise le journal, Wray a expliqué qu'il coopérerait dans l'enquête et qu'il était également opposé à la critique de Trump selon laquelle l'enquête ressemblait à une \"chasse aux sorcières\" politique."
+                },
+                {
+                    "name": "text-language",
+                    "prompt": "Text-language",
+                    "value": "fr"
+                },
+                {
+                    "name": "file-type",
+                    "prompt": "File-type",
+                    "value": "text/plain"
+                }
+            ]
+        }
+    }
+}
