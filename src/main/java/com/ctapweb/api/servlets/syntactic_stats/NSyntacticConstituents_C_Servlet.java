@@ -22,9 +22,9 @@ import org.xml.sax.SAXException;
 import com.ctapweb.api.servlets.collection.ResultItem;
 import com.ctapweb.api.servlets.collection.TextTemplate;
 import com.ctapweb.api.servlets.utils.CollectionUtils;
+import com.ctapweb.api.syntactic.SyntacticCounts;
 import com.ctapweb.api.utils.NLPPipeLinesManager;
 import com.ctapweb.api.utils.PropertiesManager;
-import com.ctapweb.api.utils.SyntacticStatUtils;
 
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
@@ -162,7 +162,7 @@ public class NSyntacticConstituents_C_Servlet extends HttpServlet {
 		String textContent = text.getTextContent();
 
 		Annotation annotation = parser.process(textContent);
-		double result = SyntacticStatUtils.getNSynConstituentsClauses(annotation);
+		double result = SyntacticCounts.countNClauses(annotation);
 
 		//create a result item
 		logger.trace("Analyzed text \"{}\", with result {}.", 

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.util.CoreMap;
 
 public class LexicalPOS {
 
@@ -88,6 +89,24 @@ public class LexicalPOS {
 		return nounTokens;
 	}
 
+	public static List<String> getTokensNouns(CoreMap sentence, boolean lemma) {
+		List<String> nounTokens = new ArrayList<>();
+		nounTokens.addAll(LexicalUtils.getPOSTokens(sentence, "NN", lemma));
+		nounTokens.addAll(LexicalUtils.getPOSTokens(sentence, "NNP", lemma));
+		nounTokens.addAll(LexicalUtils.getPOSTokens(sentence, "NNPS", lemma));
+		nounTokens.addAll(LexicalUtils.getPOSTokens(sentence, "NNS", lemma));
+		return nounTokens;
+	}
+	
+	public static List<String> getTokensPronouns(CoreMap sentence, boolean lemma) {
+		List<String> nounTokens = new ArrayList<>();
+		nounTokens.addAll(LexicalUtils.getPOSTokens(sentence, "PRP", lemma));
+		nounTokens.addAll(LexicalUtils.getPOSTokens(sentence, "PRP$", lemma));
+		nounTokens.addAll(LexicalUtils.getPOSTokens(sentence, "WP", lemma));
+		nounTokens.addAll(LexicalUtils.getPOSTokens(sentence, "WP$", lemma));
+		return nounTokens;
+	}
+	
 	public static int countNTokensVerbs(Annotation annotation, boolean lemma) {
 		return getTokensVerbs(annotation, lemma).size();
 	}
@@ -105,6 +124,42 @@ public class LexicalPOS {
 		verbTokens.addAll(LexicalUtils.getPOSTokens(annotation, "VBP", lemma));
 		verbTokens.addAll(LexicalUtils.getPOSTokens(annotation, "VBZ", lemma));
 		return verbTokens;
+	}
+	
+	public static List<String> getTokensVerbs(CoreMap sentence, boolean lemma) {
+		List<String> verbTokens = new ArrayList<>();
+		verbTokens.addAll(LexicalUtils.getPOSTokens(sentence, "VB", lemma));
+		verbTokens.addAll(LexicalUtils.getPOSTokens(sentence, "VBD", lemma));
+		verbTokens.addAll(LexicalUtils.getPOSTokens(sentence, "VBG", lemma));
+		verbTokens.addAll(LexicalUtils.getPOSTokens(sentence, "VBN", lemma));
+		verbTokens.addAll(LexicalUtils.getPOSTokens(sentence, "VBP", lemma));
+		verbTokens.addAll(LexicalUtils.getPOSTokens(sentence, "VBZ", lemma));
+		return verbTokens;
+	}
+
+	public static List<String> getTokensAdjectives(CoreMap sentence, boolean lemma) {
+		List<String> adjectiveTokens = new ArrayList<>();
+		adjectiveTokens.addAll(LexicalUtils.getPOSTokens(sentence, "JJ", lemma));
+		adjectiveTokens.addAll(LexicalUtils.getPOSTokens(sentence, "JJR", lemma));
+		adjectiveTokens.addAll(LexicalUtils.getPOSTokens(sentence, "JJS", lemma));
+		return adjectiveTokens;
+	}
+
+	public static List<String> getTokensAdverbs(CoreMap sentence, boolean lemma) {
+		List<String> adverbTokens = new ArrayList<>();
+		adverbTokens.addAll(LexicalUtils.getPOSTokens(sentence, "RB", lemma));
+		adverbTokens.addAll(LexicalUtils.getPOSTokens(sentence, "RBR", lemma));
+		adverbTokens.addAll(LexicalUtils.getPOSTokens(sentence, "RBS", lemma));
+		return adverbTokens;
+	}
+
+	public static List<String> getTokensLexicals(CoreMap sentence, boolean lemma) {
+		List<String> lexicalTokens = new ArrayList<>();
+		lexicalTokens.addAll(getTokensNouns(sentence, lemma));
+		lexicalTokens.addAll(getTokensVerbs(sentence, lemma));
+		lexicalTokens.addAll(getTokensAdjectives(sentence, lemma));
+		lexicalTokens.addAll(getTokensAdjectives(sentence, lemma));
+		return lexicalTokens;
 	}
 
 }

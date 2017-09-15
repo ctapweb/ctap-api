@@ -19,7 +19,7 @@ import org.apache.tika.exception.TikaException;
 import org.eclipse.jetty.util.URIUtil;
 import org.xml.sax.SAXException;
 
-import com.ctapweb.api.lexical.external.LexicalSophistication;
+import com.ctapweb.api.lexical.external.LexicalFrequencySUBTLEXus;
 import com.ctapweb.api.servlets.collection.ResultItem;
 import com.ctapweb.api.servlets.collection.TextTemplate;
 import com.ctapweb.api.servlets.utils.CollectionUtils;
@@ -163,7 +163,7 @@ public class SophSubtlex_WF_TokenNounSDServlet extends HttpServlet {
 		String textContent = text.getTextContent();
 
 		Annotation annotation = posTagger.process(textContent);
-		double result = LexicalSophistication.getSubtlexWFTokenNounSD(annotation);
+		double result = LexicalFrequencySUBTLEXus.getSubtlexWFTokenNounSD(annotation);
 
 		//create a result item
 		logger.trace("Analyzed text \"{}\", with result {}.", 

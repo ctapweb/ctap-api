@@ -154,6 +154,13 @@
 		</dependency>
 
 
+		<!-- for calculating edit distance of trees -->
+		<dependency>
+			<groupId>DatabaseGroup</groupId>
+			<artifactId>apted</artifactId>
+			<version>1.0</version>
+		</dependency>
+
 
 
 	</dependencies>

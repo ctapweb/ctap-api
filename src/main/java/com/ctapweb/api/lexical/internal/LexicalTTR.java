@@ -3,7 +3,6 @@ package com.ctapweb.api.lexical.internal;
 import static com.ctapweb.api.lexical.internal.TTRUtils.calcCTTR;
 import static com.ctapweb.api.lexical.internal.TTRUtils.calcGTTR;
 import static com.ctapweb.api.lexical.internal.TTRUtils.calcLogTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcMTLD;
 import static com.ctapweb.api.lexical.internal.TTRUtils.calcSTTR;
 import static com.ctapweb.api.lexical.internal.TTRUtils.calcTTR;
 import static com.ctapweb.api.lexical.internal.TTRUtils.calcUberTTR;
@@ -139,16 +138,6 @@ public class LexicalTTR {
 	
 		return msttr;
 	}
-
-	public static double calculateMTLD(Annotation annotation) {
-			List<String> allWordTokens = LexicalUtils.getWordTokens(annotation, false);
-			int size = allWordTokens.size();
-			double forward = calcMTLD(allWordTokens, true);
-			double backward = calcMTLD(allWordTokens, false);
-	//		logger.trace("size: {}, forward: {}, backward: {}", size, forward, backward);
-	
-			return (forward + backward) /2;
-		}
 
 	/**
 	 * Calculate type-token ratio.

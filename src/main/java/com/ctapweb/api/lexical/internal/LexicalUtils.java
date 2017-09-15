@@ -11,6 +11,7 @@ import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.util.CoreMap;
 
 public class LexicalUtils {
 
@@ -103,5 +104,19 @@ public class LexicalUtils {
 		}
 		return posTokens;
 	}
+	
+	//from a sentence, instead of annotation object
+	public static List<String> getPOSTokens(CoreMap sentence, String posTag, boolean lemma ) {
+		List<String> posTokens = new ArrayList<>();
+		for(CoreLabel token: sentence.get(TokensAnnotation.class)) {
+			String tokenStr = lemma? token.get(LemmaAnnotation.class) : token.get(TextAnnotation.class);
+			String posStr = token.get(PartOfSpeechAnnotation.class);
+			if(posTag.equals(posStr)) {
+				posTokens.add(tokenStr);
+			}
+		}
+		return posTokens;
+	}
+	
 
 }
