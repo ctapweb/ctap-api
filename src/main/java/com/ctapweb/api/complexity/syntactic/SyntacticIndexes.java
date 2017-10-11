@@ -1,4 +1,4 @@
-package com.ctapweb.api.syntactic;
+package com.ctapweb.api.complexity.syntactic;
 
 import java.util.List;
 
@@ -83,7 +83,7 @@ public class SyntacticIndexes {
 		DescriptiveStatistics stats = new DescriptiveStatistics();
 		int nSentences = sentences.size();
 		for(int i = 0; i < nSentences - 1; i++) {
-			for(int j = i + 1; i < nSentences; j++) {
+			for(int j = i + 1; j < nSentences; j++) {
 				CoreMap thisSent = sentences.get(i);
 				CoreMap nextSent = sentences.get(j);
 				stats.addValue(SyntacticUtils.calculateEditDistTrees(thisSent, nextSent, treeType));

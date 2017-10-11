@@ -1,11 +1,11 @@
-package com.ctapweb.api.cohesion;
+package com.ctapweb.api.complexity.cohesion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
-import com.ctapweb.api.lexical.internal.LexicalPOS;
+import com.ctapweb.api.complexity.lexical.internal.LexicalPOS;
 
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.pipeline.Annotation;
@@ -154,8 +154,8 @@ public class ReferentialCohesion {
 	
 		//loop through all sentences to check overlap
 		int nOverlaps = 0;
-		for(int i = 0; i < nSentences; i++) {
-			if(isArgumentOverlap(sentences.get(i +1), sentences.get(i))) {
+		for(int i = 0; i < nSentences - 1; i++) {
+			if(isArgumentOverlap(sentences.get(i + 1), sentences.get(i))) {
 				nOverlaps++;
 			}
 		}
@@ -174,7 +174,7 @@ public class ReferentialCohesion {
 		//loop through all sentences to get overlap percentage
 		int nOverlaps = 0;
 		DescriptiveStatistics stats = new DescriptiveStatistics();
-		for(int i = 0; i < nSentences; i++) {
+		for(int i = 0; i < nSentences - 1; i++) {
 			stats.addValue(calcContentWordOverlap(sentences.get(i +1), sentences.get(i)));
 		}
 	
@@ -192,7 +192,7 @@ public class ReferentialCohesion {
 		//loop through all sentences to get overlap percentage
 		int nOverlaps = 0;
 		DescriptiveStatistics stats = new DescriptiveStatistics();
-		for(int i = 0; i < nSentences; i++) {
+		for(int i = 0; i < nSentences - 1; i++) {
 			stats.addValue(calcContentWordOverlap(sentences.get(i +1), sentences.get(i)));
 		}
 	
@@ -210,7 +210,7 @@ public class ReferentialCohesion {
 
 		//loop through all sentences to check overlap
 		int nOverlaps = 0;
-		for(int i = 0; i < nSentences; i++) {
+		for(int i = 0; i < nSentences - 1; i++) {
 			if(isNounOverlap(sentences.get(i +1), sentences.get(i))) {
 				nOverlaps++;
 			}
@@ -229,7 +229,7 @@ public class ReferentialCohesion {
 	
 		//loop through all sentences to check overlap
 		int nOverlaps = 0;
-		for(int i = 0; i < nSentences; i++) {
+		for(int i = 0; i < nSentences - 1; i++) {
 			if(isStemOverlap(sentences.get(i +1), sentences.get(i))) {
 				nOverlaps++;
 			}

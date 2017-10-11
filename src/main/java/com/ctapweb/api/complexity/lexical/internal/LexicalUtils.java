@@ -1,4 +1,4 @@
-package com.ctapweb.api.lexical.internal;
+package com.ctapweb.api.complexity.lexical.internal;
 
 import java.util.ArrayList;
 import java.util.HashSet;

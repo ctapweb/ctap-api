@@ -1,4 +1,4 @@
-package com.ctapweb.api.lexical.external;
+package com.ctapweb.api.complexity.lexical.external;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
-import com.ctapweb.api.lexical.internal.LexicalPOS;
-import com.ctapweb.api.lexical.internal.LexicalUtils;
+import com.ctapweb.api.complexity.lexical.internal.LexicalPOS;
+import com.ctapweb.api.complexity.lexical.internal.LexicalUtils;
 
 import edu.stanford.nlp.pipeline.Annotation;
 

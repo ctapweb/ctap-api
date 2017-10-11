@@ -1,11 +1,11 @@
-package com.ctapweb.api.lexical.internal;
+package com.ctapweb.api.complexity.lexical.internal;
 
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcCTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcGTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcLogTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcSTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcUberTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcCTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcGTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcLogTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcSTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcUberTTR;
 
 import java.util.List;
 
@@ -123,7 +123,7 @@ public class LexicalTTR {
 		//get all word tokens, excluding puncts and numbers
 		List<String> tokensList = LexicalUtils.getWordTokens(annotation, false);
 	
-		//extract segments of set length and calculate TTRServlet for each segment
+		//extract segments of set length and calculate TTR for each segment
 		int listSize = tokensList.size();
 		int nSegments = (int) Math.ceil((double)listSize / segmentLength);
 		double sumTTR = 0;

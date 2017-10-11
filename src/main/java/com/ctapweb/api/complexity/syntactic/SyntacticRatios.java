@@ -1,17 +1,17 @@
-package com.ctapweb.api.syntactic;
+package com.ctapweb.api.complexity.syntactic;
 
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNClauses;
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNComplexNorminals;
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNComplexTunits;
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNCoordinateClauses;
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNCoordinatePhrases;
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNDependentClauses;
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNNounPhrases;
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNSentences;
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNTunits;
-import static com.ctapweb.api.syntactic.SyntacticCounts.countNVerbPhrases;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNClauses;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNComplexNorminals;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNComplexTunits;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNCoordinateClauses;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNCoordinatePhrases;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNDependentClauses;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNNounPhrases;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNSentences;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNTunits;
+import static com.ctapweb.api.complexity.syntactic.SyntacticCounts.countNVerbPhrases;
 
-import com.ctapweb.api.lexical.internal.LexicalCounts;
+import com.ctapweb.api.complexity.lexical.internal.LexicalCounts;
 
 import edu.stanford.nlp.pipeline.Annotation;
 

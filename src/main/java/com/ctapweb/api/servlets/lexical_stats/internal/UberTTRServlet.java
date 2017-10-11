@@ -19,7 +19,7 @@ import org.apache.tika.exception.TikaException;
 import org.eclipse.jetty.util.URIUtil;
 import org.xml.sax.SAXException;
 
-import com.ctapweb.api.lexical.internal.LexicalCounts;
+import com.ctapweb.api.complexity.lexical.internal.LexicalCounts;
 import com.ctapweb.api.servlets.collection.ResultItem;
 import com.ctapweb.api.servlets.collection.TextTemplate;
 import com.ctapweb.api.servlets.utils.CollectionUtils;

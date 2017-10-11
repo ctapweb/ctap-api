@@ -161,6 +161,13 @@
 			<version>1.0</version>
 		</dependency>
 
+<!-- language tools -->
+		<dependency>
+			<groupId>org.languagetool</groupId>
+			<artifactId>language-en</artifactId>
+			<version>3.8</version>
+		</dependency>
+
 
 
 	</dependencies>

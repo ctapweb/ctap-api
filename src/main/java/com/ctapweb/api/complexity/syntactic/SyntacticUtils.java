@@ -1,4 +1,4 @@
-package com.ctapweb.api.syntactic;
+package com.ctapweb.api.complexity.syntactic;
 
 import costmodel.PerEditOperationStringNodeDataCostModel;
 import distance.APTED;

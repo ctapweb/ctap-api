@@ -1,11 +1,11 @@
-package com.ctapweb.api.lexical.external;
+package com.ctapweb.api.complexity.lexical.external;
 
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcCTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcGTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcLogTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcSTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcTTR;
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcUberTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcCTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcGTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcLogTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcSTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcTTR;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcUberTTR;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,21 +17,21 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.ctapweb.api.lexical.internal.LexicalCounts;
-import com.ctapweb.api.lexical.internal.LexicalPOS;
-import com.ctapweb.api.lexical.internal.LexicalUtils;
+import com.ctapweb.api.complexity.lexical.internal.LexicalCounts;
+import com.ctapweb.api.complexity.lexical.internal.LexicalPOS;
+import com.ctapweb.api.complexity.lexical.internal.LexicalUtils;
 
 import edu.stanford.nlp.pipeline.Annotation;
 
-public class LexicalSophisticationNGSL {
+public class LexicalSophisticationBNC {
 	private static Logger logger = LogManager.getLogger();
 	private static Set<String> sophWordSet;
 	private static Set<String> easyWordSet;
 	
 	static{
 		try {
-			sophWordSet = FrequencyListUtils.getNgslLemmaAll();
-			easyWordSet = FrequencyListUtils.getNgslLemmaTop1000();
+			sophWordSet = FrequencyListUtils.getBncLemmaTop2000();
+			easyWordSet = FrequencyListUtils.getBncLemmaTop1000();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

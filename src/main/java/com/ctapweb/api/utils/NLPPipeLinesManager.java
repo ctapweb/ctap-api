@@ -14,6 +14,7 @@ public class NLPPipeLinesManager {
 	private static StanfordCoreNLP posTagger = null;
 	private static StanfordCoreNLP lemmatizer = null;
 	private static StanfordCoreNLP parser = null;
+	private static StanfordCoreNLP completePipe = null;
 	
 	private NLPPipeLinesManager() {}
 	
@@ -61,5 +62,18 @@ public class NLPPipeLinesManager {
 		}
 		return parser;
 	}
+	
+	public static StanfordCoreNLP getCompletePipe() {
+		//init NLP pipeline
+		//NOTE: for jetty to be able to see the pos models, one would need to set jetty 
+		// dependency in Eclipse jetty plugin to look into packages with "no scope"
+		if(completePipe == null) {
+			Properties props = new Properties();
+			props.setProperty("annotators", "tokenize, ssplit, pos, lemma, pos, parse");
+			completePipe = new StanfordCoreNLP(props);
+		}
+		return completePipe;
+	}
+
 
 }

@@ -1,4 +1,4 @@
-package com.ctapweb.api.lexical.external;
+package com.ctapweb.api.complexity.lexical.external;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,7 +70,7 @@ public class FrequencyListUtils {
 		if(ngslLemmaAll == null) {
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 			InputStream ins = classLoader.getResourceAsStream(NGSL_LEMMA_ALL_PATH);
-			List<String> wordList = IOUtils.readLines(ins, Charset.defaultCharset());
+			List<String> wordList = IOUtils.readLines(ins, "UTF-8");
 			ngslLemmaAll = new HashSet<>(wordList);
 		}
 		return ngslLemmaAll;

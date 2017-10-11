@@ -1,4 +1,4 @@
-package com.ctapweb.api.lexical.internal;
+package com.ctapweb.api.complexity.lexical.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -116,10 +116,11 @@ public class TTRUtils {
 		//make a set
 		Set<String> types = new HashSet<>(tokensList);
 		int nTypes = types.size();
-	
+		
+
 		uberTTR = (double) Math.pow(Math.log10(nTokens), 2) / Math.log10((double)nTokens / nTypes);
 	
-		return uberTTR;
+		return Double.isInfinite(uberTTR) ? 0 : uberTTR;
 	}
 
 }

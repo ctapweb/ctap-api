@@ -1,6 +1,6 @@
-package com.ctapweb.api.lexical.internal;
+package com.ctapweb.api.complexity.lexical.internal;
 
-import static com.ctapweb.api.lexical.internal.TTRUtils.calcMTLD;
+import static com.ctapweb.api.complexity.lexical.internal.TTRUtils.calcMTLD;
 
 import java.util.List;
 
