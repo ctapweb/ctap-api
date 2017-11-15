@@ -1,0 +1,24 @@
+package com.ctapweb.api.servlets.utils;
+
+public class PropertyKeys {
+	public static final String DB_HOST = "db.host";
+	public static final String DB_NAME = "db.name";
+	public static final String DB_USER = "db.user";
+	public static final String DB_PASSWD = "db.passwd";
+
+	public static final String DB_HOST_TEST = "db.host.test";
+	public static final String DB_NAME_TEST = "db.name.test";
+	public static final String DB_USER_TEST = "db.user.test";
+	public static final String DB_PASSWD_TEST = "db.passwd.test";
+
+	public static final String DB_TNAME_USER = "db.tname.user";
+	public static final String DB_TNAME_CORPUS = "db.tname.corpus";
+	public static final String DB_TNAME_TEXT = "db.tname.text";
+	public static final String DB_TNAME_TAG = "db.tname.tag";
+	public static final String DB_TNAME_MEASURE_CATEGORY = "db.tname.measure_category";
+	public static final String DB_TNAME_MEASURE = "db.tname.measure";
+	public static final String DB_TNAME_RESULT = "db.tname.result";
+
+	public static final String ADMIN_USERNAME = "admin.username";
+	public static final String ADMIN_PASSWD = "admin.passwd";
+}

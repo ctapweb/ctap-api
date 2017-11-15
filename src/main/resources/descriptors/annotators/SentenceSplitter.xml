@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-  <primitive>true</primitive>  <annotatorImplementationName>com.ctapweb.api.uima.annotators.SentenceSplitter</annotatorImplementationName>
+  <primitive>true</primitive>  <annotatorImplementationName>com.ctapweb.api.measure.uima.annotators.SentenceSplitter</annotatorImplementationName>
   <analysisEngineMetaData>
     <name>Sentence Splitter</name>
     <description>splits sentences that have been tokenized with coreNLP</description>
@@ -20,7 +20,7 @@
       <capability>
         <inputs/>
         <outputs>
-          <type allAnnotatorFeatures="true">com.ctapweb.api.uima.types.Sentence</type>
+          <type allAnnotatorFeatures="true">com.ctapweb.api.measure.uima.types.Sentence</type>
         </outputs>
         <languagesSupported/>
       </capability>

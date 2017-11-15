@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-  <primitive>true</primitive>  <annotatorImplementationName>com.ctapweb.api.uima.annotators.LanguageDetector</annotatorImplementationName>
+  <primitive>true</primitive>  <annotatorImplementationName>com.ctapweb.api.measure.uima.annotators.LanguageDetector</annotatorImplementationName>
   <analysisEngineMetaData>
     <name>Language Detector</name>
     <description>Identify the language in which a document is written.

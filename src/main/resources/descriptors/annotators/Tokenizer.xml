@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <analysisEngineDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
-  <primitive>true</primitive>  <annotatorImplementationName>com.ctapweb.api.uima.annotators.Tokenizer</annotatorImplementationName>
+  <primitive>true</primitive>  <annotatorImplementationName>com.ctapweb.api.measure.uima.annotators.Tokenizer</annotatorImplementationName>
   <analysisEngineMetaData>
     <name>Tokenizer</name>
     <description>Tokenize the input text, which has been language detected.</description>
@@ -20,7 +20,7 @@
       <capability>
         <inputs/>
         <outputs>
-          <type allAnnotatorFeatures="true">com.ctapweb.api.uima.types.Token</type>
+          <type allAnnotatorFeatures="true">com.ctapweb.api.measure.uima.types.Token</type>
         </outputs>
         <languagesSupported/>
       </capability>

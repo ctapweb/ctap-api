@@ -19,11 +19,11 @@ import org.apache.tika.exception.TikaException;
 import org.eclipse.jetty.util.URIUtil;
 import org.xml.sax.SAXException;
 
-import com.ctapweb.api.complexity.lexical.internal.LexicalCounts;
-import com.ctapweb.api.servlets.collection.ResultItem;
-import com.ctapweb.api.servlets.collection.TextTemplate;
-import com.ctapweb.api.servlets.utils.CollectionUtils;
-import com.ctapweb.api.utils.PropertiesManager;
+import com.ctapweb.api.measure.complexity.lexical.internal.LexicalCounts;
+import com.ctapweb.api.measure.servlets.collection.ResultItem;
+import com.ctapweb.api.measure.servlets.collection.TextTemplate;
+import com.ctapweb.api.measure.servlets.utils.CollectionUtils;
+import com.ctapweb.api.servlets.utils.PropertiesManager;
 import com.ctapweb.api.utils.unused.NLPPreProcess;
 
 import edu.stanford.nlp.pipeline.Annotation;

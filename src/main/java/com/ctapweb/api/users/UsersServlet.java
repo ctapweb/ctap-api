@@ -17,8 +17,8 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.ctapweb.api.utils.PropertiesManager;
-import com.ctapweb.api.utils.unused.DBConnectionManager;
+import com.ctapweb.api.db.DBConnectionManager;
+import com.ctapweb.api.servlets.utils.PropertiesManager;
 
 /**
  * Servlet implementation class UsersServlet

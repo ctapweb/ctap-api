@@ -17,10 +17,10 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.ctapweb.api.measure.servlets.collection.TextTemplate;
 import com.ctapweb.api.servlets.annotators.LanguageDetectorServlet;
-import com.ctapweb.api.servlets.collection.TextTemplate;
-import com.ctapweb.api.utils.PropKeys;
-import com.ctapweb.api.utils.PropertiesManager;
+import com.ctapweb.api.servlets.utils.PropKeys;
+import com.ctapweb.api.servlets.utils.PropertiesManager;
 
 import net.hamnaberg.json.Collection;
 import net.hamnaberg.json.parser.CollectionParser;

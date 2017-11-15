@@ -28,10 +28,10 @@ import org.apache.uima.util.InvalidXMLException;
 import org.eclipse.jetty.util.URIUtil;
 import org.xml.sax.SAXException;
 
-import com.ctapweb.api.servlets.collection.ResultItem;
-import com.ctapweb.api.servlets.collection.TextTemplate;
-import com.ctapweb.api.servlets.utils.CollectionUtils;
-import com.ctapweb.api.utils.PropertiesManager;
+import com.ctapweb.api.measure.servlets.collection.ResultItem;
+import com.ctapweb.api.measure.servlets.collection.TextTemplate;
+import com.ctapweb.api.measure.servlets.utils.CollectionUtils;
+import com.ctapweb.api.servlets.utils.PropertiesManager;
 
 import net.hamnaberg.json.Collection;
 import net.hamnaberg.json.Collection.Builder;

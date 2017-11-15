@@ -6,17 +6,17 @@
     <vendor>Xiaobin Chen</vendor>
   <types>
     <typeDescription>
-      <name>com.ctapweb.api.uima.types.Sentence</name>
+      <name>com.ctapweb.api.measure.uima.types.Sentence</name>
       <description>A sentence in a natural language. The type is for storing sentence detection results.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
     </typeDescription>
   <typeDescription>
-      <name>com.ctapweb.api.uima.types.Token</name>
+      <name>com.ctapweb.api.measure.uima.types.Token</name>
       <description>a token, or word</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
     </typeDescription>
   <typeDescription>
-      <name>com.ctapweb.api.uima.types.CoreNLPAnnotationObject</name>
+      <name>com.ctapweb.api.measure.uima.types.CoreNLPAnnotationObject</name>
       <description>for storing a coreNLP annotation object in byte array</description>
       <supertypeName>uima.cas.TOP</supertypeName>
       <features>
