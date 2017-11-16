@@ -1,0 +1,22 @@
+Version: v1
+
+
+For administration:
+
+Access to the following resources all require admin priviledge, which should be passed in with the header:
+
+	Authorization: BASIC base64_hashed_string
+
+The hashed string can be created by running :
+	
+	$ bash64 user:password
+
+which gives a string like "dXNlcjpwYXNzd29yZAo=". The accepted admin credentials are set in config.properties.
+
+
+	GET /v1/db/, lists all the tables in db
+	POST /v1/db/, creates all the tables in db
+	DELETE /v1/db/, deletes all tables in db
+	PUT /v1/db/, reinitializes the db, which means dropping all tables and recreating them.
+	
+

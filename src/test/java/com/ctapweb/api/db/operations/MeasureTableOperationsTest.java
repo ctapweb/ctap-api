@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
-import com.ctapweb.api.db.DBConnectionManager;
+import com.ctapweb.api.db.DataSourceManager;
 import com.ctapweb.api.db.data_generators.TestCategories;
 import com.ctapweb.api.db.data_generators.TestMeasures;
 import com.ctapweb.api.db.pojos.Measure;
@@ -33,7 +33,7 @@ public class MeasureTableOperationsTest {
 	Logger logger = LogManager.getLogger();
 
 	public MeasureTableOperationsTest() throws ClassNotFoundException, IOException, SQLException {
-		DataSource dataSource = DBConnectionManager.getTestDataSource();
+		DataSource dataSource = DataSourceManager.getTestDataSource();
 
 		categoryTableOperations = new MeasureCategoryTableOperations(dataSource);
 		measureTableOperations = new MeasureTableOperations(dataSource);

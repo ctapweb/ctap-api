@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.ctapweb.api.db.DBConnectionManager;
+import com.ctapweb.api.db.DataSourceManager;
 import com.ctapweb.api.db.data_generators.TestUserAccounts;
 import com.ctapweb.api.db.pojos.UserAccount;
 
@@ -29,7 +29,7 @@ public class UserTableOperationsTest {
 	
 
 	public UserTableOperationsTest() throws ClassNotFoundException, IOException, SQLException {
-		userTableOperations = new UserTableOperations(DBConnectionManager.getTestDataSource());
+		userTableOperations = new UserTableOperations(DataSourceManager.getTestDataSource());
 		testUserAccounts = new TestUserAccounts();
 	}
 

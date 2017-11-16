@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
-import com.ctapweb.api.db.DBConnectionManager;
+import com.ctapweb.api.db.DataSourceManager;
 import com.ctapweb.api.db.data_generators.TestCorpora;
 import com.ctapweb.api.db.data_generators.TestUserAccounts;
 import com.ctapweb.api.db.pojos.Corpus;
@@ -32,7 +32,7 @@ public class CorpusTableOperationsTest {
 	Logger logger = LogManager.getLogger();
 
 	public CorpusTableOperationsTest() throws ClassNotFoundException, IOException, SQLException {
-		DataSource dataSource = DBConnectionManager.getTestDataSource();
+		DataSource dataSource = DataSourceManager.getTestDataSource();
 
 		userTableOperations = new UserTableOperations(dataSource);
 		corpusTableOperations = new CorpusTableOperations(dataSource);

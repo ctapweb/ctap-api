@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
-import com.ctapweb.api.db.DBConnectionManager;
+import com.ctapweb.api.db.DataSourceManager;
 import com.ctapweb.api.db.data_generators.TestCategories;
 import com.ctapweb.api.db.data_generators.TestCorpora;
 import com.ctapweb.api.db.data_generators.TestMeasures;
@@ -56,7 +56,7 @@ public class ResultTableOperationsTest {
 	Logger logger = LogManager.getLogger();
 
 	public ResultTableOperationsTest() throws ClassNotFoundException, IOException, SQLException {
-		DataSource dataSource = DBConnectionManager.getTestDataSource();
+		DataSource dataSource = DataSourceManager.getTestDataSource();
 
 		userTableOperations = new UserTableOperations(dataSource);
 		corpusTableOperations = new CorpusTableOperations(dataSource);
@@ -387,7 +387,6 @@ public class ResultTableOperationsTest {
 	 * @throws IOException
 	 */
 	private void runPagedQuery(int numEntries, int limit) throws SQLException, ClassNotFoundException, IOException {
-		//TODO: This needs to be rewritten.
 		
 		initTestEnvironment();
 		int numPages = (int) Math.ceil((double)numEntries / limit);
@@ -403,6 +402,15 @@ public class ResultTableOperationsTest {
 		long[] insertedCorpusIds = corpusTableOperations.addEntries(corpora);
 		assertEquals(numCorpora, corpusTableOperations.getNumEntries());
 		assertEquals(numCorpora, corpusTableOperations.getNumEntriesByOwner(insertedUserId));
+		
+		MeasureCategory category = testCategories.generateCategory();
+		long insertedCategoryId = categoryTableOperations.addEntry(category);
+		assertEquals(insertedCategoryId, categoryTableOperations.getEntry(insertedCategoryId).getId());
+
+		Measure measure = testMeasures.generateMeasure(insertedCategoryId, Measure.Languages.English);
+		long insertedMeasureId = measureTableOperations.addEntry(measure);
+		assertEquals(insertedMeasureId, measureTableOperations.getEntry(insertedMeasureId).getId());
+
 
 		//for each corpus, generate a number of texts
 		for(long corpusId: insertedCorpusIds) {
@@ -411,13 +419,32 @@ public class ResultTableOperationsTest {
 
 			assertEquals(numEntries, textTableOperations.getNumEntriesByCorpus(corpusId));
 			assertEquals(numEntries, textTableOperations.getAllEntriesByCorpus(corpusId).size());
+			
+			//for each text, generate a result
+			for(long tid: insertedTextIds) {
+				Result result = testResults.generateResult(tid, insertedMeasureId);
+				long insertedResultId = resultTableOperations.addEntry(result);
+				assertEquals(insertedResultId, resultTableOperations.getEntry(insertedResultId).getId());
+			}
+			
+			assertEquals(numEntries, resultTableOperations.getAllEntriesByCorpus(corpusId).size());
+			assertEquals(numEntries, resultTableOperations.getNumEntriesByCorpus(corpusId));
 
+			
+			//get all result entry ids
+			long[] resultIds = new long[numEntries];
+			List<Result> resultList = resultTableOperations.getAllEntriesByCorpus(corpusId);
+			for(int i = 0; i < resultList.size(); i++) {
+				resultIds[i] = resultList.get(i).getId();
+			}
+			
+			
 			//get paged results
-			Arrays.sort(insertedTextIds);
+			Arrays.sort(resultIds);
 			for(int i = 0, offset = 0; i < numPages; i++, offset += limit) {
 				//ids of inserted entries
-				long[] idsOnPage = Arrays.copyOfRange(insertedTextIds, offset, 
-						Math.min(insertedTextIds.length, offset + limit));
+				long[] idsOnPage = Arrays.copyOfRange(resultIds, offset, 
+						Math.min(resultIds.length, offset + limit));
 
 				logger.trace("IDs should be on page {}: {}", i, idsOnPage);
 

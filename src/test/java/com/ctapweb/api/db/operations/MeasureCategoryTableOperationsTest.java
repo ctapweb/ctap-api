@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
-import com.ctapweb.api.db.DBConnectionManager;
+import com.ctapweb.api.db.DataSourceManager;
 import com.ctapweb.api.db.data_generators.TestCategories;
 import com.ctapweb.api.db.pojos.MeasureCategory;
 
@@ -26,7 +26,7 @@ public class MeasureCategoryTableOperationsTest {
 	
 
 	public MeasureCategoryTableOperationsTest() throws ClassNotFoundException, IOException, SQLException {
-		measureCategoryTableOperations = new MeasureCategoryTableOperations(DBConnectionManager.getTestDataSource());
+		measureCategoryTableOperations = new MeasureCategoryTableOperations(DataSourceManager.getTestDataSource());
 		testCategories = new TestCategories();
 	}
 

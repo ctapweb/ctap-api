@@ -18,14 +18,16 @@ import com.ctapweb.api.servlets.utils.PropertyKeys;
 
 
 /**
- * @author xiaobin
- * Manages database connections.
+ * Manages datasource with which a connection to the db can be established.
+ * The system uses Apache Commons DBCP package for managing the connection pool.
  * 
  * Before being able to connect to the database, create the user and grant it the rights to use the database.
  * 	  CREATE ROLE ctapapi WITH PASSWORD 'ctapapi' LOGIN;
  *    CREATE DATABASE ctapapi WITH OWNER ctapapi;
+ *    
+ * @author xiaobin
  */
-public class DBConnectionManager {
+public class DataSourceManager {
 
 	private static final Logger logger = LogManager.getLogger();  
 
@@ -77,7 +79,7 @@ public class DBConnectionManager {
 		return testDataSource;
 	}
 
-	//create the connection
+	//create the datasource
 	private static BasicDataSource createDataSource(String dbHost, String dbName, String dbUser, String dbPasswd) 
 			throws ClassNotFoundException, SQLException, IOException {
 		BasicDataSource dataSource = new BasicDataSource();

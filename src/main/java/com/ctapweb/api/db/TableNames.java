@@ -1,6 +1,8 @@
 package com.ctapweb.api.db;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
@@ -86,6 +88,18 @@ public class TableNames {
 
 	public String getResultTableName() {
 		return resultTableName;
+	}
+	
+	public List<String> getAllTableNames() {
+		List<String> allNames = new ArrayList<>();
+		allNames.add(getUserTableName());
+		allNames.add(getCorpusTableName());
+		allNames.add(getTagTableName());
+		allNames.add(getTextTableName());
+		allNames.add(getMeasureCategoryTableName());
+		allNames.add(getMeasureTableName());
+		allNames.add(getResultTableName());
+		return allNames;
 	}
 	
 }

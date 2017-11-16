@@ -1,4 +1,4 @@
-package com.ctapweb.api.servlets.admin;
+package com.ctapweb.api.servlets.db;
 
 import java.io.IOException;
 import java.util.Base64;
