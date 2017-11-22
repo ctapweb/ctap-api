@@ -5,18 +5,153 @@ For administration:
 
 Access to the following resources all require admin priviledge, which should be passed in with the header:
 
-	Authorization: BASIC base64_hashed_string
+	/admin/db/
+	GET, lists all the tables in db
+		curl -i -X GET http://localhost:8080/v1/admin/db/ --user admin@ctapweb.com:admin
+		
+	POST, creates all the tables in db
+		curl -i -X POST http://localhost:8080/v1/admin/db/ --user admin@ctapweb.com:admin
+		
+	DELETE, deletes all tables in db
+		curl -i -X DELETE http://localhost:8080/v1/admin/db/ --user admin@ctapweb.com:admin
 
-The hashed string can be created by running :
+	PUT, reinitializes the db, which means dropping all tables and recreating them.
+		curl -i -X PUT http://localhost:8080/v1/admin/db/ --user admin@ctapweb.com:admin
+
+User operations:
+	Except for new user sign up by POSTing to /users/, all the other operations require authentication.
+
+	/users/
+	POST, creates a new user  
+		echo '{"firstName": "myFirstName", "lastName": "myLastName", "institution": "University of the Universe", "email": "user@example.com", "passwd": "myPassword" }' | curl -iX POST -d @- http://localhost:8080/v1/users/ --header "Content-Type:application/json"
+	/users/passwords/?[user=account@exmaple.com]
+	PUT, resets password, returns the new password by email
+		echo '{"email": "user@example.com"}' | curl -iX PUT -d @- http://localhost:8080/v1/users/passwords/
+
+	/user/
+	GET, lists the user info
+		curl -i -X GET http://localhost:8080/v1/user/ --user user@example.com:myPassword
+		If user has already been authenticated, use sessionId for authorization
+		curl -i -X GET http://localhost:8080/v1/user/ --cookie "JSESSIONID=1lpyxyzyq69uh5e41lr9xedr2"
+	PUT, updates user info, need to check user credentials
+		echo '{"firstName": "newFirstName", "lastName": "newLastName", "institution": "new institution"}' | curl -iX PUT -d @- http://localhost:8080/v1/user/ --header "Content-Type:application/json" --user user@example.com:myPassword 
 	
-	$ bash64 user:password
+	/user/passwd/
+	PUT, updates user password, need to check user principal
+		echo '["oldPasswd", "newPasswd"]' | curl -iX PUT -d @- http://localhost:8080/v1/user/passwd/ --header "Content-Type:application/json" --user user@example.com:myPassword
+		
+	/user/login/
+	POST, authenticate the user with sent-in user info, further request can send in returned JSESSIONID for authorization
+		curl -i -X POST -d "" http://localhost:8080/v1/user/ --user user@example.com:myPassword
+		or 
+		curl -i -X POST -d "" http://localhost:8080/v1/user/ --cookie 'JSESSIONID=1956aio6vv5mv13cx3o1gmzj9a'
 
-which gives a string like "dXNlcjpwYXNzd29yZAo=". The accepted admin credentials are set in config.properties.
-
-
-	GET /v1/db/, lists all the tables in db
-	POST /v1/db/, creates all the tables in db
-	DELETE /v1/db/, deletes all tables in db
-	PUT /v1/db/, reinitializes the db, which means dropping all tables and recreating them.
+	DELETE, log out the user
+		curl -i -X DELETE http://localhost:8080/v1/user/login/ --cookie 'JSESSIONID=1956aio6vv5mv13cx3o1gmzj9a'
+		or
+		curl -i -X DELETE http://localhost:8080/v1/user/login/ --user user@example.com:myPassword
+		
 	
+Corpus operations:
+	/corpora/
+	GET, lists information of all corpora, requires user authentication
+		curl -i -X GET http://localhost:8080/v1/corpora/ --user user@example.com:myPassword
+
+	POST, creates a new corpus, returns a link to the corpus
+		echo '{"name": "corpus 1", "description": "description of corpus 1"}' | curl -iX POST -d @- http://localhost:8080/v1/corpora/ --header "Content-Type:application/json" --user user@example.com:myPassword
+		
+	PUT, changes the corpus info
+		echo '{"id": 1, "name": "new corpus 1 name", "description": "new description of corpus 1"}' | curl -i -X PUT -d @- http://localhost:8080/v1/corpora/ --user user@example.com:myPassword
+		
+	DELETE, deletes a corpus
+		echo '{"id": 1}' | curl -i -X DELETE -d @- http://localhost:8080/v1/corpora/ --user user@example.com:myPassword
+	
+	/corpora/[id]: dispatched to /coporpa/id/[id]
+	GET, gets info of a specific corpus
+		curl -i -X GET http://localhost:8080/v1/corpora/2 --user user@example.com:myPassword
+	
+	PUT, change the corpus info: name, description
+		echo '{"name": "new corpus 1 name", "description": "new description of corpus 1"}' | curl -i -X PUT -d @- http://localhost:8080/v1/corpora/1 --user user@example.com:myPassword
+
+	DELETE, remove the corpus
+		curl -i -X DELETE http://localhost:8080/v1/corpora/1 --user user@example.com:myPassword
+	
+Tag operations:
+	/tags/
+	GET, lists all the tags of the user
+		 curl -iX GET http://localhost:8080/v1/tags/ --user user@example.com:myPassword 
+
+	POST, inserts a new tag
+		echo '{"corpusId": 4, "name": "a tag name"}' | curl -iX POST -d @- http://localhost:8080/v1/tags/ --user user@example.com:myPassword  
+
+	PUT, only forwards to /tags/id/[id]
+	DELETE, only forwards to /tags/id/[id]
+	
+	/tags/corpus/[corpus_id]
+	GET, lists all the tags of a corpus
+		 curl -iX GET http://localhost:8080/v1/tags/corpus/1 --user user@example.com:myPassword 
+	
+	POST, inserts a new tag to the corpus
+		echo '{"name": "a tag name"}' | curl -iX POST -d @- http://localhost:8080/v1/tags/corpus/1 --user user@example.com:myPassword  
+	
+	/tags/[id]: dispatched to /tags/id/[id]
+
+	GET, gets the tag name
+		 curl -iX GET http://localhost:8080/v1/tags/1 --user user@example.com:myPassword 
+
+	PUT, changes the tag name
+		echo '{"name": "new name"}' | curl -iX PUT -d @- http://localhost:8080/v1/tags/7 --user user@example.com:myPassword
+
+	DELETE, deletes the tag
+		curl -iX DELETE http://localhost:8080/v1/tags/7 --user user@example.com:myPassword
+	
+Text operations:
+
+	/texts/
+	DELETE, deletes multiple texts, if url suffixed by text id, forward to /texts/id/[id]
+		echo '[{"id": 10}, {"id":11}]' | curl -iX DELETE -d @- http://localhost:8080/v1/texts/ --user user@example.com:myPassword  
+
+	GET, only forward to /texts/id/[id]
+		curl -iX GET http://localhost:8080/v1/texts/4 --user user@example.com:myPassword 
+	
+	PUT, only forward to /texts/id/[id]
+		echo '{"title": "updated title", "tagId": 9, "content": "updated Content"}' | curl -iX PUT -d @- http://localhost:8080/v1/texts/4 --user user@example.com:myPassword
+
+	/texts/corpus/[corpus_id]
+	GET, lists all the texts in the corpus
+		curl -iX GET http://localhost:8080/v1/texts/corpus/4 --user user@example.com:myPassword
+	POST, adds a text to the corpus
+		echo '{"corpusId":4, "title":"new text 1", "content": "new text content 1"}' | curl -iX POST -d @- http://localhost:8080/v1/texts/corpus/4 --user user@example.com:myPassword  
+
+	
+	/texts/corpus/import/[corpus_id]
+	POST, import texts to corpus
+	
+	/texts/id/[id]
+	GET, gets the text
+		curl -iX GET http://localhost:8080/v1/texts/id/4 --user user@example.com:myPassword
+		
+	PUT, changes the text
+		echo '{"title": "updated title", "tagId": 9, "content": "updated Content"}' | curl -iX PUT -d @- http://localhost:8080/v1/texts/id/4 --user user@example.com:myPassword
+
+	DELETE, removes a text
+		curl -iX DELETE http://localhost:8080/v1/texts/id/4 --user user@example.com:myPassword
+	
+	/texts/tag/[tagid]
+	GET, gets a list of texts with a certain tag
+		curl -iX GET http://localhost:8080/v1/texts/tag/10 --user user@example.com:myPassword
+		
+	POST, tags the posted texts with the tag
+	    echo '[{"id": 12}, {"id": 13}, {"id": 14}]' | curl -iX POST -d @- http://localhost:8080/v1/texts/tag/10 --user user@example.com:myPassword
+	    
+	DELETE, removes tags for texts
+		echo '[{"id": 12}, {"id": 13}, {"id": 14}]' | curl -iX DELETE -d @- http://localhost:8080/v1/texts/tag/10 --user user@example.com:myPassword
+
+	
+
+
+
+
+
+
 

@@ -35,8 +35,14 @@ public class TextTableOperations extends TableOperations {
 		long textId = text.getId();
 
 		updateTitle(textId, text.getTitle());
-		updateTag(textId, text.getTagId());
 		updateContent(textId, text.getContent());
+		if(text.getTagId() != null && text.getTagId() != 0) {
+			try {
+				updateTag(textId, text.getTagId());
+			} catch (ClassNotFoundException | IOException e) {
+				throw logger.throwing(new SQLException(e));
+			}
+		}
 	}
 
 	@Override
@@ -187,7 +193,15 @@ public class TextTableOperations extends TableOperations {
 		}
 	}
 
-	public void updateTag(long textId, long newTagId) throws SQLException {
+	public void updateTag(long textId, long newTagId) throws SQLException, ClassNotFoundException, IOException {
+		//makes sure the tag and the text belong to the same corpus
+		TagTableOperations tagTableOperations = new TagTableOperations(dataSource);
+		long tagCorpusId = tagTableOperations.getEntry(newTagId).getCorpusId();
+		long textCorpusId = getEntry(textId).getCorpusId();
+		if(tagCorpusId != textCorpusId) {
+			throw logger.throwing(new SQLException("Tag and texts do not belong to the same corpus."));
+		}
+
 		String updateStr = "UPDATE " + tableName + " "
 				+ "SET " + COLUMN_TAG_ID + " = ? " 
 				+ "WHERE " + COLUMN_ID + " = ?";
@@ -202,7 +216,23 @@ public class TextTableOperations extends TableOperations {
 			ps.executeUpdate();
 		}
 	}
-	
+
+	public void removeTag(long textId) throws SQLException {
+		String updateStr = "UPDATE " + tableName + " "
+				+ "SET " + COLUMN_TAG_ID + " = NULL " 
+				+ "WHERE " + COLUMN_ID + " = ?";
+		try (
+				Connection conn = dataSource.getConnection();
+				PreparedStatement ps = conn.prepareStatement(updateStr);
+				) {
+
+			ps.setLong(1, textId);
+
+			ps.executeUpdate();
+		}
+
+	}
+
 	public void updateStatus(long textId, String newStatus) throws SQLException {
 		String updateStr = "UPDATE " + tableName + " "
 				+ "SET " + COLUMN_STATUS + " = ? "
@@ -218,7 +248,7 @@ public class TextTableOperations extends TableOperations {
 			ps.executeUpdate();
 		}
 	}
-	
+
 
 	@Override
 	public Text getEntry(long entryId) throws SQLException {
@@ -299,7 +329,7 @@ public class TextTableOperations extends TableOperations {
 
 		}
 	}
-	
+
 	public List<Text> getAllEntriesByTag(long tagId) throws SQLException {
 		String queryStr = "SELECT * FROM " + tableName 
 				+ " WHERE " + COLUMN_TAG_ID + " = ?";
@@ -323,7 +353,7 @@ public class TextTableOperations extends TableOperations {
 		String queryStr = "SELECT * FROM " + tableName 
 				+ " WHERE " + COLUMN_CORPUS_ID + " = ?"
 				+ " ORDER BY " + orderByColumn + " LIMIT ? OFFSET ?";
-		
+
 		try(
 				Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(queryStr);
@@ -346,7 +376,7 @@ public class TextTableOperations extends TableOperations {
 		String queryStr = "SELECT * FROM " + tableName 
 				+ " WHERE " + COLUMN_TAG_ID + " = ?"
 				+ " ORDER BY " + orderByColumn + " LIMIT ? OFFSET ?";
-		
+
 		try(
 				Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(queryStr);
@@ -423,7 +453,7 @@ public class TextTableOperations extends TableOperations {
 		}
 
 	}
-	
+
 	public long getNumEntriesByTag(long tagId) throws SQLException {
 		String queryStr = "SELECT COUNT(*)  FROM " + tableName 
 				+ " WHERE " + COLUMN_TAG_ID + " = ?";

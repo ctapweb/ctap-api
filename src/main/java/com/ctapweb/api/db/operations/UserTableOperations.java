@@ -161,6 +161,27 @@ public class UserTableOperations extends TableOperations {
 		}
 	}
 
+//	public boolean isAccountMatchesId(String email, long id) throws SQLException {
+//
+//		String queryStr = "SELECT " + COLUMN_ID + " FROM " + tableName 
+//				+ " WHERE " + COLUMN_EMAIL + " = ? "
+//				+ " AND " + COLUMN_ID + " = ?";
+//		try(
+//				Connection conn = dataSource.getConnection();
+//				PreparedStatement ps = conn.prepareStatement(queryStr);
+//				) {
+//
+//			ps.setString(1, email);
+//			ps.setLong(2, id);
+//
+//			try(
+//					ResultSet rs = ps.executeQuery();
+//					) {
+//				return rs.isBeforeFirst(); 
+//			}
+//		}
+//	}
+
 	public String resetPasswd(long userId) throws SQLException {
 		String newPasswd = RandomStringUtils.randomAlphanumeric(10);
 
@@ -168,6 +189,15 @@ public class UserTableOperations extends TableOperations {
 
 		return newPasswd;
 	}
+	
+	public String resetPasswd(String email) throws SQLException {
+		String newPasswd = RandomStringUtils.randomAlphanumeric(10);
+
+		updatePasswd(email, newPasswd);
+
+		return newPasswd;
+	}
+
 
 	public void updateLastLogin() throws SQLException {
 		String updateStr = "UPDATE " + tableName + " "
@@ -254,6 +284,23 @@ public class UserTableOperations extends TableOperations {
 
 		}
 	}
+	
+	public void updatePasswd(String email, String passwd) throws SQLException{
+		String updateStr = "UPDATE " + tableName + " "
+				+ "SET " + COLUMN_PASSWD + " = ? "
+				+ "WHERE " + COLUMN_EMAIL + " = ?";
+
+		try(
+				Connection conn = dataSource.getConnection();
+				PreparedStatement ps = conn.prepareStatement(updateStr);
+				) {
+			ps.setString(1, BCrypt.hashpw(passwd, BCrypt.gensalt()));
+			ps.setString(2, email);
+
+			ps.executeUpdate();
+
+		}
+	}
 
 	@Override
 	public UserAccount getEntry(long entryId) throws SQLException {
@@ -274,6 +321,30 @@ public class UserTableOperations extends TableOperations {
 		}
 
 
+	}
+	
+	public UserAccount getEntry(String email) throws SQLException {
+
+		String queryStr = "SELECT * FROM " + tableName 
+				+ " WHERE " + COLUMN_EMAIL + " = ?";
+		try(
+				Connection conn = dataSource.getConnection();
+				PreparedStatement ps = conn.prepareStatement(queryStr);
+				) {
+
+			ps.setString(1, email);
+			try(
+					ResultSet rs = ps.executeQuery();
+					) {
+				return getEntryFromResultSet(rs);
+			}
+		}
+
+
+	}
+	
+	public long getUserIdByEmail(String email) throws SQLException {
+		return getEntry(email).getId();
 	}
 
 	@Override
@@ -357,4 +428,24 @@ public class UserTableOperations extends TableOperations {
 		return entryList;
 	}
 
+	public String getPasswdByEmail(String email) throws SQLException {
+		String queryStr = "SELECT " + COLUMN_PASSWD + " FROM " + tableName 
+				+ " WHERE " + COLUMN_EMAIL + " = ?";
+
+		try(
+				Connection conn = dataSource.getConnection();
+				PreparedStatement ps = conn.prepareStatement(queryStr);
+				) {
+			ps.setString(1, email);
+			try(
+					ResultSet rs = ps.executeQuery();
+					) {
+				if(rs.isBeforeFirst()) {
+					rs.next();
+					return rs.getString(COLUMN_PASSWD);
+				}
+			}
+		}
+		return null;
+	}
 }

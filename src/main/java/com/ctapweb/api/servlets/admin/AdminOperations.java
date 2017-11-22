@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ctapweb.api.servlets.db;
+package com.ctapweb.api.servlets.admin;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.ctapweb.api.db.DataSourceManager;
+import com.ctapweb.api.db.TableNames;
 import com.ctapweb.api.db.operations.CorpusTableOperations;
 import com.ctapweb.api.db.operations.MeasureCategoryTableOperations;
 import com.ctapweb.api.db.operations.MeasureTableOperations;
@@ -31,17 +32,19 @@ public class AdminOperations {
 	
 	private Logger logger = LogManager.getLogger();
 	
-	UserTableOperations userTableOperations;
-	CorpusTableOperations corpusTableOperations;
-	TagTableOperations tagTableOperations;
-	TextTableOperations textTableOperations;
-	MeasureCategoryTableOperations categoryTableOperations;
-	MeasureTableOperations measureTableOperations;
-	ResultTableOperations resultTableOperations;
+	private TableNames tableNames;
+	private UserTableOperations userTableOperations;
+	private CorpusTableOperations corpusTableOperations;
+	private TagTableOperations tagTableOperations;
+	private TextTableOperations textTableOperations;
+	private MeasureCategoryTableOperations categoryTableOperations;
+	private MeasureTableOperations measureTableOperations;
+	private ResultTableOperations resultTableOperations;
 	
 	public AdminOperations() throws ClassNotFoundException, IOException, SQLException {
 		DataSource dataSource = DataSourceManager.getDataSource();
 
+		tableNames = new TableNames();
 		userTableOperations = new UserTableOperations(dataSource);
 		corpusTableOperations = new CorpusTableOperations(dataSource);
 		tagTableOperations = new TagTableOperations(dataSource);
@@ -50,6 +53,10 @@ public class AdminOperations {
 		measureTableOperations = new MeasureTableOperations(dataSource);
 		resultTableOperations = new ResultTableOperations(dataSource);
 
+	}
+	
+	public List<String> getAllTableNames() {
+		return tableNames.getAllTableNames();
 	}
 	
 	/**

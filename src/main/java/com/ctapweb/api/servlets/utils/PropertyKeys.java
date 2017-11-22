@@ -21,4 +21,10 @@ public class PropertyKeys {
 
 	public static final String ADMIN_USERNAME = "admin.username";
 	public static final String ADMIN_PASSWD = "admin.passwd";
+
+	public static final String MAIL_SMTP_HOST = "mail.smtp.host";
+	public static final String MAIL_SMTP_PORT = "mail.smtp.port";
+	public static final String MAIL_SMTP_ACCOUNT = "mail.smtp.account";
+	public static final String MAIL_SMTP_PASSWD = "mail.smtp.passwd";
+	public static final String MAIL_FROM = "mail.from";
 }

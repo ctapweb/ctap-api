@@ -40,7 +40,7 @@ public class TagTableOperations extends TableOperations {
 				+ COLUMN_CORPUS_ID + " BIGINT NOT NULL REFERENCES "
 				+ "" + tableNames.getCorpusTableName() + "("
 				+ "" + CorpusTableOperations.COLUMN_ID + ") ON DELETE CASCADE, "
-				+ COLUMN_NAME + " VARCHAR(50), "
+				+ COLUMN_NAME + " VARCHAR(50) NOT NULL, "
 				+ " UNIQUE(" + COLUMN_CORPUS_ID + ", " + COLUMN_NAME + "))";
 
 		try(
