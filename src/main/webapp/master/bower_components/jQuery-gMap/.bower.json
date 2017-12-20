@@ -1,0 +1,14 @@
+{
+  "name": "jQuery-gMap",
+  "homepage": "https://github.com/marioestrada/jQuery-gMap",
+  "version": "2.1.5",
+  "_release": "2.1.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.1.5",
+    "commit": "33b2771a5789b7531eb56878cfa3e4a0c30a8c43"
+  },
+  "_source": "git://github.com/marioestrada/jQuery-gMap.git",
+  "_target": "2.1.5",
+  "_originalSource": "marioestrada/jQuery-gMap"
+}

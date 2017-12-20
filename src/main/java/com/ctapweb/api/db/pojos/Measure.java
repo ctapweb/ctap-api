@@ -11,7 +11,6 @@ package com.ctapweb.api.db.pojos;
 public class Measure extends TablePojo {
 
 	private long categoryId;
-	private String language;
 	private String name;
 	private String description;
 
@@ -19,10 +18,9 @@ public class Measure extends TablePojo {
 	}
 
 
-	public Measure(long id, long categoryId, String language, String name, String description) {
+	public Measure(long id, long categoryId, String name, String description) {
 		super(id);
 		this.categoryId = categoryId;
-		this.language = language;
 		this.name = name;
 		this.description = description;
 	}
@@ -35,17 +33,6 @@ public class Measure extends TablePojo {
 	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
 	}
-
-
-	public String getLanguage() {
-		return language;
-	}
-
-
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-
 
 	public String getName() {
 		return name;
@@ -66,10 +53,33 @@ public class Measure extends TablePojo {
 		this.description = description;
 	}
 
-	//the language a measure is applicable
-	public static class Languages {
-		public static final String English = "en";
-		public static final String German = "de";
-		public static final String French = "fr";
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (categoryId ^ (categoryId >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
 	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Measure other = (Measure) obj;
+		if (categoryId != other.categoryId)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
 }

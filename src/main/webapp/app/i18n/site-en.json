@@ -1,0 +1,23 @@
+{
+	"dashboard": {
+		"WELCOME": "Welcome to CTAP!"
+	},
+	"sidebar": {
+		"WELCOME": "Welcome",
+		"heading": {
+			"HEADER": "Tools",
+			"USER": "User",
+		},
+		"nav": {
+			"DASHBOARD": "Dashboard",
+			"CORPUS_MANAGER": "Corpus Manager",
+			"FEATURE_SELECTOR": "Feature Selector",
+			"ANALYSIS_GENERATOR": "Analysis Generator",
+			"RESULT_VISUALIZER": "Result Visualizer",
+			"DOCUMENTATION": "Documentation",
+			"PROFILE": "Profile",
+			"FEED_BACK": "Feedback",
+			"SIGN_OUT": "Sign Out"
+		}
+	}
+}

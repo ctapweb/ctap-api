@@ -18,6 +18,9 @@ public class PropertyKeys {
 	public static final String DB_TNAME_MEASURE_CATEGORY = "db.tname.measure_category";
 	public static final String DB_TNAME_MEASURE = "db.tname.measure";
 	public static final String DB_TNAME_RESULT = "db.tname.result";
+	public static final String DB_TNAME_FS_ME = "db.tname.fs_me";
+	public static final String DB_TNAME_FEATURE_SET = "db.tname.feature_set";
+	public static final String DB_TNAME_ANALYSIS = "db.tname.analysis";
 
 	public static final String ADMIN_USERNAME = "admin.username";
 	public static final String ADMIN_PASSWD = "admin.passwd";

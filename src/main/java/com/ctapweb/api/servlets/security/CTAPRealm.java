@@ -2,7 +2,9 @@ package com.ctapweb.api.servlets.security;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -14,14 +16,18 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
-import org.apache.shiro.realm.AuthenticatingRealm;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
 
 import com.ctapweb.api.db.DataSourceManager;
 import com.ctapweb.api.db.operations.UserTableOperations;
 import com.ctapweb.api.servlets.utils.PropertiesManager;
 import com.ctapweb.api.servlets.utils.PropertyKeys;
 
-public class CTAPRealm extends AuthenticatingRealm {
+//public class CTAPRealm extends AuthenticatingRealm {
+public class CTAPRealm extends AuthorizingRealm {
 	public static final String realmName = "CTAPRealm";
 	DataSource dataSource;
 	private String adminEmail;
@@ -41,6 +47,7 @@ public class CTAPRealm extends AuthenticatingRealm {
 		logger.trace("Doing get authentication info...");
 		
 		UsernamePasswordToken passedInToken = (UsernamePasswordToken) token;
+//		passedInToken.setRememberMe(true);
 
 		AuthenticationInfo authenticationInfo = null;
 		String userEmail = passedInToken.getPrincipal().toString();
@@ -62,11 +69,30 @@ public class CTAPRealm extends AuthenticatingRealm {
 
 			authenticationInfo = new SimpleAuthenticationInfo(userEmail, hashedPasswd, realmName);
 		} catch (ClassNotFoundException | IOException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw logger.throwing(new AuthenticationException(e));
+		}
+		
+		return authenticationInfo;
+	}
+
+	/**
+	 * Assigns admin role to admin.
+	 */
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		logger.trace("Doing authroization...");
+		String principal = principals.getPrimaryPrincipal().toString();
+		
+		if(principal.equals(adminEmail)) {
+			logger.trace("Obtained admin principal {}. Authorization succeeded.", principal);
+			Set<String> roles = new HashSet<>();
+			roles.add("ROLE_ADMIN");
+			AuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo(roles);
+			return authorizationInfo;
 		}
 
-		return authenticationInfo;
+		logger.warn("Obtained non-admin principal {}. Authorization failed.", principal);
+		return null;
 	}
 
 

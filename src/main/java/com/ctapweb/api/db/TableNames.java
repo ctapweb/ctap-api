@@ -25,6 +25,9 @@ public class TableNames {
 	private String measureCategoryTableName;
 	private String measureTableName;
 	private String resultTableName;
+	private String fsMeTableName;
+	private String featureSetTableName;
+	private String analysisTableName;
 
 	private Properties properties;
 	private Logger logger = LogManager.getLogger();
@@ -60,6 +63,18 @@ public class TableNames {
 		if((resultTableName = properties.getProperty(PropertyKeys.DB_TNAME_RESULT)) == null) {
 			throw logger.throwing(new NullPointerException("Null table name for table 'result'."));
 		}
+
+		if((fsMeTableName= properties.getProperty(PropertyKeys.DB_TNAME_FS_ME)) == null) {
+			throw logger.throwing(new NullPointerException("Null table name for table 'fs_me'."));
+		}
+
+		if((featureSetTableName = properties.getProperty(PropertyKeys.DB_TNAME_FEATURE_SET)) == null) {
+			throw logger.throwing(new NullPointerException("Null table name for table 'feature_set'."));
+		}
+
+		if((analysisTableName = properties.getProperty(PropertyKeys.DB_TNAME_ANALYSIS)) == null) {
+			throw logger.throwing(new NullPointerException("Null table name for table 'analysis'."));
+		}
 	}
 
 	public String getUserTableName() {
@@ -90,6 +105,18 @@ public class TableNames {
 		return resultTableName;
 	}
 	
+	public String getFsMeTableName() {
+		return fsMeTableName;
+	}
+
+	public String getFeatureSetTableName() {
+		return featureSetTableName;
+	}
+
+	public String getAnalysisTableName() {
+		return analysisTableName;
+	}
+
 	public List<String> getAllTableNames() {
 		List<String> allNames = new ArrayList<>();
 		allNames.add(getUserTableName());
@@ -99,6 +126,9 @@ public class TableNames {
 		allNames.add(getMeasureCategoryTableName());
 		allNames.add(getMeasureTableName());
 		allNames.add(getResultTableName());
+		allNames.add(getAnalysisTableName());
+		allNames.add(getFeatureSetTableName());
+		allNames.add(getFsMeTableName());
 		return allNames;
 	}
 	

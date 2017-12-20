@@ -14,6 +14,7 @@ import com.ctapweb.api.db.pojos.Result;
 import com.ctapweb.api.db.pojos.TablePojo;
 
 public class ResultTableOperations extends TableOperations {
+	public static final String COLUMN_ANALYSIS_ID = "analysis_id";
 	public static final String COLUMN_TEXT_ID = "text_id";
 	public static final String COLUMN_MEASURE_ID = "measure_id";
 	public static final String COLUMN_VALUE = "value";
@@ -36,6 +37,9 @@ public class ResultTableOperations extends TableOperations {
 		String createTableStr = ""
 				+ "CREATE TABLE IF NOT EXISTS " + tableName + "("
 				+ COLUMN_ID + " BIGSERIAL PRIMARY KEY NOT NULL,"
+				+ COLUMN_ANALYSIS_ID + " BIGINT NOT NULL REFERENCES "
+				+ "" + tableNames.getAnalysisTableName() + "("
+				+ "" + AnalysisTableOperations.COLUMN_ID + ") ON DELETE CASCADE,"
 				+ COLUMN_TEXT_ID + " BIGINT NOT NULL REFERENCES "
 				+ "" + tableNames.getTextTableName() + "("
 				+ "" + TextTableOperations.COLUMN_ID + ") ON DELETE CASCADE,"
@@ -99,18 +103,19 @@ public class ResultTableOperations extends TableOperations {
 
 		//the query 
 		String addEntryStr = "INSERT INTO " + tableName + " (" 
-				+ COLUMN_TEXT_ID + "," + COLUMN_MEASURE_ID + ","
-				+ COLUMN_VALUE + ")"
-				+ "VALUES(?, ?, ?) RETURNING " + COLUMN_ID;
+				+ COLUMN_ANALYSIS_ID + ", " + COLUMN_TEXT_ID + "," 
+				+ COLUMN_MEASURE_ID + "," + COLUMN_VALUE + ")"
+				+ "VALUES(?, ?, ?, ?) RETURNING " + COLUMN_ID;
 
 		try(
 				Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(addEntryStr);
 				) {
 
-			ps.setLong(1, result.getTextId());
-			ps.setLong(2, result.getMeasureId());
-			ps.setDouble(3, result.getValue());
+			ps.setLong(1, result.getAnalysisId());
+			ps.setLong(2, result.getTextId());
+			ps.setLong(3, result.getMeasureId());
+			ps.setDouble(4, result.getValue());
 
 			try(
 					ResultSet rs = ps.executeQuery();
@@ -139,6 +144,20 @@ public class ResultTableOperations extends TableOperations {
 
 			ps.setDouble(1, newValue);
 			ps.setLong(2, resultId);
+
+			ps.executeUpdate();
+		}
+	}
+	
+	public void deleteEntriesByAnalysis(long analysisId) throws SQLException {
+		String updateStr = "DELETE FROM " + tableName + " "
+				+ "WHERE " + COLUMN_ANALYSIS_ID + " = ?";
+		try (
+				Connection conn = dataSource.getConnection();
+				PreparedStatement ps = conn.prepareStatement(updateStr);
+				) {
+
+			ps.setLong(1, analysisId);
 
 			ps.executeUpdate();
 		}
@@ -204,38 +223,15 @@ public class ResultTableOperations extends TableOperations {
 		}
 	}
 
-	public List<Result> getAllEntriesByCorpusAndMeasure(long corpusId, long measureId) throws SQLException {
-		String queryStr = "SELECT r.* FROM " + tableName + " AS r "
-				+ " JOIN " + tableNames.getTextTableName() + " AS t "
-				+ "ON r." + COLUMN_TEXT_ID + " = t." + TextTableOperations.COLUMN_ID
-				+ " WHERE t." + TextTableOperations.COLUMN_CORPUS_ID + " = ? "
-				+ " AND r." + COLUMN_MEASURE_ID + " = ?";
 
+	public List<Result> getAllEntriesByAnalysis(long analysisId) throws SQLException {
+		String queryStr = "SELECT * FROM " + tableName + " WHERE " + COLUMN_ANALYSIS_ID + " = ? ";
 
 		try(
 				Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(queryStr);
 				) {
-			ps.setLong(1, corpusId);
-			ps.setLong(2, measureId);
-			try(
-					ResultSet rs = ps.executeQuery();
-					){
-				return getEntriesFromResultSet(rs);
-			}
-		}
-	}
-	public List<Result> getAllEntriesByCorpus(long corpusId) throws SQLException {
-		String queryStr = "SELECT r.* FROM " + tableName + " AS r "
-				+ " JOIN " + tableNames.getTextTableName() + " AS t "
-				+ "ON r." + COLUMN_TEXT_ID + " = t." + TextTableOperations.COLUMN_ID
-				+ " WHERE t." + TextTableOperations.COLUMN_CORPUS_ID + " = ?";
-
-		try(
-				Connection conn = dataSource.getConnection();
-				PreparedStatement ps = conn.prepareStatement(queryStr);
-				) {
-			ps.setLong(1, corpusId);
+			ps.setLong(1, analysisId);
 			try(
 					ResultSet rs = ps.executeQuery();
 					){
@@ -246,11 +242,9 @@ public class ResultTableOperations extends TableOperations {
 
 	public List<Result> getAllEntriesByTag(long tagId) throws SQLException {
 		String queryStr = "SELECT r.* FROM " + tableName + " AS r "
-				+ " JOIN " + tableNames.getTextTableName() + " AS text "
-				+ "ON r." + COLUMN_TEXT_ID + " = text." + TextTableOperations.COLUMN_ID
-				+ " JOIN " + tableNames.getTagTableName() + " AS tag "
-				+ "ON text." + TextTableOperations.COLUMN_TAG_ID + " = tag." + TagTableOperations.COLUMN_ID
-				+ " WHERE tag." + TagTableOperations.COLUMN_ID + " = ?";
+				+ " JOIN " + tableNames.getTextTableName() + " AS t "
+				+ " ON r." + COLUMN_TEXT_ID + " = text." + TextTableOperations.COLUMN_ID
+				+ " WHERE t." + TextTableOperations.COLUMN_TAG_ID + " = ? ";
 
 		try(
 				Connection conn = dataSource.getConnection();
@@ -266,12 +260,9 @@ public class ResultTableOperations extends TableOperations {
 		}
 	}
 
-	public List<Result> getEntriesByCorpus(long corpusId, String orderByColumn, long limit, long offset) 
+	public List<Result> getEntriesByAnalysis(long analysisId, String orderByColumn, long limit, long offset) 
 			throws SQLException {
-		String queryStr = "SELECT r.* FROM " + tableName + " AS r "
-				+ " JOIN " + tableNames.getTextTableName() + " AS t "
-				+ "ON r." + COLUMN_TEXT_ID + " = t." + TextTableOperations.COLUMN_ID
-				+ " WHERE t." + TextTableOperations.COLUMN_CORPUS_ID + " = ?"
+		String queryStr = "SELECT * FROM " + tableName + " WHERE " + COLUMN_ANALYSIS_ID + " = ? "
 				+ " ORDER BY " + orderByColumn + " LIMIT ? OFFSET ?";
 
 		try(
@@ -279,34 +270,7 @@ public class ResultTableOperations extends TableOperations {
 				PreparedStatement ps = conn.prepareStatement(queryStr);
 				) {
 
-			ps.setLong(1, corpusId);
-			ps.setLong(2, limit);
-			ps.setLong(3, offset);
-
-			try(
-					ResultSet rs = ps.executeQuery();
-					) {
-				return getEntriesFromResultSet(rs);
-			}
-		}
-	}
-
-	public List<Result> getEntriesByTag(long tagId, String orderByColumn, long limit, long offset) 
-			throws SQLException {
-		String queryStr = "SELECT r.* FROM " + tableName + " AS r "
-				+ " JOIN " + tableNames.getTextTableName() + " AS text "
-				+ "ON r." + COLUMN_TEXT_ID + " = text." + TextTableOperations.COLUMN_ID
-				+ " JOIN " + tableNames.getTagTableName() + " AS tag "
-				+ "ON text." + TextTableOperations.COLUMN_TAG_ID + " = tag." + TagTableOperations.COLUMN_ID
-				+ " WHERE tag." + TagTableOperations.COLUMN_ID + " = ?"
-				+ " ORDER BY " + orderByColumn + " LIMIT ? OFFSET ?";
-
-		try(
-				Connection conn = dataSource.getConnection();
-				PreparedStatement ps = conn.prepareStatement(queryStr);
-				) {
-
-			ps.setLong(1, tagId);
+			ps.setLong(1, analysisId);
 			ps.setLong(2, limit);
 			ps.setLong(3, offset);
 
@@ -341,14 +305,12 @@ public class ResultTableOperations extends TableOperations {
 		}
 	}
 
-	public List<Result> getEntriesByCorpusAndMeasure(long corpusId, long measureId, 
-			String orderByColumn, long limit, long offset) 
+	public List<Result> getEntriesByTag(long tagId, String orderByColumn, long limit, long offset) 
 					throws SQLException {
-		String queryStr = "SELECT COUNT(r.*) FROM " + tableName + " AS r "
+		String queryStr = "SELECT r.* FROM " + tableName + " AS r "
 				+ " JOIN " + tableNames.getTextTableName() + " AS t "
-				+ "ON r." + COLUMN_TEXT_ID + " = t." + TextTableOperations.COLUMN_ID
-				+ " WHERE t." + TextTableOperations.COLUMN_CORPUS_ID + " = ?"
-				+ " AND r." + COLUMN_MEASURE_ID + " = ?"
+				+ " ON r." + COLUMN_TEXT_ID + " = text." + TextTableOperations.COLUMN_ID
+				+ " WHERE t." + TextTableOperations.COLUMN_TAG_ID + " = ? "
 				+ " ORDER BY " + orderByColumn + " LIMIT ? OFFSET ?";
 
 		try(
@@ -356,10 +318,9 @@ public class ResultTableOperations extends TableOperations {
 				PreparedStatement ps = conn.prepareStatement(queryStr);
 				) {
 
-			ps.setLong(1, corpusId);
-			ps.setLong(2, measureId);
-			ps.setLong(3, limit);
-			ps.setLong(4, offset);
+			ps.setLong(1, tagId);
+			ps.setLong(2, limit);
+			ps.setLong(3, offset);
 
 			try(
 					ResultSet rs = ps.executeQuery();
@@ -376,6 +337,7 @@ public class ResultTableOperations extends TableOperations {
 			//gets text info
 			return new Result(
 					rs.getLong(COLUMN_ID),
+					rs.getLong(COLUMN_ANALYSIS_ID),
 					rs.getLong(COLUMN_TEXT_ID),
 					rs.getLong(COLUMN_MEASURE_ID),
 					rs.getDouble(COLUMN_VALUE));
@@ -391,6 +353,7 @@ public class ResultTableOperations extends TableOperations {
 			while(rs.next()) {
 				Result result = new Result(
 						rs.getLong(COLUMN_ID),
+						rs.getLong(COLUMN_ANALYSIS_ID),
 						rs.getLong(COLUMN_TEXT_ID),
 						rs.getLong(COLUMN_MEASURE_ID),
 						rs.getDouble(COLUMN_VALUE));
@@ -400,18 +363,16 @@ public class ResultTableOperations extends TableOperations {
 		return entryList;
 	}
 
-	public long getNumEntriesByCorpus(long corpusId) throws SQLException {
-		String queryStr = "SELECT COUNT(r.*) FROM " + tableName + " AS r "
-				+ " JOIN " + tableNames.getTextTableName() + " AS t "
-				+ "ON r." + COLUMN_TEXT_ID + " = t." + TextTableOperations.COLUMN_ID
-				+ " WHERE t." + TextTableOperations.COLUMN_CORPUS_ID + " = ?";
+	public long getNumEntriesByAnalysis(long analysisId) throws SQLException {
+		String queryStr = "SELECT COUNT(*) FROM " + tableName 
+				+ " WHERE " + COLUMN_TEXT_ID + " = ?";
 
 		try(
 				Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(queryStr);
 				) {
 
-			ps.setLong(1, corpusId);
+			ps.setLong(1, analysisId);
 			try( 
 					ResultSet rs = ps.executeQuery();
 					) {
@@ -427,11 +388,9 @@ public class ResultTableOperations extends TableOperations {
 
 	public long getNumEntriesByTag(long tagId) throws SQLException {
 		String queryStr = "SELECT COUNT(r.*) FROM " + tableName + " AS r "
-				+ " JOIN " + tableNames.getTextTableName() + " AS text "
-				+ "ON r." + COLUMN_TEXT_ID + " = text." + TextTableOperations.COLUMN_ID
-				+ " JOIN " + tableNames.getTagTableName() + " AS tag "
-				+ "ON text." + TextTableOperations.COLUMN_TAG_ID + " = tag." + TagTableOperations.COLUMN_ID
-				+ " WHERE tag." + TagTableOperations.COLUMN_ID + " = ?";
+				+ " JOIN " + tableNames.getTextTableName() + " AS t "
+				+ " ON r." + COLUMN_TEXT_ID + " = t." + TextTableOperations.COLUMN_ID
+				+ " WHERE t." + TextTableOperations.COLUMN_TAG_ID + " = ? ";
 
 		try(
 				Connection conn = dataSource.getConnection();
@@ -455,40 +414,13 @@ public class ResultTableOperations extends TableOperations {
 	public long getNumEntriesByText(long textId) throws SQLException {
 		String queryStr = "SELECT COUNT(*) FROM " + tableName 
 				+ " WHERE " + COLUMN_TEXT_ID + " = ?";
-
+		
 		try(
 				Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(queryStr);
 				) {
 
 			ps.setLong(1, textId);
-			try( 
-					ResultSet rs = ps.executeQuery();
-					) {
-				if(rs.isBeforeFirst()) {
-					rs.next();
-					return rs.getLong(1);
-				}
-			}
-			return 0;
-		}
-
-	}
-
-	public long getNumEntriesByCorpusAndMeasure(long corpusId, long measureId) throws SQLException {
-		String queryStr = "SELECT COUNT(r.*) FROM " + tableName + " AS r "
-				+ " JOIN " + tableNames.getTextTableName() + " AS t "
-				+ "ON r." + COLUMN_TEXT_ID + " = t." + TextTableOperations.COLUMN_ID
-				+ " WHERE t." + TextTableOperations.COLUMN_CORPUS_ID + " = ?"
-				+ " AND r." + COLUMN_MEASURE_ID + " = ?";
-
-		try(
-				Connection conn = dataSource.getConnection();
-				PreparedStatement ps = conn.prepareStatement(queryStr);
-				) {
-
-			ps.setLong(1, corpusId);
-			ps.setLong(2, measureId);
 			try( 
 					ResultSet rs = ps.executeQuery();
 					) {

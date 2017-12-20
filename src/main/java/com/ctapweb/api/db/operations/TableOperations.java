@@ -78,6 +78,7 @@ public abstract class TableOperations {
 
 	}
 	
+	
 	public long getNumEntries() throws SQLException {
 		String queryStr = "SELECT COUNT(*) FROM " + tableName;
 		try(

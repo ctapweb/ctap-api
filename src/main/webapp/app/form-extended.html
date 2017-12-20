@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Bootstrap Admin App + jQuery">
+   <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+   <title>CTAP - Common Text Analysis Platform</title>
+   <!-- =============== VENDOR STYLES ===============-->
+   <!-- FONT AWESOME-->
+   <link rel="stylesheet" href="../vendor/fontawesome/css/font-awesome.min.css">
+   <!-- SIMPLE LINE ICONS-->
+   <link rel="stylesheet" href="../vendor/simple-line-icons/css/simple-line-icons.css">
+   <!-- ANIMATE.CSS-->
+   <link rel="stylesheet" href="../vendor/animate.css/animate.min.css">
+   <!-- WHIRL (spinners)-->
+   <link rel="stylesheet" href="../vendor/whirl/dist/whirl.css">
+   <!-- =============== PAGE VENDOR STYLES ===============-->
+   <!-- TAGS INPUT-->
+   <link rel="stylesheet" href="../vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+   <!-- SLIDER CTRL-->
+   <link rel="stylesheet" href="../vendor/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css">
+   <!-- CHOSEN-->
+   <link rel="stylesheet" href="../vendor/chosen_v1.2.0/chosen.min.css">
+   <!-- DATETIMEPICKER-->
+   <link rel="stylesheet" href="../vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+   <!-- COLORPICKER-->
+   <link rel="stylesheet" href="../vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css">
+   <!-- SELECT2-->
+   <link rel="stylesheet" href="../vendor/select2/dist/css/select2.css">
+   <link rel="stylesheet" href="../vendor/select2-bootstrap-theme/dist/select2-bootstrap.css">
+   <!-- =============== BOOTSTRAP STYLES ===============-->
+   <link rel="stylesheet" href="css/bootstrap.css" id="bscss">
+   <!-- =============== APP STYLES ===============-->
+   <link rel="stylesheet" href="css/app.css" id="maincss">
+</head>
+
+<body>
+   <div class="wrapper">
+      <!-- top navbar-->
+      <header class="topnavbar-wrapper">
+         <!-- START Top Navbar-->
+         <nav class="navbar topnavbar" role="navigation">
+            <!-- START navbar header-->
+            <div class="navbar-header">
+               <a class="navbar-brand" href="#/">
+                  <div class="brand-logo">
+                     <img class="img-responsive" src="img/logo.svg" alt="App Logo" width="85" height="34">
+                  </div>
+                  <div class="brand-logo-collapsed">
+                     <img class="img-responsive" src="img/logo-single.svg" alt="App Logo">
+                  </div>
+               </a>
+            </div>
+            <!-- END navbar header-->
+            <!-- START Nav wrapper-->
+            <div class="nav-wrapper">
+               <!-- START Left navbar-->
+               <ul class="nav navbar-nav">
+                  <li>
+                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                     <a class="hidden-xs" href="#" data-trigger-resize="" data-toggle-state="aside-collapsed">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                     <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                     <a class="visible-xs sidebar-toggle" href="#" data-toggle-state="aside-toggled" data-no-persist="true">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                  </li>
+                  <!-- START User avatar toggle-->
+                  <li>
+                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                     <a id="user-block-toggle" href="#user-block" data-toggle="collapse">
+                        <em class="icon-user"></em>
+                     </a>
+                  </li>
+                  <!-- END User avatar toggle-->
+                  <!-- START lock screen-->
+                  <li>
+                     <a href="lock.html" title="Lock screen">
+                        <em class="icon-lock"></em>
+                     </a>
+                  </li>
+                  <!-- END lock screen-->
+               </ul>
+               <!-- END Left navbar-->
+               <!-- START Right Navbar-->
+               <ul class="nav navbar-nav navbar-right">
+                  <!-- Search icon-->
+                  <li>
+                     <a href="#" data-search-open="">
+                        <em class="icon-magnifier"></em>
+                     </a>
+                  </li>
+                  <!-- Fullscreen (only desktops)-->
+                  <li class="visible-lg">
+                     <a href="#" data-toggle-fullscreen="">
+                        <em class="fa fa-expand"></em>
+                     </a>
+                  </li>
+                  <!-- START Alert menu-->
+                  <li class="dropdown dropdown-list">
+                     <a href="#" data-toggle="dropdown">
+                        <em class="icon-bell"></em>
+                        <div class="label label-danger">11</div>
+                     </a>
+                     <!-- START Dropdown menu-->
+                     <ul class="dropdown-menu animated flipInX">
+                        <li>
+                           <!-- START list group-->
+                           <div class="list-group">
+                              <!-- list item-->
+                              <a class="list-group-item" href="#">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-twitter fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">New followers</p>
+                                       <p class="m0 text-muted">
+                                          <small>1 new follower</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              <!-- list item-->
+                              <a class="list-group-item" href="#">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-envelope fa-2x text-warning"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">New e-mails</p>
+                                       <p class="m0 text-muted">
+                                          <small>You have 10 new emails</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              <!-- list item-->
+                              <a class="list-group-item" href="#">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-tasks fa-2x text-success"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">Pending Tasks</p>
+                                       <p class="m0 text-muted">
+                                          <small>11 pending task</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              <!-- last list item-->
+                              <a class="list-group-item" href="#">
+                                 <small>More notifications</small>
+                                 <span class="label label-danger pull-right">14</span>
+                              </a>
+                           </div>
+                           <!-- END list group-->
+                        </li>
+                     </ul>
+                     <!-- END Dropdown menu-->
+                  </li>
+                  <!-- END Alert menu-->
+                  <!-- START Offsidebar button-->
+                  <li>
+                     <a href="#" data-toggle-state="offsidebar-open" data-no-persist="true">
+                        <em class="icon-notebook"></em>
+                     </a>
+                  </li>
+                  <!-- END Offsidebar menu-->
+               </ul>
+               <!-- END Right Navbar-->
+            </div>
+            <!-- END Nav wrapper-->
+            <!-- START Search form-->
+            <form class="navbar-form" role="search" action="search.html">
+               <div class="form-group has-feedback">
+                  <input class="form-control" type="text" placeholder="Type and hit enter ...">
+                  <div class="fa fa-times form-control-feedback" data-search-dismiss=""></div>
+               </div>
+               <button class="hidden btn btn-default" type="submit">Submit</button>
+            </form>
+            <!-- END Search form-->
+         </nav>
+         <!-- END Top Navbar-->
+      </header>
+      <!-- sidebar-->
+      <aside class="aside">
+         <!-- START Sidebar (left)-->
+         <div class="aside-inner">
+            <nav class="sidebar" data-sidebar-anyclick-close="">
+               <!-- START sidebar nav-->
+               <ul class="nav">
+                  <!-- START user info-->
+                  <li class="has-user-block">
+                     <div class="collapse" id="user-block">
+                        <div class="item user-block">
+                           <!-- User picture-->
+                           <div class="user-block-picture">
+                              <div class="user-block-status">
+                                 <img class="img-thumbnail img-circle" src="img/user/02.jpg" alt="Avatar" width="60" height="60">
+                                 <div class="circle circle-success circle-lg"></div>
+                              </div>
+                           </div>
+                           <!-- Name and Job-->
+                           <div class="user-block-info">
+                              <span class="user-block-name">Hello, Mike</span>
+                              <span class="user-block-role">Designer</span>
+                           </div>
+                        </div>
+                     </div>
+                  </li>
+                  <!-- END user info-->
+                  <!-- Iterates over all sidebar items-->
+                  <li class="nav-heading ">
+                     <span data-localize="sidebar.heading.HEADER">Tools</span>
+                  </li>
+                  <li class=" ">
+                     <a href="#dashboard" title="Dashboard">
+                        <em class="fa fa-tachometer"></em>
+                        <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="corpus_manager.html" title="Corpus Manager">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-database"></em>
+                        <span data-localize="sidebar.nav.CORPUS_MANAGER">Corpus Manager</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="feature_selector.html" title="Feature Selector">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-check-square"></em>
+                        <span data-localize="sidebar.nav.FEATURE_SELECTOR">Feature Selector</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="analysis_generator.html" title="Analysis Generator">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-cubes"></em>
+                        <span data-localize="sidebar.nav.ANALYSIS_GENERATOR">Analysis Generator</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="result_visualizer.html" title="Result Visualizer">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-area-chart"></em>
+                        <span data-localize="sidebar.nav.RESULT_VISUALIZER">Result Visualizer</span>
+                     </a>
+                  </li>
+                  <li class="nav-heading ">
+                     <span data-localize="sidebar.heading.USER">User</span>
+                  </li>
+                  <li class=" ">
+                     <a href="profile.html" title="Profile">
+                        <em class="fa fa-user"></em>
+                        <span data-localize="sidebar.nav.PROFILE">Profile</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="feedback.html" title="Feedback">
+                        <em class="fa fa-comment"></em>
+                        <span data-localize="sidebar.nav.FEEDBACK">Feedback</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="documentation.html" title="Documentation">
+                        <em class="fa fa-book"></em>
+                        <span data-localize="sidebar.nav.DOCUMENTATION">Documentation</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="./logout/" title="Sign Out">
+                        <em class="fa fa-power-off"></em>
+                        <span data-localize="sidebar.nav.SIGN_OUT">Sign Out</span>
+                     </a>
+                  </li>
+               </ul>
+               <!-- END sidebar nav-->
+            </nav>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+      <!-- offsidebar-->
+      <aside class="offsidebar hide">
+         <!-- START Off Sidebar (right)-->
+         <nav>
+            <div role="tabpanel">
+               <!-- Nav tabs-->
+               <ul class="nav nav-tabs nav-justified" role="tablist">
+                  <li class="active" role="presentation">
+                     <a href="#app-settings" aria-controls="app-settings" role="tab" data-toggle="tab">
+                        <em class="icon-equalizer fa-lg"></em>
+                     </a>
+                  </li>
+                  <li role="presentation">
+                     <a href="#app-chat" aria-controls="app-chat" role="tab" data-toggle="tab">
+                        <em class="icon-user fa-lg"></em>
+                     </a>
+                  </li>
+               </ul>
+               <!-- Tab panes-->
+               <div class="tab-content">
+                  <div class="tab-pane fade in active" id="app-settings" role="tabpanel">
+                     <h3 class="text-center text-thin">Settings</h3>
+                     <div class="p">
+                        <h4 class="text-muted text-thin">Themes</h4>
+                        <div class="table-grid mb">
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-a.css">
+                                    <input type="radio" name="setting-theme" checked="checked">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-info"></span>
+                                       <span class="color bg-info-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-b.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-green"></span>
+                                       <span class="color bg-green-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-c.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-purple"></span>
+                                       <span class="color bg-purple-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-d.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-danger"></span>
+                                       <span class="color bg-danger-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="table-grid mb">
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-e.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-info-dark"></span>
+                                       <span class="color bg-info"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-f.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-green-dark"></span>
+                                       <span class="color bg-green"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-g.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-purple-dark"></span>
+                                       <span class="color bg-purple"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-h.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-danger-dark"></span>
+                                       <span class="color bg-danger"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p">
+                        <h4 class="text-muted text-thin">Layout</h4>
+                        <div class="clearfix">
+                           <p class="pull-left">Fixed</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-fixed" type="checkbox" data-toggle-state="layout-fixed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Boxed</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-boxed" type="checkbox" data-toggle-state="layout-boxed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">RTL</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-rtl" type="checkbox">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p">
+                        <h4 class="text-muted text-thin">Aside</h4>
+                        <div class="clearfix">
+                           <p class="pull-left">Collapsed</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-collapsed" type="checkbox" data-toggle-state="aside-collapsed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Collapsed Text</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-collapsed-text" type="checkbox" data-toggle-state="aside-collapsed-text">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Float</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-float" type="checkbox" data-toggle-state="aside-float">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Hover</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-hover" type="checkbox" data-toggle-state="aside-hover">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Show Scrollbar</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-hover" type="checkbox" data-toggle-state="show-scrollbar" data-target=".sidebar">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade" id="app-chat" role="tabpanel">
+                     <h3 class="text-center text-thin">Connections</h3>
+                     <ul class="nav">
+                        <!-- START list title-->
+                        <li class="p">
+                           <small class="text-muted">ONLINE</small>
+                        </li>
+                        <!-- END list title-->
+                        <li>
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-success circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/05.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Juan Sims</strong>
+                                    <br>
+                                    <small class="text-muted">Designeer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-success circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/06.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Maureen Jenkins</strong>
+                                    <br>
+                                    <small class="text-muted">Designeer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-danger circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/07.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Billie Dunn</strong>
+                                    <br>
+                                    <small class="text-muted">Designeer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-warning circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/08.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Tomothy Roberts</strong>
+                                    <br>
+                                    <small class="text-muted">Designer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                        </li>
+                        <!-- START list title-->
+                        <li class="p">
+                           <small class="text-muted">OFFLINE</small>
+                        </li>
+                        <!-- END list title-->
+                        <li>
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/09.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Lawrence Robinson</strong>
+                                    <br>
+                                    <small class="text-muted">Developer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/10.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Tyrone Owens</strong>
+                                    <br>
+                                    <small class="text-muted">Designer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                        </li>
+                        <li>
+                           <div class="p-lg text-center">
+                              <!-- Optional link to list more users-->
+                              <a class="btn btn-purple btn-sm" href="#" title="See more contacts">
+                                 <strong>Load more..</strong>
+                              </a>
+                           </div>
+                        </li>
+                     </ul>
+                     <!-- Extra items-->
+                     <div class="p">
+                        <p>
+                           <small class="text-muted">Tasks completion</small>
+                        </p>
+                        <div class="progress progress-xs m0">
+                           <div class="progress-bar progress-bar-success progress-80" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">80% Complete</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p">
+                        <p>
+                           <small class="text-muted">Upload quota</small>
+                        </p>
+                        <div class="progress progress-xs m0">
+                           <div class="progress-bar progress-bar-warning progress-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">40% Complete</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </nav>
+         <!-- END Off Sidebar (right)-->
+      </aside>
+      <!-- Main section-->
+      <section>
+         <!-- Page content-->
+         <div class="content-wrapper">
+            <h3>Form Extended
+               <small>New elements to extend the classic functions</small>
+            </h3>
+            <!-- START panel-->
+            <div class="panel panel-default">
+               <div class="panel-heading">Form elements</div>
+               <div class="panel-body">
+                  <form class="form-horizontal" method="get" action="#">
+                     <fieldset>
+                        <legend>New Components</legend>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Slider
+                              <br>
+                              <small>Classic, range and vertical</small>
+                           </label>
+                           <div class="col-sm-4">
+                              <input class="slider slider-vertical" data-ui-slider="" type="text" value="" data-slider-min="5" data-slider-max="35" data-slider-step="1" data-slider-value="5" data-slider-orientation="vertical">
+                              <input class="slider slider-vertical" data-ui-slider="" type="text" value="" data-slider-min="5" data-slider-max="35" data-slider-step="1" data-slider-value="10" data-slider-orientation="vertical">
+                              <input class="slider slider-vertical" data-ui-slider="" type="text" value="" data-slider-min="5" data-slider-max="35" data-slider-step="1" data-slider-value="15" data-slider-orientation="vertical">
+                              <input class="slider slider-vertical" data-ui-slider="" type="text" value="" data-slider-min="5" data-slider-max="35" data-slider-step="1" data-slider-value="20" data-slider-orientation="vertical">
+                              <input class="slider slider-vertical" data-ui-slider="" type="text" value="" data-slider-min="5" data-slider-max="35" data-slider-step="1" data-slider-value="25" data-slider-orientation="vertical">
+                              <input class="slider slider-vertical" data-ui-slider="" type="text" value="" data-slider-min="5" data-slider-max="35" data-slider-step="1" data-slider-value="30" data-slider-orientation="vertical">
+                              <br>
+                              <br>
+                              <input class="slider slider-horizontal" data-ui-slider="" type="text" value="" data-slider-min="5" data-slider-max="20" data-slider-step="1" data-slider-value="10" data-slider-orientation="horizontal">
+                              <br>
+                              <br>
+                              <input class="slider" id="sl2" data-ui-slider="" type="text" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,750]">
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Switch Small</label>
+                           <div class="col-sm-10">
+                              <label class="switch switch-sm">
+                                 <input type="checkbox" checked="checked">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Switch</label>
+                           <div class="col-sm-10">
+                              <label class="switch">
+                                 <input type="checkbox" checked="checked">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Switch Large</label>
+                           <div class="col-sm-10">
+                              <label class="switch switch-lg">
+                                 <input type="checkbox" checked="checked">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Switch Radio</label>
+                           <div class="col-sm-10">
+                              <label class="switch switch-lg">
+                                 <input type="radio" checked="checked" name="radioSwitch">
+                                 <span></span>
+                              </label>
+                              <label class="switch switch-lg">
+                                 <input type="radio" name="radioSwitch">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group mb">
+                           <label class="col-sm-2 control-label">Color picker</label>
+                           <div class="col-sm-8">
+                              <div class="row">
+                                 <div class="col-xs-12">
+                                    <p>Automatically switches from hex to rgba format when transparency is selected:</p>
+                                    <input class="form-control demo-colorpicker" type="text" value="#5367ce">
+                                 </div>
+                                 <div class="col-xs-12">
+                                    <p class="mt-lg">As a component:</p>
+                                    <div class="input-group colorpicker-component demo-colorpicker">
+                                       <input class="form-control" type="text" value="#00AABB">
+                                       <span class="input-group-addon"><i></i>
+                                       </span>
+                                    </div>
+                                 </div>
+                                 <div class="col-xs-12">
+                                    <p class="mt-lg">Inline mode:</p>
+                                    <div class="row">
+                                       <div class="col-xs-6">
+                                          <div class="demo-colorpicker" id="demo_cont" data-container="#demo_cont" data-color="rgba(150,216,62,0.55)" data-inline="true"></div>
+                                       </div>
+                                       <div class="col-xs-6">
+                                          <div class="demo-colorpicker" data-container="true" data-color="rgb(50,216,62)" data-inline="true"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-xs-12">
+                                    <p class="mt-lg">Quick select Bootstrap colors:</p>
+                                    <input class="form-control" id="demo_selectors" type="text" data-format="hex" value="success">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group mb">
+                           <label class="col-sm-2 control-label">Chosen Groups</label>
+                           <div class="col-sm-10">
+                              <select class="chosen-select input-md form-control">
+                                 <optgroup label="NFC EAST">
+                                    <option>Dallas Cowboys</option>
+                                    <option>New York Giants</option>
+                                    <option>Philadelphia Eagles</option>
+                                    <option>Washington Redskins</option>
+                                 </optgroup>
+                                 <optgroup label="NFC NORTH">
+                                    <option>Chicago Bears</option>
+                                    <option>Detroit Lions</option>
+                                    <option>Green Bay Packers</option>
+                                    <option>Minnesota Vikings</option>
+                                 </optgroup>
+                                 <optgroup label="NFC SOUTH">
+                                    <option>Atlanta Falcons</option>
+                                    <option>Carolina Panthers</option>
+                                    <option>New Orleans Saints</option>
+                                    <option>Tampa Bay Buccaneers</option>
+                                 </optgroup>
+                                 <optgroup label="NFC WEST">
+                                    <option>Arizona Cardinals</option>
+                                    <option>St. Louis Rams</option>
+                                    <option>San Francisco 49ers</option>
+                                    <option>Seattle Seahawks</option>
+                                 </optgroup>
+                                 <optgroup label="AFC EAST">
+                                    <option>Buffalo Bills</option>
+                                    <option>Miami Dolphins</option>
+                                    <option>New England Patriots</option>
+                                    <option>New York Jets</option>
+                                 </optgroup>
+                                 <optgroup label="AFC NORTH">
+                                    <option>Baltimore Ravens</option>
+                                    <option>Cincinnati Bengals</option>
+                                    <option>Cleveland Browns</option>
+                                    <option>Pittsburgh Steelers</option>
+                                 </optgroup>
+                                 <optgroup label="AFC SOUTH">
+                                    <option>Houston Texans</option>
+                                    <option>Indianapolis Colts</option>
+                                    <option>Jacksonville Jaguars</option>
+                                    <option>Tennessee Titans</option>
+                                 </optgroup>
+                                 <optgroup label="AFC WEST">
+                                    <option>Denver Broncos</option>
+                                    <option>Kansas City Chiefs</option>
+                                    <option>Oakland Raiders</option>
+                                    <option>San Diego Chargers</option>
+                                 </optgroup>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Chosen Multiple</label>
+                           <div class="col-sm-10">
+                              <select class="chosen-select form-control" multiple>
+                                 <option>Dallas Cowboys</option>
+                                 <option>New York Giants</option>
+                                 <option>Philadelphia Eagles</option>
+                                 <option>Washington Redskins</option>
+                                 <option>Chicago Bears</option>
+                                 <option>Detroit Lions</option>
+                                 <option>Green Bay Packers</option>
+                                 <option>Minnesota Vikings</option>
+                                 <option>Atlanta Falcons</option>
+                                 <option>Carolina Panthers</option>
+                                 <option>New Orleans Saints</option>
+                                 <option>Tampa Bay Buccaneers</option>
+                                 <option>Arizona Cardinals</option>
+                                 <option>St. Louis Rams</option>
+                                 <option>San Francisco 49ers</option>
+                                 <option>Seattle Seahawks</option>
+                                 <option>Buffalo Bills</option>
+                                 <option>Miami Dolphins</option>
+                                 <option>New England Patriots</option>
+                                 <option>New York Jets</option>
+                                 <option>Baltimore Ravens</option>
+                                 <option>Cincinnati Bengals</option>
+                                 <option>Cleveland Browns</option>
+                                 <option>Pittsburgh Steelers</option>
+                                 <option>Houston Texans</option>
+                                 <option>Indianapolis Colts</option>
+                                 <option>Jacksonville Jaguars</option>
+                                 <option>Tennessee Titans</option>
+                                 <option>Denver Broncos</option>
+                                 <option>Kansas City Chiefs</option>
+                                 <option>Oakland Raiders</option>
+                                 <option>San Diego Chargers</option>
+                              </select>
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Masked input</label>
+                           <div class="col-sm-10">
+                              <div class="row">
+                                 <div class="col-sm-6">
+                                    <input class="form-control" type="text" data-masked="" data-inputmask="'mask': '999-99-999-9999-9'" placeholder="ISBN">
+                                    <span class="help-block">data-inputmask="'mask': '999-99-999-9999-9"'</span>
+                                 </div>
+                                 <div class="col-sm-6">
+                                    <input class="form-control" type="text" data-masked="" data-inputmask="'mask': '99/99/9999'" placeholder="Date">
+                                    <span class="help-block">data-inputmask="'mask': '99/99/9999"'</span>
+                                 </div>
+                                 <div class="col-sm-6">
+                                    <input class="form-control" type="text" data-masked="" data-inputmask="'mask': '(999) 999-9999'" placeholder="Phone number">
+                                    <span class="help-block">data-inputmask="'mask': '(999) 999-9999"'</span>
+                                 </div>
+                                 <div class="col-sm-6">
+                                    <input class="form-control" type="text" data-masked="" data-inputmask="'mask': 'aaaa-9999-aa99-9999'" placeholder="Custom Key">
+                                    <span class="help-block">data-inputmask="'mask': 'aaaa-9999-aa99-9999"'</span>
+                                 </div>
+                                 <div class="col-sm-6">
+                                    <input class="form-control" type="text" data-masked="" data-inputmask="'mask': '$ 999.999.999,99'" placeholder="Currency Dolar">
+                                    <span class="help-block">data-inputmask="'mask': '$ 999.999.999,99"'</span>
+                                 </div>
+                                 <div class="col-sm-6">
+                                    <input class="form-control" type="text" data-masked="" data-inputmask="'mask': '€ 999.999.999,99'" placeholder="Currency Euro">
+                                    <span class="help-block">data-inputmask="'mask': '€ 999.999.999,99"'</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group mb">
+                           <label class="col-sm-2 control-label mb">Select2</label>
+                           <div class="col-sm-10">
+                              <!-- SELECT2-->
+                              <select class="form-control" id="select2-1">
+                                 <option value="AL">Alabama</option>
+                                 <option value="AR">Arkansas</option>
+                                 <option value="IL">Illinois</option>
+                                 <option value="IA">Iowa</option>
+                                 <option value="KS">Kansas</option>
+                                 <option value="KY">Kentucky</option>
+                                 <option value="LA">Louisiana</option>
+                                 <option value="MN">Minnesota</option>
+                                 <option value="MS">Mississippi</option>
+                                 <option value="MO">Missouri</option>
+                                 <option value="OK">Oklahoma</option>
+                                 <option value="SD">South Dakota</option>
+                                 <option value="TX">Texas</option>
+                                 <option value="TN">Tennessee</option>
+                                 <option value="WI">Wisconsin</option>
+                              </select>
+                              <p class="mv">Multiple</p>
+                              <select class="form-control" id="select2-2">
+                                 <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                 </optgroup>
+                                 <optgroup label="Pacific Time Zone">
+                                    <option value="CA">California</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="WA">Washington</option>
+                                 </optgroup>
+                                 <optgroup label="Mountain Time Zone">
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="WY">Wyoming</option>
+                                 </optgroup>
+                                 <optgroup label="Central Time Zone">
+                                    <option value="AL">Alabama</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="WI">Wisconsin</option>
+                                 </optgroup>
+                                 <optgroup label="Eastern Time Zone">
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WV">West Virginia</option>
+                                 </optgroup>
+                              </select>
+                              <p class="mv">Multiple Pills</p>
+                              <select class="form-control" id="select2-3" multiple="multiple">
+                                 <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK" selected="selected">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                 </optgroup>
+                                 <optgroup label="Pacific Time Zone">
+                                    <option value="CA">California</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="WA">Washington</option>
+                                 </optgroup>
+                                 <optgroup label="Mountain Time Zone">
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="WY">Wyoming</option>
+                                 </optgroup>
+                                 <optgroup label="Central Time Zone">
+                                    <option value="AL">Alabama</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="WI">Wisconsin</option>
+                                 </optgroup>
+                                 <optgroup label="Eastern Time Zone">
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WV">West Virginia</option>
+                                 </optgroup>
+                              </select>
+                              <p class="mv">Placeholders</p>
+                              <select class="form-control" id="select2-4">
+                                 <optgroup label="Alaskan/Hawaiian Time Zone">
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                 </optgroup>
+                                 <optgroup label="Pacific Time Zone">
+                                    <option value="CA">California</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="WA">Washington</option>
+                                 </optgroup>
+                                 <optgroup label="Mountain Time Zone">
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="WY">Wyoming</option>
+                                 </optgroup>
+                              </select>
+                              <!-- END SELECT2-->
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group mb">
+                           <label class="col-sm-2 control-label mb">DateTimePicker</label>
+                           <div class="col-sm-10">
+                              <div class="input-group date" id="datetimepicker1">
+                                 <input class="form-control" type="text">
+                                 <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group mb">
+                           <label class="col-sm-2 control-label mb">Time Picker</label>
+                           <div class="col-sm-10">
+                              <div class="input-group date" id="datetimepicker2">
+                                 <input class="form-control" type="text">
+                                 <span class="input-group-addon">
+                                    <span class="fa fa-clock-o"></span>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Tags input
+                              <span class="text-sm text-muted">Type and press Enter</span>
+                           </label>
+                           <div class="col-sm-10">
+                              <input class="form-control" type="text" data-role="tagsinput" value="Amsterdam,Washington,Sydney,Beijing,Cairo">
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">File input</label>
+                           <div class="col-sm-10">
+                              <input class="form-control filestyle" type="file" data-classbutton="btn btn-default" data-classinput="form-control inline">
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Block Note Editor</label>
+                           <div class="col-sm-10">
+                              <div class="panel">
+                                 <div class="panel-body">
+                                    <textarea class="form-control note-editor" rows="10"></textarea>
+                                 </div>
+                              </div>
+                              <p>With margin</p>
+                              <div class="panel">
+                                 <div class="panel-body">
+                                    <textarea class="form-control note-editor note-editor-margin" rows="10"></textarea>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group">
+                           <label class="col-sm-2 control-label">Simple wysiwyg</label>
+                           <div class="col-sm-10">
+                              <div class="btn-toolbar btn-editor" data-role="editor-toolbar" data-target="#editor">
+                                 <div class="btn-group dropdown">
+                                    <a class="btn btn-default" data-toggle="dropdown" title="Font">
+                                       <em class="fa fa-font"></em><b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                       <li><a href="" data-edit="fontName Arial" style="font-family:'Arial';">Arial</a>
+                                       </li>
+                                       <li><a href="" data-edit="fontName Sans" style="font-family:'Sans';">Sans</a>
+                                       </li>
+                                       <li><a href="" data-edit="fontName Serif" style="font-family:'Serif';">Serif</a>
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <div class="btn-group dropdown">
+                                    <a class="btn btn-default" data-toggle="dropdown" title="Font Size">
+                                       <em class="fa fa-text-height"></em>&nbsp;<b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                       <li><a href="" data-edit="fontSize 5" style="font-size:24px;">Huge</a>
+                                       </li>
+                                       <li><a href="" data-edit="fontSize 3" style="font-size:18px;">Normal</a>
+                                       </li>
+                                       <li><a href="" data-edit="fontSize 1" style="font-size:14px;">Small</a>
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <div class="btn-group">
+                                    <a class="btn btn-default" data-edit="bold" data-toggle="tooltip" title="Bold (Ctrl/Cmd+B)">
+                                       <em class="fa fa-bold"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="italic" data-toggle="tooltip" title="Italic (Ctrl/Cmd+I)">
+                                       <em class="fa fa-italic"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="strikethrough" data-toggle="tooltip" title="Strikethrough">
+                                       <em class="fa fa-strikethrough"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="underline" data-toggle="tooltip" title="Underline (Ctrl/Cmd+U)">
+                                       <em class="fa fa-underline"></em>
+                                    </a>
+                                 </div>
+                                 <div class="btn-group">
+                                    <a class="btn btn-default" data-edit="insertunorderedlist" data-toggle="tooltip" title="Bullet list">
+                                       <em class="fa fa-list-ul"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="insertorderedlist" data-toggle="tooltip" title="Number list">
+                                       <em class="fa fa-list-ol"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="outdent" data-toggle="tooltip" title="Reduce indent (Shift+Tab)">
+                                       <em class="fa fa-dedent"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="indent" data-toggle="tooltip" title="Indent (Tab)">
+                                       <em class="fa fa-indent"></em>
+                                    </a>
+                                 </div>
+                                 <div class="btn-group">
+                                    <a class="btn btn-default" data-edit="justifyleft" data-toggle="tooltip" title="Align Left (Ctrl/Cmd+L)">
+                                       <em class="fa fa-align-left"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="justifycenter" data-toggle="tooltip" title="Center (Ctrl/Cmd+E)">
+                                       <em class="fa fa-align-center"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="justifyright" data-toggle="tooltip" title="Align Right (Ctrl/Cmd+R)">
+                                       <em class="fa fa-align-right"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="justifyfull" data-toggle="tooltip" title="Justify (Ctrl/Cmd+J)">
+                                       <em class="fa fa-align-justify"></em>
+                                    </a>
+                                 </div>
+                                 <div class="btn-group dropdown">
+                                    <a class="btn btn-default" data-toggle="dropdown" title="Hyperlink">
+                                       <em class="fa fa-link"></em>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                       <div class="input-group ml-xs mr-xs">
+                                          <input class="form-control input-sm" id="LinkInput" placeholder="URL" type="text" data-edit="createLink">
+                                          <div class="input-group-btn">
+                                             <button class="btn btn-sm btn-default" type="button">Add</button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <a class="btn btn-default" data-edit="unlink" data-toggle="tooltip" title="Remove Hyperlink">
+                                       <em class="fa fa-cut"></em>
+                                    </a>
+                                 </div>
+                                 <div class="btn-group">
+                                    <a class="btn btn-default" id="pictureBtn" data-toggle="tooltip" title="Insert picture (or just drag &amp; drop)">
+                                       <em class="fa fa-picture-o"></em>
+                                    </a>
+                                    <input type="file" data-edit="insertImage" style="position:absolute; opacity:0; width:41px; height:34px;">
+                                 </div>
+                                 <div class="btn-group pull-right">
+                                    <a class="btn btn-default" data-edit="undo" data-toggle="tooltip" title="Undo (Ctrl/Cmd+Z)">
+                                       <em class="fa fa-undo"></em>
+                                    </a>
+                                    <a class="btn btn-default" data-edit="redo" data-toggle="tooltip" title="Redo (Ctrl/Cmd+Y)">
+                                       <em class="fa fa-repeat"></em>
+                                    </a>
+                                 </div>
+                              </div>
+                              <div class="form-control wysiwyg mt-lg" style="overflow:scroll; height:250px;max-height:250px;">Type something ...</div>
+                           </div>
+                        </div>
+                     </fieldset>
+                     <fieldset>
+                        <div class="form-group">
+                           <div class="col-sm-4 col-sm-offset-2">
+                              <button class="btn btn-default" type="submit">Cancel</button>
+                              <button class="btn btn-primary" type="submit">Save changes</button>
+                           </div>
+                        </div>
+                     </fieldset>
+                  </form>
+               </div>
+            </div>
+            <!-- END panel-->
+         </div>
+      </section>
+      <!-- Page footer-->
+      <footer>
+         <span>&copy; 2017 - CTAP</span>
+      </footer>
+   </div>
+   <!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   <script src="../vendor/modernizr/modernizr.custom.js"></script>
+   <!-- MATCHMEDIA POLYFILL-->
+   <script src="../vendor/matchMedia/matchMedia.js"></script>
+   <!-- JQUERY-->
+   <script src="../vendor/jquery/dist/jquery.js"></script>
+   <!-- BOOTSTRAP-->
+   <script src="../vendor/bootstrap/dist/js/bootstrap.js"></script>
+   <!-- STORAGE API-->
+   <script src="../vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
+   <!-- JQUERY EASING-->
+   <script src="../vendor/jquery.easing/js/jquery.easing.js"></script>
+   <!-- ANIMO-->
+   <script src="../vendor/animo.js/animo.js"></script>
+   <!-- SLIMSCROLL-->
+   <script src="../vendor/slimScroll/jquery.slimscroll.min.js"></script>
+   <!-- SCREENFULL-->
+   <script src="../vendor/screenfull/dist/screenfull.js"></script>
+   <!-- LOCALIZE-->
+   <script src="../vendor/jquery-localize-i18n/dist/jquery.localize.js"></script>
+   <!-- RTL demo-->
+   <script src="js/demo/demo-rtl.js"></script>
+   <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+   <!-- FILESTYLE-->
+   <script src="../vendor/bootstrap-filestyle/src/bootstrap-filestyle.js"></script>
+   <!-- TAGS INPUT-->
+   <script src="../vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+   <!-- CHOSEN-->
+   <script src="../vendor/chosen_v1.2.0/chosen.jquery.min.js"></script>
+   <!-- SLIDER CTRL-->
+   <script src="../vendor/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+   <!-- INPUT MASK-->
+   <script src="../vendor/jquery.inputmask/dist/jquery.inputmask.bundle.js"></script>
+   <!-- WYSIWYG-->
+   <script src="../vendor/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+   <script src="../vendor/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+   <!-- MOMENT JS-->
+   <script src="../vendor/moment/min/moment-with-locales.min.js"></script>
+   <!-- DATETIMEPICKER-->
+   <script type="text/javascript" src="../vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+   <!-- COLORPICKER-->
+   <script type="text/javascript" src="../vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
+   <!-- Demo-->
+   <script src="js/demo/demo-forms.js"></script>
+   <!-- SELECT2-->
+   <script src="../vendor/select2/dist/js/select2.js"></script>
+   <!-- =============== APP SCRIPTS ===============-->
+   <script src="js/app.js"></script>
+</body>
+
+</html>

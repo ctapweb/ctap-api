@@ -14,26 +14,30 @@ public class Text extends TablePojo {
 	private long corpusId;
 	private String title;
 	private String content;
+	private String annotatedContent;
 	private Long tagId;
-	private String status;
 	private Timestamp updateDate;
-	
-	public static final String STATUS_ANALYZED = "analyzed";
-	public static final String STATUS_ANALYZING = "analyzing";
-	public static final String STATUS_NOT_ANALYZED = "not analyzed";
 	
 	public Text() {
 	}
 
-	public Text(long id, long corpusId, String title, String content, Long tagId, 
-			String status, Timestamp updateDate) {
+	public Text(long id, long corpusId, String title, String content, String annotatedContent, Long tagId, 
+			Timestamp updateDate) {
 		super(id);
 		this.corpusId = corpusId;
 		this.title = title;
 		this.content = content;
+		this.annotatedContent = annotatedContent;
 		this.tagId = tagId;
-		this.status = status;
 		this.updateDate = updateDate;
+	}
+
+	public String getAnnotatedContent() {
+		return annotatedContent;
+	}
+
+	public void setAnnotatedContent(String annotatedContent) {
+		this.annotatedContent = annotatedContent;
 	}
 
 	public Long getTagId() {
@@ -61,12 +65,6 @@ public class Text extends TablePojo {
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	public Timestamp getUpdateDate() {
 		return updateDate;

@@ -17,8 +17,8 @@ public class TestResults {
 	 * @param corpusId
 	 * @return
 	 */
-	public Result generateResult(long textId, long measureId) {
-		return generateResults(textId, measureId, 1).get(0);
+	public Result generateResult(long analysisId, long textId, long measureId) {
+		return generateResults(analysisId, textId, measureId, 1).get(0);
 	}
 
 	/**
@@ -27,12 +27,13 @@ public class TestResults {
 	 * @param size
 	 * @return
 	 */
-	public List<Result> generateResults(long textId, Long measureId, int size) {
+	public List<Result> generateResults(long analysisId, long textId, Long measureId, int size) {
 		List<Result> resultList = new ArrayList<>();
 		Random rand = new Random();
 
 		for(int i = 1; i <= size; i++) {
 			Result text = new Result(i, 
+					analysisId, 
 					textId,
 					measureId,
 					rand.nextDouble()

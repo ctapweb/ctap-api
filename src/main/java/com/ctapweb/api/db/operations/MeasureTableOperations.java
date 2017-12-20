@@ -14,9 +14,7 @@ import com.ctapweb.api.db.pojos.Measure;
 import com.ctapweb.api.db.pojos.TablePojo;
 
 public class MeasureTableOperations extends TableOperations {
-	public static final String COLUMN_OWNER_ID = "owner_id";
 	public static final String COLUMN_CATEGORY_ID = "category_id";
-	public static final String COLUMN_LANGUAGE = "language";
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_DESCRIPTION = "description";
 
@@ -33,7 +31,6 @@ public class MeasureTableOperations extends TableOperations {
 		long measureId = measure.getId();
 
 		updateCategoryId(measureId, measure.getCategoryId());
-		updateLanguage(measureId, measure.getLanguage());
 		updateName(measureId, measure.getName());
 		updateDescription(measureId, measure.getDescription());
 	}
@@ -46,10 +43,9 @@ public class MeasureTableOperations extends TableOperations {
 				+ COLUMN_CATEGORY_ID + " BIGINT NOT NULL REFERENCES "
 				+ "" + tableNames.getMeasureCategoryTableName() + "("
 				+ "" + MeasureCategoryTableOperations.COLUMN_ID + ") ON DELETE CASCADE,"
-				+ COLUMN_LANGUAGE + " VARCHAR(20) NOT NULL,"
 				+ COLUMN_NAME + " TEXT NOT NULL, "
 				+ COLUMN_DESCRIPTION + " TEXT, "
-				+ " UNIQUE(" + COLUMN_LANGUAGE + ", " + COLUMN_NAME + "))"; 
+				+ " UNIQUE(" + COLUMN_CATEGORY_ID + ", " + COLUMN_NAME + "))"; 
 
 		try(
 				Connection conn = dataSource.getConnection();
@@ -105,9 +101,9 @@ public class MeasureTableOperations extends TableOperations {
 
 		//the query 
 		String addEntryStr = "INSERT INTO " + tableName + " (" 
-				+ COLUMN_CATEGORY_ID + "," + COLUMN_LANGUAGE + ","
+				+ COLUMN_CATEGORY_ID + ","  
 				+ COLUMN_NAME + "," + COLUMN_DESCRIPTION + ") "
-				+ "VALUES(?, ?, ?, ?) RETURNING " + COLUMN_ID;
+				+ "VALUES(?, ?, ?) RETURNING " + COLUMN_ID;
 
 		try(
 				Connection conn = dataSource.getConnection();
@@ -115,9 +111,8 @@ public class MeasureTableOperations extends TableOperations {
 				) {
 
 			ps.setLong(1, measure.getCategoryId());
-			ps.setString(2, measure.getLanguage());
-			ps.setString(3, measure.getName());
-			ps.setString(4, measure.getDescription());
+			ps.setString(2, measure.getName());
+			ps.setString(3, measure.getDescription());
 
 			try(
 					ResultSet rs = ps.executeQuery();
@@ -168,22 +163,6 @@ public class MeasureTableOperations extends TableOperations {
 		}
 	}
 
-	public void updateLanguage(long measureId, String newLanguage) throws SQLException {
-		String updateStr = "UPDATE " + tableName + " "
-				+ "SET " + COLUMN_LANGUAGE + " = ? "
-				+ "WHERE " + COLUMN_ID + " = ?";
-		try (
-				Connection conn = dataSource.getConnection();
-				PreparedStatement ps = conn.prepareStatement(updateStr);
-				) {
-
-			ps.setString(1, newLanguage);
-			ps.setLong(2, measureId);
-
-			ps.executeUpdate();
-		}
-	}
-
 	public void updateCategoryId(long measureId, long categoryId) throws SQLException {
 		String updateStr = "UPDATE " + tableName + " "
 				+ "SET " + COLUMN_CATEGORY_ID + " = ? "
@@ -220,7 +199,26 @@ public class MeasureTableOperations extends TableOperations {
 		}
 	}
 
+	public Measure getEntryByCategoryAndName(long categoryId, String name) throws SQLException {
+		Measure corpus = null;
 
+		String queryStr = "SELECT * FROM " + tableName 
+				+ " WHERE " + COLUMN_CATEGORY_ID + " = ? "
+				+ " AND " + COLUMN_NAME + " = ? ";
+		try(
+				Connection conn = dataSource.getConnection();
+				PreparedStatement ps = conn.prepareStatement(queryStr);
+				) {
+
+			ps.setLong(1, categoryId);
+			ps.setString(2, name);
+			try(
+					ResultSet rs = ps.executeQuery();
+					) {
+				return getEntryFromResultSet(rs);
+			}
+		}
+	}
 
 	@Override
 	public long[] addEntries(List<? extends TablePojo> entries) throws SQLException {
@@ -240,9 +238,12 @@ public class MeasureTableOperations extends TableOperations {
 
 	public boolean isMeasureOfLanguageExist(String measureName, String language) 
 			throws SQLException {
-		String queryStr = "SELECT " + COLUMN_ID + " FROM " + tableName 
-				+ " WHERE " + COLUMN_NAME + " = ? "
-				+ " AND " + COLUMN_LANGUAGE + " = ?";
+		String queryStr = "SELECT m.* FROM " + tableName + " AS m "
+				+ " JOIN " + tableNames.getMeasureCategoryTableName() + " AS c "
+						+ " ON m." + COLUMN_CATEGORY_ID + " = c." + MeasureCategoryTableOperations.COLUMN_ID
+				+ " WHERE m." + COLUMN_NAME + " = ? "
+				+ " AND c." + MeasureCategoryTableOperations.COLUMN_LANGUAGE + " = ?";
+				
 		try(
 				Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(queryStr);
@@ -279,7 +280,10 @@ public class MeasureTableOperations extends TableOperations {
 	}
 
 	public List<Measure> getAllEntriesByLanguage(String language) throws SQLException {
-		String queryStr = "SELECT * FROM " + tableName + " WHERE " + COLUMN_LANGUAGE + " = ?";
+		String queryStr = "SELECT m.* FROM " + tableName + " AS m "
+				+ " JOIN " + tableNames.getMeasureCategoryTableName() 
+					+ " AS c ON m." + COLUMN_CATEGORY_ID + " = c." + MeasureCategoryTableOperations.COLUMN_ID
+				+ " WHERE " +  " c." + MeasureCategoryTableOperations.COLUMN_LANGUAGE + " = ?";
 
 		try(
 				Connection conn = dataSource.getConnection();
@@ -297,9 +301,11 @@ public class MeasureTableOperations extends TableOperations {
 
 	public List<Measure> getAllEntriesByLanguageAndCategory(String language, long categoryId) 
 			throws SQLException {
-		String queryStr = "SELECT * FROM " + tableName 
-				+ " WHERE " + COLUMN_LANGUAGE + " = ? "
-				+ " AND " + COLUMN_CATEGORY_ID + " = ?";
+		String queryStr = "SELECT m.* FROM " + tableName + " AS m "
+				+ " JOIN " + tableNames.getMeasureCategoryTableName() 
+					+ " AS c ON m." + COLUMN_CATEGORY_ID + " = c." + MeasureCategoryTableOperations.COLUMN_ID
+				+ " WHERE " +  " c." + MeasureCategoryTableOperations.COLUMN_LANGUAGE + " = ? "
+				+ " AND m." + COLUMN_CATEGORY_ID + "=?";
 
 		try(
 				Connection conn = dataSource.getConnection();
@@ -339,8 +345,10 @@ public class MeasureTableOperations extends TableOperations {
 
 	public List<Measure> getEntriesByLanguage(String language, String orderByColumn, long limit, long offset) throws SQLException {
 
-		String queryStr = "SELECT * FROM " + tableName 
-				+ " WHERE " + COLUMN_LANGUAGE + " = ? "
+		String queryStr = "SELECT m.* FROM " + tableName + " AS m "
+				+ " JOIN " + tableNames.getMeasureCategoryTableName() 
+					+ " AS c ON m." + COLUMN_CATEGORY_ID + " = c." + MeasureCategoryTableOperations.COLUMN_ID
+				+ " WHERE " +  " c." + MeasureCategoryTableOperations.COLUMN_LANGUAGE + " = ?"
 				+ " ORDER BY " + orderByColumn + " LIMIT ? OFFSET ?";
 		try(
 				Connection conn = dataSource.getConnection();
@@ -361,10 +369,11 @@ public class MeasureTableOperations extends TableOperations {
 
 	public List<Measure> getEntriesByLanguageAndCategory(String language, long categoryId, 
 			String orderByColumn, long limit, long offset) throws SQLException {
-
-		String queryStr = "SELECT * FROM " + tableName 
-				+ " WHERE " + COLUMN_LANGUAGE + " = ? "
-				+ " AND " + COLUMN_CATEGORY_ID + " = ? "
+		String queryStr = "SELECT m.* FROM " + tableName + " AS m "
+				+ " JOIN " + tableNames.getMeasureCategoryTableName() 
+					+ " AS c ON m." + COLUMN_CATEGORY_ID + " = c." + MeasureCategoryTableOperations.COLUMN_ID
+				+ " WHERE " +  " c." + MeasureCategoryTableOperations.COLUMN_LANGUAGE + " = ? "
+				+ " AND m." + COLUMN_CATEGORY_ID + " = ? "
 				+ " ORDER BY " + orderByColumn + " LIMIT ? OFFSET ?";
 		try(
 				Connection conn = dataSource.getConnection();
@@ -392,7 +401,6 @@ public class MeasureTableOperations extends TableOperations {
 			return new Measure(
 					rs.getLong(COLUMN_ID),
 					rs.getLong(COLUMN_CATEGORY_ID),
-					rs.getString(COLUMN_LANGUAGE),
 					rs.getString(COLUMN_NAME),
 					rs.getString(COLUMN_DESCRIPTION)
 					);
@@ -409,7 +417,6 @@ public class MeasureTableOperations extends TableOperations {
 				Measure measure = new Measure(
 						rs.getLong(COLUMN_ID),
 						rs.getLong(COLUMN_CATEGORY_ID),
-						rs.getString(COLUMN_LANGUAGE),
 						rs.getString(COLUMN_NAME),
 						rs.getString(COLUMN_DESCRIPTION)
 						);
@@ -442,8 +449,11 @@ public class MeasureTableOperations extends TableOperations {
 	}
 
 	public long getNumEntriesByLanguage(String language) throws SQLException {
-		String queryStr = "SELECT COUNT(*) FROM " + tableName 
-				+ " WHERE " + COLUMN_LANGUAGE + " = ?";
+		String queryStr = "SELECT COUNT(m.*) FROM " + tableName + " AS m "
+				+ " JOIN " + tableNames.getMeasureCategoryTableName() 
+					+ " AS c ON m." + COLUMN_CATEGORY_ID + " = c." + MeasureCategoryTableOperations.COLUMN_ID
+				+ " WHERE " +  " c." + MeasureCategoryTableOperations.COLUMN_LANGUAGE + " = ?";
+
 		try(
 				Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(queryStr);
@@ -465,9 +475,12 @@ public class MeasureTableOperations extends TableOperations {
 
 	public long getNumEntriesByLanguageAndCategory(String language, long categoryId) 
 			throws SQLException {
-		String queryStr = "SELECT COUNT(*) FROM " + tableName 
-				+ " WHERE " + COLUMN_LANGUAGE + " = ?" 
-				+ " AND " + COLUMN_CATEGORY_ID + " = ?";
+		String queryStr = "SELECT COUNT(m.*) FROM " + tableName + " AS m "
+				+ " JOIN " + tableNames.getMeasureCategoryTableName() 
+					+ " AS c ON m." + COLUMN_CATEGORY_ID + " = c." + MeasureCategoryTableOperations.COLUMN_ID
+				+ " WHERE " +  " c." + MeasureCategoryTableOperations.COLUMN_LANGUAGE + " = ? "
+				+ " AND m." + COLUMN_CATEGORY_ID + "=?";
+
 		try(
 				Connection conn = dataSource.getConnection();
 				PreparedStatement ps = conn.prepareStatement(queryStr);

@@ -26,6 +26,41 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.11</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.corpus-tools/pepper-lib -->
+		<dependency>
+			<groupId>org.corpus-tools</groupId>
+			<artifactId>pepper-lib</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.corpus-tools/pepperModules-CoNLLModules -->
+		<dependency>
+			<groupId>org.corpus-tools</groupId>
+			<artifactId>pepperModules-CoNLLModules</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.corpus-tools/pepperModules-ANNISModules -->
+		<dependency>
+			<groupId>org.corpus-tools</groupId>
+			<artifactId>pepperModules-ANNISModules</artifactId>
+			<version>2.0.9</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.corpus-tools/pepperModules-PTBModules -->
+		<dependency>
+			<groupId>org.corpus-tools</groupId>
+			<artifactId>pepperModules-PTBModules</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+
+
+
+
+
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -112,6 +147,14 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-langdetect -->
+		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika -->
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika</artifactId>
+			<version>1.16</version>
+			<type>pom</type>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-langdetect</artifactId>
@@ -138,13 +181,6 @@
 			<version>2.3.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/net.hamnaberg.rest/json-collection -->
-		<dependency>
-			<groupId>net.hamnaberg.rest</groupId>
-			<artifactId>json-collection</artifactId>
-			<version>4.0.0</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -156,14 +192,16 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
-			<version>9.4.6.v20170531</version>
+			<version>9.4.7.v20170914</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlet -->
+
+		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlets -->
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-servlet</artifactId>
-			<version>9.4.6.v20170531</version>
+			<artifactId>jetty-servlets</artifactId>
+			<version>9.4.7.v20170914</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-client -->
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
@@ -224,8 +262,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<compilerArguments>
 						<endorseddirs>${endorsed.dir}</endorseddirs>
 					</compilerArguments>

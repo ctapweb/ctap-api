@@ -1,0 +1,74 @@
+{
+  "sidebar": [
+    {
+      "text": "Tools",
+      "heading": "true",
+      "translate": "sidebar.heading.HEADER"
+    },
+    {
+      "text": "Dashboard",
+      "href": "#dashboard",
+      "icon": "fa fa-tachometer",
+      "label": "label label-info",
+      "translate": "sidebar.nav.DASHBOARD"
+    },
+    {
+      "text": "Corpus Manager",
+      "href": "corpus_manager.html",
+      "icon": "fa fa-database",
+      "alert": "30",
+      "translate": "sidebar.nav.CORPUS_MANAGER"
+    },
+    {
+      "text": "Feature Selector",
+      "href": "feature_selector.html",
+      "icon": "fa fa-check-square",
+      "alert": "30",
+      "translate": "sidebar.nav.FEATURE_SELECTOR"
+    },
+    {
+      "text": "Analysis Generator",
+      "href": "analysis_generator.html",
+      "icon": "fa fa-cubes",
+      "alert": "30",
+      "translate": "sidebar.nav.ANALYSIS_GENERATOR"
+    },
+    {
+      "text": "Result Visualizer",
+      "href": "result_visualizer.html",
+      "icon": "fa fa-area-chart",
+      "alert": "30",
+      "translate": "sidebar.nav.RESULT_VISUALIZER"
+    },
+
+    {
+      "text": "User",
+      "heading": "true",
+      "translate": "sidebar.heading.USER"
+    },
+    {
+        "text": "Profile",
+        "href": "profile.html",
+        "icon": "fa fa-user",
+        "translate": "sidebar.nav.PROFILE"
+      },
+    {
+        "text": "Feedback",
+        "href": "feedback.html",
+        "icon": "fa fa-comment",
+        "translate": "sidebar.nav.FEEDBACK"
+      },
+    {
+        "text": "Documentation",
+        "href": "documentation.html",
+        "icon": "fa fa-book",
+        "translate": "sidebar.nav.DOCUMENTATION"
+      },
+    {
+        "text": "Sign Out",
+        "href": "./logout/",
+        "icon": "fa fa-power-off",
+        "translate": "sidebar.nav.SIGN_OUT"
+      }
+  ]
+}

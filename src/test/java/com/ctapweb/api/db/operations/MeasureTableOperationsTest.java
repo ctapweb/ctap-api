@@ -16,6 +16,8 @@ import com.ctapweb.api.db.data_generators.TestCategories;
 import com.ctapweb.api.db.data_generators.TestMeasures;
 import com.ctapweb.api.db.pojos.Measure;
 import com.ctapweb.api.db.pojos.MeasureCategory;
+import com.ctapweb.api.measures.annotations.MeasureCategory.Languages;
+import com.ctapweb.api.measures.annotations.MeasureCategory.Pipelines;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -51,11 +53,11 @@ public class MeasureTableOperationsTest {
 		//insert one measure category
 		MeasureCategory category = testCategories.generateCategory();
 		long insertedCategoryId = categoryTableOperations.addEntry(category);
-		assertTrue(categoryTableOperations.isCategoryExist(category.getName()));
+		assertTrue(categoryTableOperations.isCategoryExist(category.getName(), category.getLanguage()));
 
 		//insert one measure
 		logger.trace("Testing inserting single entry...");
-		Measure measure = testMeasures.generateMeasure(insertedCategoryId, Measure.Languages.English);
+		Measure measure = testMeasures.generateMeasure(insertedCategoryId);
 		long insertedMeasureId = measureTableOperations.addEntry(measure);
 
 		assertEquals(insertedMeasureId, measureTableOperations.getEntry(insertedMeasureId).getId());
@@ -65,23 +67,25 @@ public class MeasureTableOperationsTest {
 
 		//change one entry: update
 		logger.trace("Testing updating single entry...");
-		String newLanguage = Measure.Languages.French;
-		measureTableOperations.updateLanguage(insertedMeasureId, newLanguage);
-		assertEquals(newLanguage, measureTableOperations.getEntry(insertedMeasureId).getLanguage());
-
 		String newMeasureName = "New measure name";
 		measureTableOperations.updateName(insertedMeasureId, newMeasureName);
 		assertEquals(newMeasureName, measureTableOperations.getEntry(insertedMeasureId).getName());
 
-		String newCorpusDescription = "New measure description";
-		measureTableOperations.updateDescription(insertedMeasureId, newCorpusDescription);
-		assertEquals(newCorpusDescription, measureTableOperations.getEntry(insertedMeasureId).getDescription());
+		String newMeasureDescription = "New measure description";
+		measureTableOperations.updateDescription(insertedMeasureId, newMeasureDescription);
+		assertEquals(newMeasureDescription, measureTableOperations.getEntry(insertedMeasureId).getDescription());
 
-		measure.setLanguage(Measure.Languages.German);
+		category.setLanguage(Languages.GERMAN);
+		insertedCategoryId = categoryTableOperations.addEntry(category);
+		measureTableOperations.updateCategoryId(insertedMeasureId, insertedCategoryId);
+		assertEquals(insertedCategoryId, measureTableOperations.getEntry(insertedMeasureId).getCategoryId());
+		
+		//update info of the whole entry
+		measure.setCategoryId(insertedCategoryId);
 		measure.setName("updated name");
 		measure.setDescription("updated description");
 		measureTableOperations.updateEntry(measure);
-		assertEquals(measure.getLanguage(), measureTableOperations.getEntry(insertedMeasureId).getLanguage());
+		assertEquals(measure.getCategoryId(), measureTableOperations.getEntry(insertedMeasureId).getCategoryId());
 		assertEquals(measure.getName(), measureTableOperations.getEntry(insertedMeasureId).getName());
 		assertEquals(measure.getDescription(), measureTableOperations.getEntry(insertedMeasureId).getDescription());
 
@@ -90,6 +94,8 @@ public class MeasureTableOperationsTest {
 		measureTableOperations.deleteEntry(insertedMeasureId);
 		assertEquals(0, measureTableOperations.getNumEntries());
 		assertNull(measureTableOperations.getEntry(insertedMeasureId));
+		
+		categoryTableOperations.deleteAllEntries();
 
 		//insert multiple entries
 		logger.trace("Testing inserting multiple entries...");
@@ -97,12 +103,26 @@ public class MeasureTableOperationsTest {
 		int nDeEntries = 20;
 		int nFrEntries = 30;
 		int numAllEntries = nEnEntries + nDeEntries + nFrEntries;
+		
+		//insert 3 categories for three languages
+		MeasureCategory enCategory = testCategories.generateCategory();
+		enCategory.setLanguage(Languages.ENGLISH);
+		long insertedEnCategoryId = categoryTableOperations.addEntry(enCategory);
+
+		MeasureCategory deCategory = testCategories.generateCategory();
+		deCategory.setLanguage(Languages.GERMAN);
+		long insertedDeCategoryId = categoryTableOperations.addEntry(deCategory);
+
+		MeasureCategory frCategory = testCategories.generateCategory();
+		frCategory.setLanguage(Languages.FRENCH);
+		long insertedFrCategoryId = categoryTableOperations.addEntry(frCategory);
+
 		List<Measure> enMeasureList = 
-				testMeasures.generateMeasures(insertedCategoryId, Measure.Languages.English, nEnEntries);
+				testMeasures.generateMeasures(insertedEnCategoryId, nEnEntries);
 		List<Measure> deMeasureList = 
-				testMeasures.generateMeasures(insertedCategoryId, Measure.Languages.German, nDeEntries);
+				testMeasures.generateMeasures(insertedDeCategoryId, nDeEntries);
 		List<Measure> frMeasureList = 
-				testMeasures.generateMeasures(insertedCategoryId, Measure.Languages.French, nFrEntries);
+				testMeasures.generateMeasures(insertedFrCategoryId, nFrEntries);
 
 		long[] insertedEnMeasureIds = measureTableOperations.addEntries(enMeasureList);
 		long[] insertedDeMeasureIds = measureTableOperations.addEntries(deMeasureList);
@@ -110,17 +130,17 @@ public class MeasureTableOperationsTest {
 
 		assertEquals(numAllEntries, measureTableOperations.getAllEntries().size());
 		assertEquals(numAllEntries, measureTableOperations.getNumEntries());
-		assertEquals(numAllEntries, measureTableOperations.getNumEntriesByCategory(insertedCategoryId));
 
-		assertEquals(nEnEntries, measureTableOperations.getNumEntriesByLanguage(Measure.Languages.English));
+		assertEquals(nEnEntries, measureTableOperations.getNumEntriesByLanguage(Languages.ENGLISH));
+		assertEquals(nDeEntries, measureTableOperations.getNumEntriesByLanguage(Languages.GERMAN));
+		assertEquals(nFrEntries, measureTableOperations.getNumEntriesByLanguage(Languages.FRENCH));
+
 		assertEquals(nEnEntries, measureTableOperations.
-				getNumEntriesByLanguageAndCategory(Measure.Languages.English, insertedCategoryId));
-		assertEquals(nDeEntries, measureTableOperations.getNumEntriesByLanguage(Measure.Languages.German));
+				getNumEntriesByLanguageAndCategory(Languages.ENGLISH, insertedEnCategoryId));
 		assertEquals(nDeEntries, measureTableOperations.
-				getNumEntriesByLanguageAndCategory(Measure.Languages.German, insertedCategoryId));
-		assertEquals(nFrEntries, measureTableOperations.getNumEntriesByLanguage(Measure.Languages.French));
+				getNumEntriesByLanguageAndCategory(Languages.GERMAN, insertedDeCategoryId));
 		assertEquals(nFrEntries, measureTableOperations.
-				getNumEntriesByLanguageAndCategory(Measure.Languages.French, insertedCategoryId));
+				getNumEntriesByLanguageAndCategory(Languages.FRENCH, insertedFrCategoryId));
 
 		//delete multiple entries: half of the inserted entries
 		logger.trace("Testing deleting multiple entries...");
@@ -131,28 +151,57 @@ public class MeasureTableOperationsTest {
 			enMeasureIdsToDelete[i] = insertedEnMeasureIds[i];
 		}
 		measureTableOperations.deleteEntries(enMeasureIdsToDelete);
-		assertEquals(nEnEntriesLeft, measureTableOperations.getNumEntriesByLanguage(Measure.Languages.English));
+		assertEquals(nEnEntriesLeft, measureTableOperations.getNumEntriesByLanguage(Languages.ENGLISH));
+		assertEquals(nEnEntriesLeft, measureTableOperations.getAllEntriesByLanguage(Languages.ENGLISH).size());
+		assertEquals(nEnEntriesLeft, measureTableOperations.getAllEntriesByLanguageAndCategory(Languages.ENGLISH, insertedEnCategoryId).size());
+
+		int nDeEntriesToDelete = nDeEntries / 2;
+		int nDeEntriesLeft = nDeEntries - nDeEntriesToDelete;
+		long[] deMeasureIdsToDelete = new long[nDeEntriesToDelete];
+		for(int i = 0; i < nDeEntriesToDelete; i ++) {
+			deMeasureIdsToDelete[i] = insertedDeMeasureIds[i];
+		}
+		measureTableOperations.deleteEntries(deMeasureIdsToDelete);
+		assertEquals(nDeEntriesLeft, measureTableOperations.getNumEntriesByLanguage(Languages.GERMAN));
+		assertEquals(nDeEntriesLeft, measureTableOperations.getAllEntriesByLanguage(Languages.GERMAN).size());
+		assertEquals(nDeEntriesLeft, measureTableOperations.getAllEntriesByLanguageAndCategory(Languages.GERMAN, insertedDeCategoryId).size());
+
+		int nFrEntriesToDelete = nFrEntries / 2;
+		int nFrEntriesLeft = nFrEntries - nFrEntriesToDelete;
+		long[] frMeasureIdsToDelete = new long[nFrEntriesToDelete];
+		for(int i = 0; i < nFrEntriesToDelete; i ++) {
+			frMeasureIdsToDelete[i] = insertedFrMeasureIds[i];
+		}
+		measureTableOperations.deleteEntries(frMeasureIdsToDelete);
+		assertEquals(nFrEntriesLeft, measureTableOperations.getNumEntriesByLanguage(Languages.FRENCH));
+		assertEquals(nFrEntriesLeft, measureTableOperations.getAllEntriesByLanguage(Languages.FRENCH).size());
+		assertEquals(nFrEntriesLeft, measureTableOperations.getAllEntriesByLanguageAndCategory(Languages.FRENCH, insertedFrCategoryId).size());
 
 		//delete all entries
 		logger.trace("Testing deleting all entries...");
 		measureTableOperations.deleteAllEntries();
 		assertNull(measureTableOperations.getAllEntries());
-		assertNull(measureTableOperations.getAllEntriesByCategory(insertedCategoryId));
-		assertNull(measureTableOperations.getAllEntriesByLanguage(Measure.Languages.English));
-		assertNull(measureTableOperations.getAllEntriesByLanguage(Measure.Languages.French));
-		assertNull(measureTableOperations.getAllEntriesByLanguage(Measure.Languages.German));
-		assertNull(measureTableOperations.getAllEntriesByLanguageAndCategory(Measure.Languages.English, 
+		assertNull(measureTableOperations.getAllEntriesByCategory(insertedEnCategoryId));
+		assertNull(measureTableOperations.getAllEntriesByCategory(insertedDeCategoryId));
+		assertNull(measureTableOperations.getAllEntriesByCategory(insertedFrCategoryId));
+		assertNull(measureTableOperations.getAllEntriesByLanguage(Languages.ENGLISH));
+		assertNull(measureTableOperations.getAllEntriesByLanguage(Languages.FRENCH));
+		assertNull(measureTableOperations.getAllEntriesByLanguage(Languages.GERMAN));
+		assertNull(measureTableOperations.getAllEntriesByLanguageAndCategory(Languages.ENGLISH, 
 				insertedCategoryId));
-		assertNull(measureTableOperations.getAllEntriesByLanguageAndCategory(Measure.Languages.French, 
+		assertNull(measureTableOperations.getAllEntriesByLanguageAndCategory(Languages.FRENCH, 
 				insertedCategoryId));
-		assertNull(measureTableOperations.getAllEntriesByLanguageAndCategory(Measure.Languages.German, 
+		assertNull(measureTableOperations.getAllEntriesByLanguageAndCategory(Languages.GERMAN, 
 				insertedCategoryId));
 
 		assertEquals(0, measureTableOperations.getNumEntries());
 		assertEquals(0, measureTableOperations.getNumEntriesByCategory(insertedCategoryId));
-		assertEquals(0, measureTableOperations.getNumEntriesByLanguage(Measure.Languages.English));
-		assertEquals(0, measureTableOperations.getNumEntriesByLanguage(Measure.Languages.French));
-		assertEquals(0, measureTableOperations.getNumEntriesByLanguage(Measure.Languages.German));
+		assertEquals(0, measureTableOperations.getNumEntriesByLanguage(Languages.ENGLISH));
+		assertEquals(0, measureTableOperations.getNumEntriesByLanguage(Languages.FRENCH));
+		assertEquals(0, measureTableOperations.getNumEntriesByLanguage(Languages.GERMAN));
+		assertEquals(0, measureTableOperations.getNumEntriesByLanguageAndCategory(Languages.ENGLISH, insertedCategoryId));
+		assertEquals(0, measureTableOperations.getNumEntriesByLanguageAndCategory(Languages.GERMAN, insertedCategoryId));
+		assertEquals(0, measureTableOperations.getNumEntriesByLanguageAndCategory(Languages.FRENCH, insertedCategoryId));
 
 		//drop the table
 		logger.trace("Testing dropping the table...");
@@ -173,58 +222,54 @@ public class MeasureTableOperationsTest {
 		int numMeasuresPerLangPerCat = 10;
 		int numMeasuresPerCat = numLanguages * numMeasuresPerLangPerCat;
 		int numMeasuresPerLang = numCategories * numMeasuresPerLangPerCat;
-		String[] languages = {Measure.Languages.English, Measure.Languages.French, Measure.Languages.German};
+		int numTotalMeasures = numCategories * numLanguages * numMeasuresPerLangPerCat;
+		String[] languages = {Languages.ENGLISH, Languages.FRENCH, Languages.GERMAN};
 
-		//insert measure categories
-		List<MeasureCategory>  categoryList = testCategories.generateCategories(numCategories);
-		long[] categoryIds = categoryTableOperations.addEntries(categoryList);
+		//for each language, insert the categories
+		for(String language: languages) {
+			List<MeasureCategory>  categoryList = 
+					testCategories.generateCategories(language, Pipelines.COMPLETE_PIPELINE, numCategories);
+			categoryTableOperations.addEntries(categoryList);
+			assertEquals(numCategories, categoryTableOperations.getNumEntriesByLanguage(language));
+			assertEquals(numCategories, categoryTableOperations.getAllEntriesByLanguage(language).size());
+		}
 
-		//for each category, insert measures in 3 different languages
-		for(long categoryId: categoryIds) {
-			for(String lang: languages) {
-				List<Measure> measureList = testMeasures.generateMeasures(categoryId, 
-						lang, numMeasuresPerLangPerCat);
+		//for each language,  insert some measures for each category
+		for(String language: languages) {
+			for(MeasureCategory cat: categoryTableOperations.getAllEntriesByLanguage(language)) {
+				List<Measure> measureList = testMeasures.generateMeasures(cat.getId(), numMeasuresPerLangPerCat);
 				measureTableOperations.addEntries(measureList);
 			}
 		}
+		assertEquals(numTotalMeasures, measureTableOperations.getNumEntries());
+		assertEquals(numTotalMeasures, measureTableOperations.getAllEntries().size());
 
-		//for each category, get their measures from db
-		for(long categoryId: categoryIds) {
-			assertEquals(numMeasuresPerCat, measureTableOperations.getAllEntriesByCategory(categoryId).size());
-			assertEquals(numMeasuresPerCat, measureTableOperations.getNumEntriesByCategory(categoryId));
-
-			//check each measure has the same category
-			for(Measure m: measureTableOperations.getAllEntriesByCategory(categoryId)) {
-				assertEquals(categoryId, m.getCategoryId());
-			}
-		}
-
-		//for each language, get their measures from db
-		for(String lang: languages) {
-			List<Measure> measures = 
-					measureTableOperations.getAllEntriesByLanguage(lang);
-			assertEquals(numMeasuresPerLang, measures.size());
-			assertEquals(numMeasuresPerLang, measureTableOperations.getNumEntriesByLanguage(lang));
-
-			//check each measure has the same lang
-			for(Measure m: measures) {
-				assertEquals(lang, m.getLanguage());
-			}
-		}
 		
+		//for each language, test num measures
 		for(String language: languages) {
-			for(long categoryId: categoryIds) {
-				List<Measure> measures =
-						measureTableOperations.getAllEntriesByLanguageAndCategory(language, categoryId);
-				assertEquals(numMeasuresPerLangPerCat, measures.size());
+			assertEquals(numMeasuresPerLang, measureTableOperations.getNumEntriesByLanguage(language));
+			for(MeasureCategory cat: categoryTableOperations.getAllEntriesByLanguage(language)) {
+				long catId = cat.getId();
 				assertEquals(numMeasuresPerLangPerCat, 
-						measureTableOperations.getNumEntriesByLanguageAndCategory(language, categoryId));
-				
-				for(Measure measure: measures) {
-					assertEquals(categoryId, measure.getCategoryId());
-					assertEquals(language, measure.getLanguage());
+						measureTableOperations.getNumEntriesByLanguageAndCategory(language, catId));
+				assertEquals(numMeasuresPerLangPerCat, 
+						measureTableOperations.getAllEntriesByLanguageAndCategory(language, catId).size());
+				assertEquals(numMeasuresPerLangPerCat, 
+						measureTableOperations.getNumEntriesByCategory(catId));
+				assertEquals(numMeasuresPerLangPerCat, 
+						measureTableOperations.getAllEntriesByCategory(catId).size());
+				assertEquals(language, cat.getLanguage());
+
+				//for specific measure entry
+				for(Measure m: measureTableOperations.getAllEntriesByLanguageAndCategory(language, catId)) {
+					assertEquals(catId, m.getCategoryId());
 				}
+				
 			}
+			assertEquals(numMeasuresPerLang, 
+					measureTableOperations.getNumEntriesByLanguage(language));
+			assertEquals(numMeasuresPerLang, 
+					measureTableOperations.getAllEntriesByLanguage(language).size());
 		}
 
 
@@ -292,7 +337,7 @@ public class MeasureTableOperationsTest {
 		MeasureCategory measureCategory = testCategories.generateCategory();
 		long insertedCategoryId = categoryTableOperations.addEntry(measureCategory);
 
-		List<Measure> measures = testMeasures.generateMeasures(insertedCategoryId, Measure.Languages.English, numEntries);
+		List<Measure> measures = testMeasures.generateMeasures(insertedCategoryId, numEntries);
 		long[] insertedMeasureIds = measureTableOperations.addEntries(measures);
 		assertEquals(numEntries, measureTableOperations.getNumEntries());
 

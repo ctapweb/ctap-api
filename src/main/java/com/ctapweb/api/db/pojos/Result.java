@@ -9,6 +9,7 @@ package com.ctapweb.api.db.pojos;
  *
  */
 public class Result extends TablePojo {
+	private long analysisId;
 	private long textId;
 	private long measureId;
 	private double value;
@@ -16,11 +17,20 @@ public class Result extends TablePojo {
 	public Result() {
 	}
 	
-	public Result(long id, long textId, long measureId, double value) {
+	public Result(long id, long analysisId, long textId, long measureId, double value) {
 		super(id);
+		this.analysisId = analysisId;
 		this.textId = textId;
 		this.measureId = measureId;
 		this.value = value;
+	}
+
+	public long getAnalysisId() {
+		return analysisId;
+	}
+
+	public void setAnalysisId(long analysisId) {
+		this.analysisId = analysisId;
 	}
 
 	public long getTextId() {

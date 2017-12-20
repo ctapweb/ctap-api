@@ -1,0 +1,52 @@
+extends ../_layout_page
+
+block content
+  .block-center.mt-xl.wd-xl
+    // START panel
+    .panel.panel-dark.panel-flat
+      .panel-heading.text-center
+        a(href="#")
+          img.block-center.img-rounded(src='img/logo.svg', alt='CTAP Logo',  width='85', height='34')
+      .panel-body
+        p.text-center.pv SIGNUP TO GET INSTANT ACCESS.
+        form(role='form', data-parsley-validate='', novalidate='', id='registerForm').mb-lg
+          .form-group.has-feedback
+            label.text-muted(for='signupInputEmail') Email address*
+            input#signupInputEmail.form-control(type='email', placeholder='Enter email', autocomplete="off", required)
+            span.fa.fa-envelope.form-control-feedback.text-muted
+          .form-group.has-feedback
+            label.text-muted(for='signupInputPassword1') Password*
+            input#signupInputPassword1.form-control(type='password', placeholder='Password', autocomplete="off", required, data-parsley-minlength="6")
+            span.fa.fa-lock.form-control-feedback.text-muted
+          .form-group.has-feedback
+            label.text-muted(for='signupInputRePassword1') Retype Password*
+            input#signupInputRePassword1.form-control(type='password', placeholder='Retype Password', autocomplete="off", required, data-parsley-equalto="#signupInputPassword1", data-parsley-minlength="6")
+            span.fa.fa-lock.form-control-feedback.text-muted
+
+          .form-group.has-feedback
+            label.text-muted(for='signupInputFirstName') First Name
+            input#signupInputFirstName.form-control(type='text', placeholder='Your First Name', autocomplete="off", data-parsley-maxlength="30")
+            span.fa.fa-user.form-control-feedback.text-muted
+          .form-group.has-feedback
+            label.text-muted(for='signupInputLastName') Last Name
+            input#signupInputLastName.form-control(type='text', placeholder='Your Last Name', autocomplete="off", data-parsley-maxlength="30")
+            span.fa.fa-user.form-control-feedback.text-muted
+          .form-group.has-feedback
+            label.text-muted(for='signupInputInstitution') Institution
+            input#signupInputInstitution.form-control(type='text', placeholder='Your Institution', autocomplete="off", data-parsley-maxlength="100")
+            span.fa.fa-institution.form-control-feedback.text-muted
+          .clearfix
+            .checkbox.c-checkbox.pull-left.mt0
+              label
+                input(type='checkbox', value='', required, name="agreed")
+                span.fa.fa-check
+                |  I agree with the 
+                a(href="#") terms
+          
+          button.btn.btn-block.btn-primary.mt-lg(type='submit') Create account
+        
+        p.pt-lg.text-center Have an account?
+        a(href="login.html").btn.btn-block.btn-default Signin
+
+    // END panel
+    include _footer_page

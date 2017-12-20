@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Bootstrap Admin App + jQuery">
+   <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+   <title>CTAP - Common Text Analysis Platform</title>
+   <!-- =============== VENDOR STYLES ===============-->
+   <!-- FONT AWESOME-->
+   <link rel="stylesheet" href="../vendor/fontawesome/css/font-awesome.min.css">
+   <!-- SIMPLE LINE ICONS-->
+   <link rel="stylesheet" href="../vendor/simple-line-icons/css/simple-line-icons.css">
+   <!-- ANIMATE.CSS-->
+   <link rel="stylesheet" href="../vendor/animate.css/animate.min.css">
+   <!-- WHIRL (spinners)-->
+   <link rel="stylesheet" href="../vendor/whirl/dist/whirl.css">
+   <!-- =============== PAGE VENDOR STYLES ===============-->
+   <!-- CHOSEN-->
+   <link rel="stylesheet" href="../vendor/chosen_v1.2.0/chosen.min.css">
+   <!-- =============== BOOTSTRAP STYLES ===============-->
+   <link rel="stylesheet" href="css/bootstrap.css" id="bscss">
+   <!-- =============== APP STYLES ===============-->
+   <link rel="stylesheet" href="css/app.css" id="maincss">
+</head>
+
+<body>
+   <div class="wrapper">
+      <!-- top navbar-->
+      <header class="topnavbar-wrapper">
+         <!-- START Top Navbar-->
+         <nav class="navbar topnavbar" role="navigation">
+            <!-- START navbar header-->
+            <div class="navbar-header">
+               <a class="navbar-brand" href="#/">
+                  <div class="brand-logo">
+                     <img class="img-responsive" src="img/logo.svg" alt="App Logo" width="85" height="34">
+                  </div>
+                  <div class="brand-logo-collapsed">
+                     <img class="img-responsive" src="img/logo-single.svg" alt="App Logo">
+                  </div>
+               </a>
+            </div>
+            <!-- END navbar header-->
+            <!-- START Nav wrapper-->
+            <div class="nav-wrapper">
+               <!-- START Left navbar-->
+               <ul class="nav navbar-nav">
+                  <li>
+                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                     <a class="hidden-xs" href="#" data-trigger-resize="" data-toggle-state="aside-collapsed">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                     <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                     <a class="visible-xs sidebar-toggle" href="#" data-toggle-state="aside-toggled" data-no-persist="true">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                  </li>
+                  <!-- START User avatar toggle-->
+                  <li>
+                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                     <a id="user-block-toggle" href="#user-block" data-toggle="collapse">
+                        <em class="icon-user"></em>
+                     </a>
+                  </li>
+                  <!-- END User avatar toggle-->
+                  <!-- START lock screen-->
+                  <li>
+                     <a href="lock.html" title="Lock screen">
+                        <em class="icon-lock"></em>
+                     </a>
+                  </li>
+                  <!-- END lock screen-->
+               </ul>
+               <!-- END Left navbar-->
+               <!-- START Right Navbar-->
+               <ul class="nav navbar-nav navbar-right">
+                  <!-- Search icon-->
+                  <li>
+                     <a href="#" data-search-open="">
+                        <em class="icon-magnifier"></em>
+                     </a>
+                  </li>
+                  <!-- Fullscreen (only desktops)-->
+                  <li class="visible-lg">
+                     <a href="#" data-toggle-fullscreen="">
+                        <em class="fa fa-expand"></em>
+                     </a>
+                  </li>
+                  <!-- START Alert menu-->
+                  <li class="dropdown dropdown-list">
+                     <a href="#" data-toggle="dropdown">
+                        <em class="icon-bell"></em>
+                        <div class="label label-danger">11</div>
+                     </a>
+                     <!-- START Dropdown menu-->
+                     <ul class="dropdown-menu animated flipInX">
+                        <li>
+                           <!-- START list group-->
+                           <div class="list-group">
+                              <!-- list item-->
+                              <a class="list-group-item" href="#">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-twitter fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">New followers</p>
+                                       <p class="m0 text-muted">
+                                          <small>1 new follower</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              <!-- list item-->
+                              <a class="list-group-item" href="#">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-envelope fa-2x text-warning"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">New e-mails</p>
+                                       <p class="m0 text-muted">
+                                          <small>You have 10 new emails</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              <!-- list item-->
+                              <a class="list-group-item" href="#">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-tasks fa-2x text-success"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">Pending Tasks</p>
+                                       <p class="m0 text-muted">
+                                          <small>11 pending task</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              <!-- last list item-->
+                              <a class="list-group-item" href="#">
+                                 <small>More notifications</small>
+                                 <span class="label label-danger pull-right">14</span>
+                              </a>
+                           </div>
+                           <!-- END list group-->
+                        </li>
+                     </ul>
+                     <!-- END Dropdown menu-->
+                  </li>
+                  <!-- END Alert menu-->
+                  <!-- START Offsidebar button-->
+                  <li>
+                     <a href="#" data-toggle-state="offsidebar-open" data-no-persist="true">
+                        <em class="icon-notebook"></em>
+                     </a>
+                  </li>
+                  <!-- END Offsidebar menu-->
+               </ul>
+               <!-- END Right Navbar-->
+            </div>
+            <!-- END Nav wrapper-->
+            <!-- START Search form-->
+            <form class="navbar-form" role="search" action="search.html">
+               <div class="form-group has-feedback">
+                  <input class="form-control" type="text" placeholder="Type and hit enter ...">
+                  <div class="fa fa-times form-control-feedback" data-search-dismiss=""></div>
+               </div>
+               <button class="hidden btn btn-default" type="submit">Submit</button>
+            </form>
+            <!-- END Search form-->
+         </nav>
+         <!-- END Top Navbar-->
+      </header>
+      <!-- sidebar-->
+      <aside class="aside">
+         <!-- START Sidebar (left)-->
+         <div class="aside-inner">
+            <nav class="sidebar" data-sidebar-anyclick-close="">
+               <!-- START sidebar nav-->
+               <ul class="nav">
+                  <!-- START user info-->
+                  <li class="has-user-block">
+                     <div class="collapse" id="user-block">
+                        <div class="item user-block">
+                           <!-- User picture-->
+                           <div class="user-block-picture">
+                              <div class="user-block-status">
+                                 <img class="img-thumbnail img-circle" src="img/user/02.jpg" alt="Avatar" width="60" height="60">
+                                 <div class="circle circle-success circle-lg"></div>
+                              </div>
+                           </div>
+                           <!-- Name and Job-->
+                           <div class="user-block-info">
+                              <span class="user-block-name">Hello, Mike</span>
+                              <span class="user-block-role">Designer</span>
+                           </div>
+                        </div>
+                     </div>
+                  </li>
+                  <!-- END user info-->
+                  <!-- Iterates over all sidebar items-->
+                  <li class="nav-heading ">
+                     <span data-localize="sidebar.heading.HEADER">Tools</span>
+                  </li>
+                  <li class=" ">
+                     <a href="#dashboard" title="Dashboard">
+                        <em class="fa fa-tachometer"></em>
+                        <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="corpus_manager.html" title="Corpus Manager">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-database"></em>
+                        <span data-localize="sidebar.nav.CORPUS_MANAGER">Corpus Manager</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="feature_selector.html" title="Feature Selector">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-check-square"></em>
+                        <span data-localize="sidebar.nav.FEATURE_SELECTOR">Feature Selector</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="analysis_generator.html" title="Analysis Generator">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-cubes"></em>
+                        <span data-localize="sidebar.nav.ANALYSIS_GENERATOR">Analysis Generator</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="result_visualizer.html" title="Result Visualizer">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-area-chart"></em>
+                        <span data-localize="sidebar.nav.RESULT_VISUALIZER">Result Visualizer</span>
+                     </a>
+                  </li>
+                  <li class="nav-heading ">
+                     <span data-localize="sidebar.heading.USER">User</span>
+                  </li>
+                  <li class=" ">
+                     <a href="profile.html" title="Profile">
+                        <em class="fa fa-user"></em>
+                        <span data-localize="sidebar.nav.PROFILE">Profile</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="feedback.html" title="Feedback">
+                        <em class="fa fa-comment"></em>
+                        <span data-localize="sidebar.nav.FEEDBACK">Feedback</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="documentation.html" title="Documentation">
+                        <em class="fa fa-book"></em>
+                        <span data-localize="sidebar.nav.DOCUMENTATION">Documentation</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="./logout/" title="Sign Out">
+                        <em class="fa fa-power-off"></em>
+                        <span data-localize="sidebar.nav.SIGN_OUT">Sign Out</span>
+                     </a>
+                  </li>
+               </ul>
+               <!-- END sidebar nav-->
+            </nav>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+      <!-- offsidebar-->
+      <aside class="offsidebar hide">
+         <!-- START Off Sidebar (right)-->
+         <nav>
+            <div role="tabpanel">
+               <!-- Nav tabs-->
+               <ul class="nav nav-tabs nav-justified" role="tablist">
+                  <li class="active" role="presentation">
+                     <a href="#app-settings" aria-controls="app-settings" role="tab" data-toggle="tab">
+                        <em class="icon-equalizer fa-lg"></em>
+                     </a>
+                  </li>
+                  <li role="presentation">
+                     <a href="#app-chat" aria-controls="app-chat" role="tab" data-toggle="tab">
+                        <em class="icon-user fa-lg"></em>
+                     </a>
+                  </li>
+               </ul>
+               <!-- Tab panes-->
+               <div class="tab-content">
+                  <div class="tab-pane fade in active" id="app-settings" role="tabpanel">
+                     <h3 class="text-center text-thin">Settings</h3>
+                     <div class="p">
+                        <h4 class="text-muted text-thin">Themes</h4>
+                        <div class="table-grid mb">
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-a.css">
+                                    <input type="radio" name="setting-theme" checked="checked">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-info"></span>
+                                       <span class="color bg-info-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-b.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-green"></span>
+                                       <span class="color bg-green-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-c.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-purple"></span>
+                                       <span class="color bg-purple-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-d.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-danger"></span>
+                                       <span class="color bg-danger-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="table-grid mb">
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-e.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-info-dark"></span>
+                                       <span class="color bg-info"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-f.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-green-dark"></span>
+                                       <span class="color bg-green"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-g.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-purple-dark"></span>
+                                       <span class="color bg-purple"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-h.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-danger-dark"></span>
+                                       <span class="color bg-danger"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p">
+                        <h4 class="text-muted text-thin">Layout</h4>
+                        <div class="clearfix">
+                           <p class="pull-left">Fixed</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-fixed" type="checkbox" data-toggle-state="layout-fixed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Boxed</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-boxed" type="checkbox" data-toggle-state="layout-boxed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">RTL</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-rtl" type="checkbox">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p">
+                        <h4 class="text-muted text-thin">Aside</h4>
+                        <div class="clearfix">
+                           <p class="pull-left">Collapsed</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-collapsed" type="checkbox" data-toggle-state="aside-collapsed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Collapsed Text</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-collapsed-text" type="checkbox" data-toggle-state="aside-collapsed-text">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Float</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-float" type="checkbox" data-toggle-state="aside-float">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Hover</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-hover" type="checkbox" data-toggle-state="aside-hover">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Show Scrollbar</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-hover" type="checkbox" data-toggle-state="show-scrollbar" data-target=".sidebar">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade" id="app-chat" role="tabpanel">
+                     <h3 class="text-center text-thin">Connections</h3>
+                     <ul class="nav">
+                        <!-- START list title-->
+                        <li class="p">
+                           <small class="text-muted">ONLINE</small>
+                        </li>
+                        <!-- END list title-->
+                        <li>
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-success circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/05.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Juan Sims</strong>
+                                    <br>
+                                    <small class="text-muted">Designeer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-success circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/06.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Maureen Jenkins</strong>
+                                    <br>
+                                    <small class="text-muted">Designeer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-danger circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/07.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Billie Dunn</strong>
+                                    <br>
+                                    <small class="text-muted">Designeer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-warning circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/08.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Tomothy Roberts</strong>
+                                    <br>
+                                    <small class="text-muted">Designer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                        </li>
+                        <!-- START list title-->
+                        <li class="p">
+                           <small class="text-muted">OFFLINE</small>
+                        </li>
+                        <!-- END list title-->
+                        <li>
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/09.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Lawrence Robinson</strong>
+                                    <br>
+                                    <small class="text-muted">Developer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/10.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Tyrone Owens</strong>
+                                    <br>
+                                    <small class="text-muted">Designer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                        </li>
+                        <li>
+                           <div class="p-lg text-center">
+                              <!-- Optional link to list more users-->
+                              <a class="btn btn-purple btn-sm" href="#" title="See more contacts">
+                                 <strong>Load more..</strong>
+                              </a>
+                           </div>
+                        </li>
+                     </ul>
+                     <!-- Extra items-->
+                     <div class="p">
+                        <p>
+                           <small class="text-muted">Tasks completion</small>
+                        </p>
+                        <div class="progress progress-xs m0">
+                           <div class="progress-bar progress-bar-success progress-80" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">80% Complete</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p">
+                        <p>
+                           <small class="text-muted">Upload quota</small>
+                        </p>
+                        <div class="progress progress-xs m0">
+                           <div class="progress-bar progress-bar-warning progress-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">40% Complete</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </nav>
+         <!-- END Off Sidebar (right)-->
+      </aside>
+      <!-- Main section-->
+      <section>
+         <!-- Page content-->
+         <div class="content-wrapper">
+            <div class="content-heading">New Article</div>
+            <div class="alert alert-info">
+               <em class="fa fa-exclamation-circle fa-lg fa-fw"></em>
+               <span>There is an autosaved version of this article that is more recent than the version below. <a class="text-white" href="#">Restore</a>
+               </span>
+            </div>
+            <div class="row">
+               <!-- Article Content-->
+               <div class="col-lg-9">
+                  <div class="panel panel-default">
+                     <div class="panel-body">
+                        <form action="">
+                           <input class="mb-lg form-control input-lg" type="text" name="article-title" placeholder="Article title...">
+                           <!-- Wysiswyg tooblbar-->
+                           <div class="btn-toolbar btn-editor" data-role="editor-toolbar" data-target="#editor">
+                              <div class="btn-group dropdown">
+                                 <a class="btn btn-default" data-toggle="dropdown" title="Font">
+                                    <em class="fa fa-font"></em><b class="caret"></b>
+                                 </a>
+                                 <ul class="dropdown-menu">
+                                    <li><a href="" data-edit="fontName Arial" style="font-family:'Arial';">Arial</a>
+                                    </li>
+                                    <li><a href="" data-edit="fontName Sans" style="font-family:'Sans';">Sans</a>
+                                    </li>
+                                    <li><a href="" data-edit="fontName Serif" style="font-family:'Serif';">Serif</a>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <div class="btn-group dropdown">
+                                 <a class="btn btn-default" data-toggle="dropdown" title="Font Size">
+                                    <em class="fa fa-text-height"></em>&nbsp;<b class="caret"></b>
+                                 </a>
+                                 <ul class="dropdown-menu">
+                                    <li><a href="" data-edit="fontSize 5" style="font-size:24px;">Huge</a>
+                                    </li>
+                                    <li><a href="" data-edit="fontSize 3" style="font-size:18px;">Normal</a>
+                                    </li>
+                                    <li><a href="" data-edit="fontSize 1" style="font-size:14px;">Small</a>
+                                    </li>
+                                 </ul>
+                              </div>
+                              <div class="btn-group">
+                                 <a class="btn btn-default" data-edit="bold" data-toggle="tooltip" title="Bold (Ctrl/Cmd+B)">
+                                    <em class="fa fa-bold"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="italic" data-toggle="tooltip" title="Italic (Ctrl/Cmd+I)">
+                                    <em class="fa fa-italic"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="strikethrough" data-toggle="tooltip" title="Strikethrough">
+                                    <em class="fa fa-strikethrough"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="underline" data-toggle="tooltip" title="Underline (Ctrl/Cmd+U)">
+                                    <em class="fa fa-underline"></em>
+                                 </a>
+                              </div>
+                              <div class="btn-group">
+                                 <a class="btn btn-default" data-edit="insertunorderedlist" data-toggle="tooltip" title="Bullet list">
+                                    <em class="fa fa-list-ul"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="insertorderedlist" data-toggle="tooltip" title="Number list">
+                                    <em class="fa fa-list-ol"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="outdent" data-toggle="tooltip" title="Reduce indent (Shift+Tab)">
+                                    <em class="fa fa-dedent"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="indent" data-toggle="tooltip" title="Indent (Tab)">
+                                    <em class="fa fa-indent"></em>
+                                 </a>
+                              </div>
+                              <div class="btn-group">
+                                 <a class="btn btn-default" data-edit="justifyleft" data-toggle="tooltip" title="Align Left (Ctrl/Cmd+L)">
+                                    <em class="fa fa-align-left"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="justifycenter" data-toggle="tooltip" title="Center (Ctrl/Cmd+E)">
+                                    <em class="fa fa-align-center"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="justifyright" data-toggle="tooltip" title="Align Right (Ctrl/Cmd+R)">
+                                    <em class="fa fa-align-right"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="justifyfull" data-toggle="tooltip" title="Justify (Ctrl/Cmd+J)">
+                                    <em class="fa fa-align-justify"></em>
+                                 </a>
+                              </div>
+                              <div class="btn-group dropdown">
+                                 <a class="btn btn-default" data-toggle="dropdown" title="Hyperlink">
+                                    <em class="fa fa-link"></em>
+                                 </a>
+                                 <div class="dropdown-menu">
+                                    <div class="input-group ml-xs mr-xs">
+                                       <input class="form-control input-sm" id="LinkInput" placeholder="URL" type="text" data-edit="createLink">
+                                       <div class="input-group-btn">
+                                          <button class="btn btn-sm btn-default" type="button">Add</button>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <a class="btn btn-default" data-edit="unlink" data-toggle="tooltip" title="Remove Hyperlink">
+                                    <em class="fa fa-cut"></em>
+                                 </a>
+                              </div>
+                              <div class="btn-group">
+                                 <a class="btn btn-default" id="pictureBtn" data-toggle="tooltip" title="Insert picture (or just drag &amp; drop)">
+                                    <em class="fa fa-picture-o"></em>
+                                 </a>
+                                 <input type="file" data-edit="insertImage" style="position:absolute; opacity:0; width:41px; height:34px;">
+                              </div>
+                              <div class="btn-group pull-right">
+                                 <a class="btn btn-default" data-edit="undo" data-toggle="tooltip" title="Undo (Ctrl/Cmd+Z)">
+                                    <em class="fa fa-undo"></em>
+                                 </a>
+                                 <a class="btn btn-default" data-edit="redo" data-toggle="tooltip" title="Redo (Ctrl/Cmd+Y)">
+                                    <em class="fa fa-repeat"></em>
+                                 </a>
+                              </div>
+                           </div>
+                           <!-- Wysiswyg Editor-->
+                           <div class="form-control wysiwyg mt-lg" style="overflow:scroll; height:250px;max-height:250px;">Type something ...</div>
+                           <br>
+                           <p>Notes</p>
+                           <textarea class="mb-lg form-control" cols="6"></textarea>
+                           <div class="clearfix">
+                              <div class="pull-left">
+                                 <button class="btn btn-default m-r-10 m-t-10" type="button">
+                                    <em class="fa fa-edit fa-fw"></em>Draft</button>
+                                 <button class="btn btn-primary m-t-10" type="button">
+                                    <em class="fa fa-check fa-fw"></em>Save</button>
+                              </div>
+                              <div class="pull-right">
+                                 <button class="btn btn-danger m-r-10 m-t-10" type="button">
+                                    <em class="fa fa-trash fa-fw"></em>Remove</button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <p class="lead">List of Comments</p>
+                  <div class="panel">
+                     <div class="table-responsive">
+                        <table class="table table-hover">
+                           <thead>
+                              <tr>
+                                 <th>
+                                    <strong>Comment ID</strong>
+                                 </th>
+                                 <th>
+                                    <strong>Date</strong>
+                                 </th>
+                                 <th>
+                                    <strong>Username</strong>
+                                 </th>
+                                 <th>
+                                    <strong>Comment excerpt</strong>
+                                 </th>
+                                 <th class="text-center">
+                                    <strong>Current status</strong>
+                                 </th>
+                                 <th class="text-right" style="width:130px;">
+                                    <strong>Actions</strong>
+                                 </th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td>123</td>
+                                 <td>10/05/2015</td>
+                                 <td><a href="">Jack Jordan</a>
+                                 </td>
+                                 <td>Sed quis eros libero, a euismod nisl....</td>
+                                 <td class="text-center">
+                                    <span class="label label-success">Approved</span>
+                                 </td>
+                                 <td class="text-right">
+                                    <button class="btn btn-sm btn-default" type="button">
+                                       <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" type="button">
+                                       <em class="fa fa-trash"></em>
+                                    </button>
+                                    <button class="btn btn-sm btn-success" type="button">
+                                       <em class="fa fa-check"></em>
+                                    </button>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>456</td>
+                                 <td>10/07/2015</td>
+                                 <td><a href="">Hailey Mckinney</a>
+                                 </td>
+                                 <td>Nulla facilisi.</td>
+                                 <td class="text-center">
+                                    <span class="label label-success">Approved</span>
+                                 </td>
+                                 <td class="text-right">
+                                    <button class="btn btn-sm btn-default" type="button">
+                                       <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" type="button">
+                                       <em class="fa fa-trash"></em>
+                                    </button>
+                                    <button class="btn btn-sm btn-success" type="button">
+                                       <em class="fa fa-check"></em>
+                                    </button>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>789</td>
+                                 <td>11/05/2015</td>
+                                 <td><a href="">Peyton Reyes</a>
+                                 </td>
+                                 <td>Quisque enim nisi, semper non pulvinar et, aliquam id lorem...</td>
+                                 <td class="text-center">
+                                    <span class="label label-warning">Pending</span>
+                                 </td>
+                                 <td class="text-right">
+                                    <button class="btn btn-sm btn-default" type="button">
+                                       <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" type="button">
+                                       <em class="fa fa-trash"></em>
+                                    </button>
+                                    <button class="btn btn-sm btn-success" type="button">
+                                       <em class="fa fa-check"></em>
+                                    </button>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>999</td>
+                                 <td>10/06/2015</td>
+                                 <td><a href="">Darryl Harper</a>
+                                 </td>
+                                 <td>Nulla facilisi.</td>
+                                 <td class="text-center">
+                                    <span class="label label-danger">Rejected</span>
+                                 </td>
+                                 <td class="text-right">
+                                    <button class="btn btn-sm btn-default" type="button">
+                                       <em class="fa fa-pencil"></em>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" type="button" disabled="">
+                                       <em class="fa fa-trash"></em>
+                                    </button>
+                                    <button class="btn btn-sm btn-success" type="button">
+                                       <em class="fa fa-check"></em>
+                                    </button>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+               <!-- Article sidebar-->
+               <div class="col-lg-3">
+                  <div class="panel panel-default">
+                     <div class="panel-body">
+                        <p class="lead">Article Data</p>
+                        <p>Categories</p>
+                        <select class="chosen-select form-control" multiple>
+                           <option>coding</option>
+                           <option>less</option>
+                           <option>sass</option>
+                           <option>angularjs</option>
+                           <option>node</option>
+                           <option>expressJS</option>
+                        </select>
+                        <p>Tags</p>
+                        <select class="chosen-select form-control" multiple>
+                           <option>JAVASCRIPT</option>
+                           <option>WEB</option>
+                           <option>BOOTSTRAP</option>
+                           <option>SERVER</option>
+                           <option>HTML5</option>
+                           <option>CSS</option>
+                        </select>
+                        <p>Reviewers</p>
+                        <select class="chosen-select form-control" multiple>
+                           <option>adam@email.com</option>
+                           <option>amalie@email.com</option>
+                           <option>wladimir@email.com</option>
+                           <option>samantha@email.com</option>
+                           <option>estefanía@email.com</option>
+                           <option>natasha@email.com</option>
+                           <option>nicole@email.com</option>
+                           <option>adrian@email.com</option>
+                        </select>
+                        <p class="lead">SEO Metadata</p>
+                        <div class="form-group">
+                           <p>Title</p>
+                           <input class="form-control" type="text" placeholder="Brief description..">
+                        </div>
+                        <div class="form-group">
+                           <p>Description</p>
+                           <textarea class="form-control" rows="5" placeholder="Max 255 characters..."></textarea>
+                        </div>
+                        <div class="form-group">
+                           <p>Keywords</p>
+                           <textarea class="form-control" rows="5" placeholder="Max 1000 characters..."></textarea>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Page footer-->
+      <footer>
+         <span>&copy; 2017 - CTAP</span>
+      </footer>
+   </div>
+   <!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   <script src="../vendor/modernizr/modernizr.custom.js"></script>
+   <!-- MATCHMEDIA POLYFILL-->
+   <script src="../vendor/matchMedia/matchMedia.js"></script>
+   <!-- JQUERY-->
+   <script src="../vendor/jquery/dist/jquery.js"></script>
+   <!-- BOOTSTRAP-->
+   <script src="../vendor/bootstrap/dist/js/bootstrap.js"></script>
+   <!-- STORAGE API-->
+   <script src="../vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
+   <!-- JQUERY EASING-->
+   <script src="../vendor/jquery.easing/js/jquery.easing.js"></script>
+   <!-- ANIMO-->
+   <script src="../vendor/animo.js/animo.js"></script>
+   <!-- SLIMSCROLL-->
+   <script src="../vendor/slimScroll/jquery.slimscroll.min.js"></script>
+   <!-- SCREENFULL-->
+   <script src="../vendor/screenfull/dist/screenfull.js"></script>
+   <!-- LOCALIZE-->
+   <script src="../vendor/jquery-localize-i18n/dist/jquery.localize.js"></script>
+   <!-- RTL demo-->
+   <script src="js/demo/demo-rtl.js"></script>
+   <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+   <!-- CHOSEN-->
+   <script src="../vendor/chosen_v1.2.0/chosen.jquery.min.js"></script>
+   <!-- WYSIWYG-->
+   <script src="../vendor/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+   <script src="../vendor/bootstrap-wysiwyg/external/jquery.hotkeys.js"></script>
+   <!-- Demo-->
+   <script>
+      $('.chosen-select').chosen();
+      $('.wysiwyg').wysiwyg();
+   </script>
+   <!-- =============== APP SCRIPTS ===============-->
+   <script src="js/app.js"></script>
+</body>
+
+</html>

@@ -17,6 +17,18 @@ Access to the following resources all require admin priviledge, which should be 
 
 	PUT, reinitializes the db, which means dropping all tables and recreating them.
 		curl -i -X PUT http://localhost:8080/v1/admin/db/ --user admin@ctapweb.com:admin
+		
+	/admin/measures/
+	POST, imports all the measures. If measures already exist, update their descriptions.
+		curl -i -X POST http://localhost:8080/v1/admin/measures/ --user admin@ctapweb.com:admin
+	
+	PUT, cleans measures so that the db matches the class annotations 
+		curl -i -X PUT http://localhost:8080/v1/admin/measures/ --user admin@ctapweb.com:admin
+		
+	/admin/categories/
+	GET, same as GET /categories/, but with more information
+		curl -i -X GET http://localhost:8080/v1/admin/categories/ --user admin@ctapweb.com:admin	
+	
 
 User operations:
 	Except for new user sign up by POSTing to /users/, all the other operations require authentication.
@@ -41,10 +53,10 @@ User operations:
 		echo '["oldPasswd", "newPasswd"]' | curl -iX PUT -d @- http://localhost:8080/v1/user/passwd/ --header "Content-Type:application/json" --user user@example.com:myPassword
 		
 	/user/login/
-	POST, authenticate the user with sent-in user info, further request can send in returned JSESSIONID for authorization
-		curl -i -X POST -d "" http://localhost:8080/v1/user/ --user user@example.com:myPassword
+	GET, authenticate the user with sent-in user info, further request can send in returned JSESSIONID for authorization
+		curl -i -X GET http://localhost:8080/v1/user/login/ --user user@example.com:myPassword
 		or 
-		curl -i -X POST -d "" http://localhost:8080/v1/user/ --cookie 'JSESSIONID=1956aio6vv5mv13cx3o1gmzj9a'
+		curl -i -X GET  http://localhost:8080/v1/user/login/ --cookie 'JSESSIONID=1956aio6vv5mv13cx3o1gmzj9a'
 
 	DELETE, log out the user
 		curl -i -X DELETE http://localhost:8080/v1/user/login/ --cookie 'JSESSIONID=1956aio6vv5mv13cx3o1gmzj9a'
@@ -125,7 +137,8 @@ Text operations:
 
 	
 	/texts/corpus/import/[corpus_id]
-	POST, import texts to corpus
+	POST, import texts to corpus. Imported files can be zip, tar, tar.gz, word, pdf, or txt.
+		curl -iX POST -F "file=@plain_text.txt" http://localhost:8080/v1/texts/import/4 --user user@example.com:myPassword
 	
 	/texts/id/[id]
 	GET, gets the text
@@ -147,8 +160,116 @@ Text operations:
 	DELETE, removes tags for texts
 		echo '[{"id": 12}, {"id": 13}, {"id": 14}]' | curl -iX DELETE -d @- http://localhost:8080/v1/texts/tag/10 --user user@example.com:myPassword
 
+Measure Category Operations
+	/categories/
+	GET, gets a list of categories
+		curl -i -X GET http://localhost:8080/v1/categories/ 
 	
+	/categories/language/[language]
+	GET, gets a list of categories of the specified language
+		curl -i -X GET http://localhost:8080/v1/categories/language/en 
+	
+Measure Operations
+	/measures/
+	GET, gets a list of measures
+		curl -i -X GET http://localhost:8080/v1/measures/ 
+	
+	/measures/category/[category_id]
+	GET, gets a list of measures of certain category
+		curl -i -X GET http://localhost:8080/v1/measures/category/1
+	
+	/measures/language/[language]
+	GET, gets a list of measures of certain language
+		curl -i -X GET http://localhost:8080/v1/measures/language/en
 
+Feature Set Operations
+	/feature_sets/
+	GET, lists information of all feature sets, requires user authentication
+		curl -i -X GET http://localhost:8080/v1/feature_sets/ --user user@example.com:myPassword
+
+	POST, creates a new feature set, returns a link to it
+		echo '{"name": "feature set 1", "description": "description of feature set 1"}' | curl -iX POST -d @- http://localhost:8080/v1/feature_sets/ --header "Content-Type:application/json" --user user@example.com:myPassword
+		
+	PUT, updates the feature set info (name, description)
+		echo '{"id": 1, "name": "new feature set 1 name", "description": "new description of feature set 1"}' | curl -i -X PUT -d @- http://localhost:8080/v1/feature_sets/ --user user@example.com:myPassword
+		
+	DELETE, deletes feature sets
+		echo '[{"id": 1}]' | curl -i -X DELETE -d @- http://localhost:8080/v1/feature_sets/ --user user@example.com:myPassword
+	
+	/feature_sets/[id]: dispatched to /feature_sets/id/[id]
+	GET, gets info of a specific feature set
+		curl -i -X GET http://localhost:8080/v1/feature_sets/2 --user user@example.com:myPassword
+	
+	PUT, change the feature set info: name, description
+		echo '{"name": "new feature set 1 name", "description": "new feature set description of 1"}' | curl -i -X PUT -d @- http://localhost:8080/v1/feature_sets/1 --user user@example.com:myPassword
+
+	DELETE, remove the feature set
+		curl -i -X DELETE http://localhost:8080/v1/feature_sets/2 --user user@example.com:myPassword
+	
+Feature set measure operations:
+	/fs_me/feature_set/[id]
+	GET, lists the measures in a feature set
+		curl -i -X GET http://localhost:8080/v1/fs_me/feature_set/1 --user user@example.com:myPassword
+
+
+	POST, adds new measures to a feature set, returns a list of all the measures in the feature set
+		echo '[{"id": 7}]' | curl -iX POST -d @- http://localhost:8080/v1/fs_me/feature_set/3 --user user@example.com:myPassword	
+		echo '[{"id": 7}, {"id": 8}]' | curl -iX POST -d @- http://localhost:8080/v1/fs_me/feature_set/3 --user user@example.com:myPassword	
+
+	DELETE, removes measures from feature set
+		echo '[{"id": 7}]' | curl -iX DELETE -d @- http://localhost:8080/v1/fs_me/feature_set/3 --user user@example.com:myPassword	
+	
+Analysis operations:
+	/analyses/
+	GET, lists information of all analyses, requires user authentication
+		curl -i -X GET http://localhost:8080/v1/analyses/ --user user@example.com:myPassword
+
+	POST, creates a new analysis, returns a link to it
+		echo '{"name": "analysis 1", "description": "description of analysis 1", "corpusId": 1, "featureSetId": 1}' | curl -iX POST -d @- http://localhost:8080/v1/analyses/ --header "Content-Type:application/json" --user user@example.com:myPassword
+		
+	PUT, updates the analysis info (name, description, corpus_id, featureset_id)
+		echo '{"id": 1, "name": "new analysis 1 name", "description": "new analysis description 1", "corpusId": 1, "featureSetId": 2}' | curl -i -X PUT -d @- http://localhost:8080/v1/analyses/ --user user@example.com:myPassword
+		
+	DELETE, deletes some analyses
+		echo '[{"id": 1}]' | curl -i -X DELETE -d @- http://localhost:8080/v1/analyses/ --user user@example.com:myPassword
+	
+	/analyses/[id]: dispatched to /analyses/id/[id]
+	GET, gets info of a specific analysis
+		curl -i -X GET http://localhost:8080/v1/analyses/2 --user user@example.com:myPassword
+	
+	PUT, updates the analysis info (name, description, corpus_id, featureset_id, status)
+		echo '{"name": "new analysis 1 name", "description": "new analysis description 1", "corpusId": 1, "featureSetId": 2}' | curl -i -X PUT -d @- http://localhost:8080/v1/analyses/3 --user user@example.com:myPassword
+
+	DELETE, remove the analysis
+		curl -i -X DELETE http://localhost:8080/v1/analyses/2 --user user@example.com:myPassword
+	
+	/analyses/status/[analysisId]
+	PUT, switches runnning status of the analysis. If the status is "running", stop it and the status becomes "stopped". If it is "stopped", start running the analysis and change the status to "running". 
+		curl -i -X PUT http://localhost:8080/v1/analyses/status/4 --user user@example.com:myPassword
+	
+Result operations:
+	/results/analysis/[analysisId]
+	GET, gets results of an analysis
+		curl -i -X GET http://localhost:8080/v1/results/analysis/2 --user user@example.com:myPassword
+	
+	/results/text/[textId]
+	GET, gets results of a text
+	
+	/results/tag/[tagId]
+	GET, gets results of texts tagged with a certain tag
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

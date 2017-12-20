@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <meta name="description" content="Bootstrap Admin App + jQuery">
+   <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
+   <title>CTAP - Common Text Analysis Platform</title>
+   <!-- =============== VENDOR STYLES ===============-->
+   <!-- FONT AWESOME-->
+   <link rel="stylesheet" href="../vendor/fontawesome/css/font-awesome.min.css">
+   <!-- SIMPLE LINE ICONS-->
+   <link rel="stylesheet" href="../vendor/simple-line-icons/css/simple-line-icons.css">
+   <!-- ANIMATE.CSS-->
+   <link rel="stylesheet" href="../vendor/animate.css/animate.min.css">
+   <!-- WHIRL (spinners)-->
+   <link rel="stylesheet" href="../vendor/whirl/dist/whirl.css">
+   <!-- =============== PAGE VENDOR STYLES ===============-->
+   <!-- =============== BOOTSTRAP STYLES ===============-->
+   <link rel="stylesheet" href="css/bootstrap.css" id="bscss">
+   <!-- =============== APP STYLES ===============-->
+   <link rel="stylesheet" href="css/app.css" id="maincss">
+</head>
+
+<body>
+   <div class="wrapper">
+      <!-- top navbar-->
+      <header class="topnavbar-wrapper">
+         <!-- START Top Navbar-->
+         <nav class="navbar topnavbar" role="navigation">
+            <!-- START navbar header-->
+            <div class="navbar-header">
+               <a class="navbar-brand" href="#/">
+                  <div class="brand-logo">
+                     <img class="img-responsive" src="img/logo.svg" alt="App Logo" width="85" height="34">
+                  </div>
+                  <div class="brand-logo-collapsed">
+                     <img class="img-responsive" src="img/logo-single.svg" alt="App Logo">
+                  </div>
+               </a>
+            </div>
+            <!-- END navbar header-->
+            <!-- START Nav wrapper-->
+            <div class="nav-wrapper">
+               <!-- START Left navbar-->
+               <ul class="nav navbar-nav">
+                  <li>
+                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                     <a class="hidden-xs" href="#" data-trigger-resize="" data-toggle-state="aside-collapsed">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                     <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                     <a class="visible-xs sidebar-toggle" href="#" data-toggle-state="aside-toggled" data-no-persist="true">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                  </li>
+                  <!-- START User avatar toggle-->
+                  <li>
+                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                     <a id="user-block-toggle" href="#user-block" data-toggle="collapse">
+                        <em class="icon-user"></em>
+                     </a>
+                  </li>
+                  <!-- END User avatar toggle-->
+                  <!-- START lock screen-->
+                  <li>
+                     <a href="lock.html" title="Lock screen">
+                        <em class="icon-lock"></em>
+                     </a>
+                  </li>
+                  <!-- END lock screen-->
+               </ul>
+               <!-- END Left navbar-->
+               <!-- START Right Navbar-->
+               <ul class="nav navbar-nav navbar-right">
+                  <!-- Search icon-->
+                  <li>
+                     <a href="#" data-search-open="">
+                        <em class="icon-magnifier"></em>
+                     </a>
+                  </li>
+                  <!-- Fullscreen (only desktops)-->
+                  <li class="visible-lg">
+                     <a href="#" data-toggle-fullscreen="">
+                        <em class="fa fa-expand"></em>
+                     </a>
+                  </li>
+                  <!-- START Alert menu-->
+                  <li class="dropdown dropdown-list">
+                     <a href="#" data-toggle="dropdown">
+                        <em class="icon-bell"></em>
+                        <div class="label label-danger">11</div>
+                     </a>
+                     <!-- START Dropdown menu-->
+                     <ul class="dropdown-menu animated flipInX">
+                        <li>
+                           <!-- START list group-->
+                           <div class="list-group">
+                              <!-- list item-->
+                              <a class="list-group-item" href="#">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-twitter fa-2x text-info"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">New followers</p>
+                                       <p class="m0 text-muted">
+                                          <small>1 new follower</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              <!-- list item-->
+                              <a class="list-group-item" href="#">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-envelope fa-2x text-warning"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">New e-mails</p>
+                                       <p class="m0 text-muted">
+                                          <small>You have 10 new emails</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              <!-- list item-->
+                              <a class="list-group-item" href="#">
+                                 <div class="media-box">
+                                    <div class="pull-left">
+                                       <em class="fa fa-tasks fa-2x text-success"></em>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                       <p class="m0">Pending Tasks</p>
+                                       <p class="m0 text-muted">
+                                          <small>11 pending task</small>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </a>
+                              <!-- last list item-->
+                              <a class="list-group-item" href="#">
+                                 <small>More notifications</small>
+                                 <span class="label label-danger pull-right">14</span>
+                              </a>
+                           </div>
+                           <!-- END list group-->
+                        </li>
+                     </ul>
+                     <!-- END Dropdown menu-->
+                  </li>
+                  <!-- END Alert menu-->
+                  <!-- START Offsidebar button-->
+                  <li>
+                     <a href="#" data-toggle-state="offsidebar-open" data-no-persist="true">
+                        <em class="icon-notebook"></em>
+                     </a>
+                  </li>
+                  <!-- END Offsidebar menu-->
+               </ul>
+               <!-- END Right Navbar-->
+            </div>
+            <!-- END Nav wrapper-->
+            <!-- START Search form-->
+            <form class="navbar-form" role="search" action="search.html">
+               <div class="form-group has-feedback">
+                  <input class="form-control" type="text" placeholder="Type and hit enter ...">
+                  <div class="fa fa-times form-control-feedback" data-search-dismiss=""></div>
+               </div>
+               <button class="hidden btn btn-default" type="submit">Submit</button>
+            </form>
+            <!-- END Search form-->
+         </nav>
+         <!-- END Top Navbar-->
+      </header>
+      <!-- sidebar-->
+      <aside class="aside">
+         <!-- START Sidebar (left)-->
+         <div class="aside-inner">
+            <nav class="sidebar" data-sidebar-anyclick-close="">
+               <!-- START sidebar nav-->
+               <ul class="nav">
+                  <!-- START user info-->
+                  <li class="has-user-block">
+                     <div class="collapse" id="user-block">
+                        <div class="item user-block">
+                           <!-- User picture-->
+                           <div class="user-block-picture">
+                              <div class="user-block-status">
+                                 <img class="img-thumbnail img-circle" src="img/user/02.jpg" alt="Avatar" width="60" height="60">
+                                 <div class="circle circle-success circle-lg"></div>
+                              </div>
+                           </div>
+                           <!-- Name and Job-->
+                           <div class="user-block-info">
+                              <span class="user-block-name">Hello, Mike</span>
+                              <span class="user-block-role">Designer</span>
+                           </div>
+                        </div>
+                     </div>
+                  </li>
+                  <!-- END user info-->
+                  <!-- Iterates over all sidebar items-->
+                  <li class="nav-heading ">
+                     <span data-localize="sidebar.heading.HEADER">Tools</span>
+                  </li>
+                  <li class=" ">
+                     <a href="#dashboard" title="Dashboard">
+                        <em class="fa fa-tachometer"></em>
+                        <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="corpus_manager.html" title="Corpus Manager">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-database"></em>
+                        <span data-localize="sidebar.nav.CORPUS_MANAGER">Corpus Manager</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="feature_selector.html" title="Feature Selector">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-check-square"></em>
+                        <span data-localize="sidebar.nav.FEATURE_SELECTOR">Feature Selector</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="analysis_generator.html" title="Analysis Generator">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-cubes"></em>
+                        <span data-localize="sidebar.nav.ANALYSIS_GENERATOR">Analysis Generator</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="result_visualizer.html" title="Result Visualizer">
+                        <div class="pull-right label label-success">30</div>
+                        <em class="fa fa-area-chart"></em>
+                        <span data-localize="sidebar.nav.RESULT_VISUALIZER">Result Visualizer</span>
+                     </a>
+                  </li>
+                  <li class="nav-heading ">
+                     <span data-localize="sidebar.heading.USER">User</span>
+                  </li>
+                  <li class=" ">
+                     <a href="profile.html" title="Profile">
+                        <em class="fa fa-user"></em>
+                        <span data-localize="sidebar.nav.PROFILE">Profile</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="feedback.html" title="Feedback">
+                        <em class="fa fa-comment"></em>
+                        <span data-localize="sidebar.nav.FEEDBACK">Feedback</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="documentation.html" title="Documentation">
+                        <em class="fa fa-book"></em>
+                        <span data-localize="sidebar.nav.DOCUMENTATION">Documentation</span>
+                     </a>
+                  </li>
+                  <li class=" ">
+                     <a href="./logout/" title="Sign Out">
+                        <em class="fa fa-power-off"></em>
+                        <span data-localize="sidebar.nav.SIGN_OUT">Sign Out</span>
+                     </a>
+                  </li>
+               </ul>
+               <!-- END sidebar nav-->
+            </nav>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+      <!-- offsidebar-->
+      <aside class="offsidebar hide">
+         <!-- START Off Sidebar (right)-->
+         <nav>
+            <div role="tabpanel">
+               <!-- Nav tabs-->
+               <ul class="nav nav-tabs nav-justified" role="tablist">
+                  <li class="active" role="presentation">
+                     <a href="#app-settings" aria-controls="app-settings" role="tab" data-toggle="tab">
+                        <em class="icon-equalizer fa-lg"></em>
+                     </a>
+                  </li>
+                  <li role="presentation">
+                     <a href="#app-chat" aria-controls="app-chat" role="tab" data-toggle="tab">
+                        <em class="icon-user fa-lg"></em>
+                     </a>
+                  </li>
+               </ul>
+               <!-- Tab panes-->
+               <div class="tab-content">
+                  <div class="tab-pane fade in active" id="app-settings" role="tabpanel">
+                     <h3 class="text-center text-thin">Settings</h3>
+                     <div class="p">
+                        <h4 class="text-muted text-thin">Themes</h4>
+                        <div class="table-grid mb">
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-a.css">
+                                    <input type="radio" name="setting-theme" checked="checked">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-info"></span>
+                                       <span class="color bg-info-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-b.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-green"></span>
+                                       <span class="color bg-green-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-c.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-purple"></span>
+                                       <span class="color bg-purple-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-d.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-danger"></span>
+                                       <span class="color bg-danger-light"></span>
+                                    </span>
+                                    <span class="color bg-white"></span>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="table-grid mb">
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-e.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-info-dark"></span>
+                                       <span class="color bg-info"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-f.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-green-dark"></span>
+                                       <span class="color bg-green"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-g.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-purple-dark"></span>
+                                       <span class="color bg-purple"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col mb">
+                              <div class="setting-color">
+                                 <label data-load-css="css/theme-h.css">
+                                    <input type="radio" name="setting-theme">
+                                    <span class="icon-check"></span>
+                                    <span class="split">
+                                       <span class="color bg-danger-dark"></span>
+                                       <span class="color bg-danger"></span>
+                                    </span>
+                                    <span class="color bg-gray-dark"></span>
+                                 </label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p">
+                        <h4 class="text-muted text-thin">Layout</h4>
+                        <div class="clearfix">
+                           <p class="pull-left">Fixed</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-fixed" type="checkbox" data-toggle-state="layout-fixed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Boxed</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-boxed" type="checkbox" data-toggle-state="layout-boxed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">RTL</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-rtl" type="checkbox">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p">
+                        <h4 class="text-muted text-thin">Aside</h4>
+                        <div class="clearfix">
+                           <p class="pull-left">Collapsed</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-collapsed" type="checkbox" data-toggle-state="aside-collapsed">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Collapsed Text</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-collapsed-text" type="checkbox" data-toggle-state="aside-collapsed-text">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Float</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-float" type="checkbox" data-toggle-state="aside-float">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Hover</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-hover" type="checkbox" data-toggle-state="aside-hover">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                        <div class="clearfix">
+                           <p class="pull-left">Show Scrollbar</p>
+                           <div class="pull-right">
+                              <label class="switch">
+                                 <input id="chk-hover" type="checkbox" data-toggle-state="show-scrollbar" data-target=".sidebar">
+                                 <span></span>
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade" id="app-chat" role="tabpanel">
+                     <h3 class="text-center text-thin">Connections</h3>
+                     <ul class="nav">
+                        <!-- START list title-->
+                        <li class="p">
+                           <small class="text-muted">ONLINE</small>
+                        </li>
+                        <!-- END list title-->
+                        <li>
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-success circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/05.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Juan Sims</strong>
+                                    <br>
+                                    <small class="text-muted">Designeer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-success circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/06.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Maureen Jenkins</strong>
+                                    <br>
+                                    <small class="text-muted">Designeer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-danger circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/07.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Billie Dunn</strong>
+                                    <br>
+                                    <small class="text-muted">Designeer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-warning circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/08.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Tomothy Roberts</strong>
+                                    <br>
+                                    <small class="text-muted">Designer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                        </li>
+                        <!-- START list title-->
+                        <li class="p">
+                           <small class="text-muted">OFFLINE</small>
+                        </li>
+                        <!-- END list title-->
+                        <li>
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/09.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Lawrence Robinson</strong>
+                                    <br>
+                                    <small class="text-muted">Developer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                           <!-- START User status-->
+                           <a class="media-box p mt0" href="#">
+                              <span class="pull-right">
+                                 <span class="circle circle-lg"></span>
+                              </span>
+                              <span class="pull-left">
+                                 <!-- Contact avatar-->
+                                 <img class="media-box-object img-circle thumb48" src="img/user/10.jpg" alt="Image">
+                              </span>
+                              <!-- Contact info-->
+                              <span class="media-box-body">
+                                 <span class="media-box-heading">
+                                    <strong>Tyrone Owens</strong>
+                                    <br>
+                                    <small class="text-muted">Designer</small>
+                                 </span>
+                              </span>
+                           </a>
+                           <!-- END User status-->
+                        </li>
+                        <li>
+                           <div class="p-lg text-center">
+                              <!-- Optional link to list more users-->
+                              <a class="btn btn-purple btn-sm" href="#" title="See more contacts">
+                                 <strong>Load more..</strong>
+                              </a>
+                           </div>
+                        </li>
+                     </ul>
+                     <!-- Extra items-->
+                     <div class="p">
+                        <p>
+                           <small class="text-muted">Tasks completion</small>
+                        </p>
+                        <div class="progress progress-xs m0">
+                           <div class="progress-bar progress-bar-success progress-80" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">80% Complete</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="p">
+                        <p>
+                           <small class="text-muted">Upload quota</small>
+                        </p>
+                        <div class="progress progress-xs m0">
+                           <div class="progress-bar progress-bar-warning progress-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                              <span class="sr-only">40% Complete</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </nav>
+         <!-- END Off Sidebar (right)-->
+      </aside>
+      <!-- Main section-->
+      <section>
+         <!-- Page content-->
+         <div class="content-wrapper">
+            <div class="row">
+               <div class="col-md-3">
+                  <div class="panel b">
+                     <div class="panel-heading bb">
+                        <h4 class="panel-title">Order Summnary</h4>
+                     </div>
+                     <div class="panel-body bt">
+                        <h4 class="b0">Order #65487</h4>
+                     </div>
+                     <table class="table">
+                        <tbody>
+                           <tr>
+                              <td>Subtotal</td>
+                              <td>
+                                 <div class="text-right text-bold">$400</div>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>Estimated Tax</td>
+                              <td>
+                                 <div class="text-right text-bold">$1.44</div>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>Shiping</td>
+                              <td>
+                                 <div class="text-right text-bold">$5</div>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <div class="panel-body">
+                        <div class="clearfix">
+                           <div class="pull-right text-right">
+                              <div class="text-bold">$406.44</div>
+                              <div class="text-sm">USD</div>
+                           </div>
+                           <div class="pull-left text-bold text-dark">ORDER TOTAL</div>
+                        </div>
+                     </div>
+                     <div class="panel-body">
+                        <p>
+                           <button class="btn btn-primary btn-block" type="button">EXPRESS CHECKOUT</button>
+                        </p>
+                        <small class="text-muted">* To use this method you must be registered first</small>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-9">
+                  <div class="container-md">
+                     <!-- Checkout Process-->
+                     <form action="" method="post" novalidate>
+                        <div class="panel-group" id="accordion">
+                           <!-- Checkout Method-->
+                           <div class="panel b">
+                              <div class="panel-heading">
+                                 <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#acc1collapse1">1. Checkout Method</a>
+                                 </h4>
+                              </div>
+                              <div class="panel-collapse collapse in" id="acc1collapse1">
+                                 <div class="panel-body" id="collapse01">
+                                    <div class="row">
+                                       <div class="col-md-6">
+                                          <p>
+                                             <strong>REGISTER AND SAVE TIME!</strong>
+                                          </p>
+                                          <p class="mb0">Fast and simple check out</p>
+                                          <p>Quick access to order history</p>
+                                          <div class="mv-lg">
+                                             <button class="btn btn-primary" type="button">Register</button>
+                                          </div>
+                                          <hr>
+                                          <button class="btn btn-default" type="button">Checkout as Guest</button>
+                                       </div>
+                                       <div class="col-md-6">
+                                          <div class="form-group">
+                                             <p>Already a Member?</p>
+                                          </div>
+                                          <div class="form-group">
+                                             <input class="form-control" type="text" name="login-name" required="" placeholder="Email Address">
+                                          </div>
+                                          <div class="form-group">
+                                             <input class="form-control" type="text" name="login-password" required="" placeholder="Password">
+                                          </div>
+                                          <p><a href="#">Forgot password?</a>
+                                          </p>
+                                          <button class="btn btn-primary" type="button">Login</button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Billing Information-->
+                           <div class="panel b">
+                              <div class="panel-heading">
+                                 <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#acc1collapse2">2. Billing Information</a>
+                                 </h4>
+                              </div>
+                              <div class="panel-collapse collapse" id="acc1collapse2">
+                                 <div class="panel-body" id="collapse02">
+                                    <div class="row">
+                                       <div class="col-lg-6">
+                                          <div class="form-group">
+                                             <label>First Name*</label>
+                                             <input class="form-control" type="text" name="checkout-name" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Company</label>
+                                             <input class="form-control" type="text" name="checkout-company">
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                          <div class="form-group">
+                                             <label>Last Name*</label>
+                                             <input class="form-control" type="text" name="checkout-lastname" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Email Address*</label>
+                                             <input class="form-control" type="text" name="checkout-email" required="">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-lg-12">
+                                          <div class="form-group">
+                                             <label>Address</label>
+                                             <input class="form-control" type="text" name="checkout-address" required="">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-lg-6">
+                                          <div class="form-group">
+                                             <label>City*</label>
+                                             <input class="form-control" type="text" name="checkout-city" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Zip/Postal Code*</label>
+                                             <input class="form-control" type="text" name="checkout-zip" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Telephone*</label>
+                                             <input class="form-control" type="text" name="checkout-telephone" required="">
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                          <div class="form-group">
+                                             <label>State/Province*</label>
+                                             <input class="form-control" type="text" name="checkout-state" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Country*</label>
+                                             <input class="form-control" type="text" name="checkout-country" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Fax</label>
+                                             <input class="form-control" type="text" name="checkout-fax">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="mv">
+                                       <div class="radio c-radio">
+                                          <label>
+                                             <input id="chk-guest" type="radio" name="checkout-ship-to" value="address">
+                                             <span class="fa fa-check"></span>Ship to this address</label>
+                                       </div>
+                                       <div class="radio c-radio">
+                                          <label>
+                                             <input id="chk-guest" type="radio" name="checkout-ship-to" value="other">
+                                             <span class="fa fa-check"></span>Ship to different address</label>
+                                       </div>
+                                    </div>
+                                    <div class="pt clearfix">
+                                       <p class="pull-right text-sm"><i>Fields marked with (*) are required</i>
+                                       </p>
+                                       <div class="pull-left">
+                                          <button class="btn btn-primary" type="button">Continue</button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Shipping Information-->
+                           <div class="panel b">
+                              <div class="panel-heading">
+                                 <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#acc1collapse3">3. Shipping Information</a>
+                                 </h4>
+                              </div>
+                              <div class="panel-collapse collapse" id="acc1collapse3">
+                                 <div class="panel-body" id="collapse03">
+                                    <div class="row">
+                                       <div class="col-lg-6">
+                                          <div class="form-group">
+                                             <label>First Name*</label>
+                                             <input class="form-control" type="text" name="checkout-ship-name" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Company</label>
+                                             <input class="form-control" type="text" name="checkout-ship-company">
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                          <div class="form-group">
+                                             <label>Last Name*</label>
+                                             <input class="form-control" type="text" name="checkout-ship-lastname" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Email Address*</label>
+                                             <input class="form-control" type="text" name="checkout-ship-email" required="">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-lg-12">
+                                          <div class="form-group">
+                                             <label>Address</label>
+                                             <input class="form-control" type="text" name="checkout-ship-address" required="">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-lg-6">
+                                          <div class="form-group">
+                                             <label>City*</label>
+                                             <input class="form-control" type="text" name="checkout-ship-city" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Zip/Postal Code*</label>
+                                             <input class="form-control" type="text" name="checkout-ship-zip" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Telephone*</label>
+                                             <input class="form-control" type="text" name="checkout-ship-telephone" required="">
+                                          </div>
+                                       </div>
+                                       <div class="col-lg-6">
+                                          <div class="form-group">
+                                             <label>State/Province*</label>
+                                             <input class="form-control" type="text" name="checkout-ship-state" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Country*</label>
+                                             <input class="form-control" type="text" name="checkout-ship-country" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Fax</label>
+                                             <input class="form-control" type="text" name="checkout-ship-fax">
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="mv">
+                                       <div class="checkbox c-checkbox">
+                                          <label>
+                                             <input id="chk-guest" type="checkbox" name="checkout-use-bill-address">
+                                             <span class="fa fa-check"></span>Use Billing Address</label>
+                                       </div>
+                                    </div>
+                                    <div class="pt clearfix">
+                                       <p class="pull-right text-sm"><i>Fields marked with (*) are required</i>
+                                       </p>
+                                       <div class="pull-left">
+                                          <button class="btn btn-primary" type="button">Continue</button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Shipping Method-->
+                           <div class="panel b">
+                              <div class="panel-heading">
+                                 <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#acc1collapse4">4. Shipping Method</a>
+                                 </h4>
+                              </div>
+                              <div class="panel-collapse collapse" id="acc1collapse4">
+                                 <div class="panel-body" id="collapse04">
+                                    <table class="table">
+                                       <thead class="bg-gray-lighter">
+                                          <tr>
+                                             <th class="wd-xxs">
+                                                <em class="fa fa-check text-muted ml-sm"></em>
+                                             </th>
+                                             <th>Method</th>
+                                             <th>Deliver Time</th>
+                                             <th>Cost</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+                                                <div class="radio c-radio">
+                                                   <label>
+                                                      <input id="chk-guest" type="radio" name="checkout-ship" value="free">
+                                                      <span class="fa fa-check"></span>
+                                                   </label>
+                                                </div>
+                                             </td>
+                                             <td>
+                                                <strong>Free Shipping</strong>
+                                             </td>
+                                             <td>10 to 15 days</td>
+                                             <td>
+                                                <strong class="h4 text-green">Free</strong>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>
+                                                <div class="radio c-radio">
+                                                   <label>
+                                                      <input id="chk-guest" type="radio" name="checkout-ship" value="std">
+                                                      <span class="fa fa-check"></span>
+                                                   </label>
+                                                </div>
+                                             </td>
+                                             <td>
+                                                <strong>Standard post</strong>
+                                             </td>
+                                             <td>4 to 7 days</td>
+                                             <td>
+                                                <strong class="h4">$9.95</strong>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>
+                                                <div class="radio c-radio">
+                                                   <label>
+                                                      <input id="chk-guest" type="radio" name="checkout-ship" value="next">
+                                                      <span class="fa fa-check"></span>
+                                                   </label>
+                                                </div>
+                                             </td>
+                                             <td>
+                                                <strong>Next day</strong>
+                                             </td>
+                                             <td>tomorrow</td>
+                                             <td>
+                                                <strong class="h4">$19</strong>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                    <div class="pt clearfix">
+                                       <div class="pull-left">
+                                          <button class="btn btn-primary" type="button">Continue</button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Payment Information-->
+                           <div class="panel b">
+                              <div class="panel-heading">
+                                 <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#acc1collapse5">5. Payment Information</a>
+                                 </h4>
+                              </div>
+                              <div class="panel-collapse collapse" id="acc1collapse5">
+                                 <div class="panel-body" id="collapse05">
+                                    <div class="row">
+                                       <div class="col-lg-6">
+                                          <div class="form-group">
+                                             <div class="radio c-radio">
+                                                <label>
+                                                   <input class="form-control" id="chk-guest" type="radio" name="checkout-pay" value="paypal" checked>
+                                                   <span class="fa fa-check"></span>Paypal</label>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <div class="radio c-radio">
+                                                <label>
+                                                   <input class="form-control" id="chk-guest" type="radio" name="checkout-pay" value="check">
+                                                   <span class="fa fa-check"></span>Check / Money order</label>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <div class="radio c-radio">
+                                                <label>
+                                                   <input class="form-control" id="chk-guest" type="radio" name="checkout-pay" value="creditcard">
+                                                   <span class="fa fa-check"></span>Credit Card (saved)</label>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Name on Card*</label>
+                                             <input class="form-control" type="text" name="checkout-cc-name" required="">
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Credit Card Type*</label>
+                                             <select class="form-control" name="checkout-cc-type" required="">
+                                                <option value="">- Please Select -</option>
+                                                <option value="amex">American Express</option>
+                                                <option value="visa">Visa</option>
+                                                <option value="master">Mastercard</option>
+                                             </select>
+                                          </div>
+                                          <div class="form-group">
+                                             <label>Credit Card Number*</label>
+                                             <input class="form-control" type="text" name="checkout-cc-number" required="">
+                                          </div>
+                                          <div class="row">
+                                             <div class="col-lg-5">
+                                                <div class="form-group">
+                                                   <label>Credit Expiration month*</label>
+                                                   <select class="form-control" name="checkout-cc-exp-month" required="">
+                                                      <option value="">Month</option>
+                                                      <option value="1">January</option>
+                                                      <option value="2">February</option>
+                                                      <option value="3">March</option>
+                                                      <option value="4">April</option>
+                                                      <option value="5">May</option>
+                                                      <option value="6">June</option>
+                                                      <option value="7">Jule</option>
+                                                      <option value="8">August</option>
+                                                      <option value="9">September</option>
+                                                      <option value="10">October</option>
+                                                      <option value="11">November</option>
+                                                      <option value="12">December</option>
+                                                   </select>
+                                                </div>
+                                             </div>
+                                             <div class="col-lg-5">
+                                                <div class="form-group">
+                                                   <label>Credit Expiration year*</label>
+                                                   <select class="form-control" name="checkout-cc-exp-year" required="">
+                                                      <option value="">Year</option>
+                                                      <option value="2016">2016</option>
+                                                      <option value="2017">2017</option>
+                                                      <option value="2018">2018</option>
+                                                      <option value="2019">2019</option>
+                                                      <option value="2020">2020</option>
+                                                      <option value="2021">2021</option>
+                                                      <option value="2022">2022</option>
+                                                      <option value="2023">2023</option>
+                                                   </select>
+                                                </div>
+                                             </div>
+                                             <div class="col-lg-2">
+                                                <div class="form-group">
+                                                   <label>CNV*</label>
+                                                   <input class="form-control" type="text" name="checkout-cc-verification" required="">
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="pt clearfix">
+                                       <p class="pull-right text-sm"><i>Fields marked with (*) are required</i>
+                                       </p>
+                                       <div class="pull-left">
+                                          <button class="btn btn-primary" type="button">Continue</button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Order Review-->
+                           <div class="panel b">
+                              <div class="panel-heading">
+                                 <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#acc1collapse6">6. Order Review</a>
+                                 </h4>
+                              </div>
+                              <div class="panel-collapse collapse" id="acc1collapse6">
+                                 <div class="panel-body" id="collapse06">
+                                    <div class="table-responsive">
+                                       <table class="table">
+                                          <colgroup>
+                                             <col class="order-pic" span="1">
+                                                <col class="order-item-name" span="1">
+                                                   <col class="order-qty" span="1">
+                                                      <col class="order-price" span="1">
+                                                         <col class="order-tax" span="1">
+                                                            <col class="order-total" span="1">
+                                          </colgroup>
+                                          <thead class="bg-gray-lighter">
+                                             <tr>
+                                                <th>Product</th>
+                                                <th>Product Title</th>
+                                                <th class="wd-xs">Qty</th>
+                                                <th>Unit Price</th>
+                                                <th>Tax</th>
+                                                <th>Total</th>
+                                             </tr>
+                                          </thead>
+                                          <tfoot>
+                                             <tr>
+                                                <td colspan="5">Subtotal</td>
+                                                <td>$1540.00</td>
+                                             </tr>
+                                             <tr>
+                                                <td colspan="5">Shipping &amp; Handling (Free)</td>
+                                                <td>$0.00</td>
+                                             </tr>
+                                             <tr>
+                                                <td colspan="5">Tax</td>
+                                                <td>$49.00</td>
+                                             </tr>
+                                             <tr class="order-subtotal">
+                                                <td colspan="5">Subtotal</td>
+                                                <td>$1340.00</td>
+                                             </tr>
+                                          </tfoot>
+                                          <tbody>
+                                             <tr>
+                                                <td class="order-pic thumb64">
+                                                   <img src="img/dummy.png">
+                                                </td>
+                                                <td class="order-item-name">Lorem Ipsum dolor</td>
+                                                <td class="order-qty">
+                                                   <input class="form-control" type="text" name="checkout-qty" value="1">
+                                                </td>
+                                                <td class="order-price">$825.00</td>
+                                                <td class="order-tax">$16.00</td>
+                                                <td class="order-total">$841.00</td>
+                                             </tr>
+                                             <tr>
+                                                <td class="order-pic">
+                                                   <img src="img/dummy.png">
+                                                </td>
+                                                <td class="order-item-name">Lorem Ipsum dolor</td>
+                                                <td class="order-qty">
+                                                   <input class="form-control" type="text" name="checkout-qty" value="1">
+                                                </td>
+                                                <td class="order-price">$825.00</td>
+                                                <td class="order-tax">$16.00</td>
+                                                <td class="order-total">$841.00</td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                    <div class="mt-lg">
+                                       <button class="btn btn-info" type="button">Submit Order</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- Page footer-->
+      <footer>
+         <span>&copy; 2017 - CTAP</span>
+      </footer>
+   </div>
+   <!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   <script src="../vendor/modernizr/modernizr.custom.js"></script>
+   <!-- MATCHMEDIA POLYFILL-->
+   <script src="../vendor/matchMedia/matchMedia.js"></script>
+   <!-- JQUERY-->
+   <script src="../vendor/jquery/dist/jquery.js"></script>
+   <!-- BOOTSTRAP-->
+   <script src="../vendor/bootstrap/dist/js/bootstrap.js"></script>
+   <!-- STORAGE API-->
+   <script src="../vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
+   <!-- JQUERY EASING-->
+   <script src="../vendor/jquery.easing/js/jquery.easing.js"></script>
+   <!-- ANIMO-->
+   <script src="../vendor/animo.js/animo.js"></script>
+   <!-- SLIMSCROLL-->
+   <script src="../vendor/slimScroll/jquery.slimscroll.min.js"></script>
+   <!-- SCREENFULL-->
+   <script src="../vendor/screenfull/dist/screenfull.js"></script>
+   <!-- LOCALIZE-->
+   <script src="../vendor/jquery-localize-i18n/dist/jquery.localize.js"></script>
+   <!-- RTL demo-->
+   <script src="js/demo/demo-rtl.js"></script>
+   <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+   <!-- =============== APP SCRIPTS ===============-->
+   <script src="js/app.js"></script>
+</body>
+
+</html>

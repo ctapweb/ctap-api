@@ -1,0 +1,54 @@
+extends ../_layout
+
+block active
+  - sidebar_active = 'table-datatable.html'
+
+block content
+    h3 Corpus Manager
+      small Manages corpora and texts
+
+    .container-fluid
+      // START DATATABLE 1
+      .row
+        .col-lg-12
+          .panel.panel-default
+            .panel-heading
+              | List of Corpora
+              small Zero Configuration + Export Buttons
+            .panel-body: .table-responsive
+              table#corpusList.table.table-striped.table-hover(style="cursor:pointer")
+                thead
+                  tr
+                    th ID
+                    th Corpus Name
+                    th Description
+                    th.sort-numeric Created On
+                tbody
+                  
+      // END DATATABLE 1
+
+
+block vendor_css
+  // DATATABLES
+  link(rel='stylesheet', href='../vendor/datatables-colvis/css/dataTables.colVis.css')
+  link(rel='stylesheet', href='../vendor/datatables/media/css/dataTables.bootstrap.css')
+  link(rel='stylesheet', href='../vendor/dataTables.fontAwesome/index.css')
+  link(rel='stylesheet', href='https://cdn.datatables.net/select/1.2.4/css/select.dataTables.min.css')
+
+block vendor_js
+  // DATATABLES
+  script(src='../vendor/datatables/media/js/jquery.dataTables.min.js')
+  script(src='../vendor/datatables-colvis/js/dataTables.colVis.js')
+  script(src='../vendor/datatables/media/js/dataTables.bootstrap.js')
+  script(src='../vendor/datatables-buttons/js/dataTables.buttons.js')
+  //- script(src='../vendor/datatables-buttons/css/buttons.bootstrap.css')
+  script(src='../vendor/datatables-buttons/js/buttons.bootstrap.js')
+  script(src='../vendor/datatables-buttons/js/buttons.colVis.js')
+  script(src='../vendor/datatables-buttons/js/buttons.flash.js')
+  script(src='../vendor/datatables-buttons/js/buttons.html5.js')
+  script(src='../vendor/datatables-buttons/js/buttons.print.js')
+  script(src='https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js')
+
+  script(src='../vendor/datatables-responsive/js/dataTables.responsive.js')
+  script(src='../vendor/datatables-responsive/js/responsive.bootstrap.js')
+  //script(src='js/demo/demo-datatable.js')

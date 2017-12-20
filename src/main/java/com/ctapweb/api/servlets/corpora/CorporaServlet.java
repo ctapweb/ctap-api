@@ -19,8 +19,8 @@ import com.ctapweb.api.db.DataSourceManager;
 import com.ctapweb.api.db.operations.CorpusTableOperations;
 import com.ctapweb.api.db.operations.UserTableOperations;
 import com.ctapweb.api.db.pojos.Corpus;
-import com.ctapweb.api.servlets.ServletUtils;
 import com.ctapweb.api.servlets.exceptions.CTAPException;
+import com.ctapweb.api.servlets.utils.ServletUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -107,7 +107,7 @@ public class CorporaServlet extends HttpServlet {
 			long insertedCorpusId = corpusTableOperations.addEntry(corpus);
 			
 			//return the link of the inserted corpus
-			response.setHeader("Link:", ServletUtils.createLinkHeader("/corpora/" + insertedCorpusId, "self"));
+			response.setHeader("Link", ServletUtils.createLinkHeader("/corpora/" + insertedCorpusId, "self"));
 			response.setStatus(response.SC_CREATED);
 
 		} catch (SQLException e) {
@@ -178,7 +178,7 @@ public class CorporaServlet extends HttpServlet {
 			corpusTableOperations.updateEntry(corpus);
 			
 			//return the link of the inserted corpus
-			response.setHeader("Link:", ServletUtils.createLinkHeader("/corpora/" + corpusId, "self"));
+			response.setHeader("Link", ServletUtils.createLinkHeader("/corpora/" + corpusId, "self"));
 			response.setStatus(response.SC_OK);
 
 		} catch (SQLException e) {

@@ -90,7 +90,6 @@ public class TextTableOperationsTest {
 		assertEquals(text.getTitle(), textTableOperations.getEntry(insertedTextId).getTitle());
 		assertEquals(text.getContent(), textTableOperations.getEntry(insertedTextId).getContent());
 		assertEquals(text.getTagId(), textTableOperations.getEntry(insertedTextId).getTagId());
-		assertEquals(text.getStatus(), textTableOperations.getEntry(insertedTextId).getStatus());
 		assertNotNull(textTableOperations.getEntry(insertedTextId).getUpdateDate());
 
 		//test if user owner
@@ -110,14 +109,6 @@ public class TextTableOperationsTest {
 		assertEquals(newTextContent, textTableOperations.getEntry(insertedTextId).getContent());
 		assertFalse(oldUpdateDate.equals(newUpdateDate));
 
-		String newTextStatus = Text.STATUS_ANALYZED;
-		textTableOperations.updateStatus(insertedTextId, newTextStatus);
-		assertEquals(newTextStatus, textTableOperations.getEntry(insertedTextId).getStatus());
-
-		newTextStatus = Text.STATUS_ANALYZING;
-		textTableOperations.updateStatus(insertedTextId, newTextStatus);
-		assertEquals(newTextStatus, textTableOperations.getEntry(insertedTextId).getStatus());
-
 		//delete one entry
 		logger.trace("Testing deleting single entry...");
 		textTableOperations.deleteEntry(insertedTextId);
@@ -132,7 +123,6 @@ public class TextTableOperationsTest {
 		assertEquals(text.getTitle(), textTableOperations.getEntry(insertedTextId).getTitle());
 		assertEquals(text.getContent(), textTableOperations.getEntry(insertedTextId).getContent());
 		assertEquals(0, textTableOperations.getEntry(insertedTextId).getTagId().longValue());
-		assertEquals(text.getStatus(), textTableOperations.getEntry(insertedTextId).getStatus());
 		assertNotNull(textTableOperations.getEntry(insertedTextId).getUpdateDate());
 
 		textTableOperations.deleteEntry(insertedTextId);

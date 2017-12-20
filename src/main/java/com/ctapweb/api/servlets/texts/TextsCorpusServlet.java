@@ -21,8 +21,8 @@ import com.ctapweb.api.db.operations.TagTableOperations;
 import com.ctapweb.api.db.operations.TextTableOperations;
 import com.ctapweb.api.db.operations.UserTableOperations;
 import com.ctapweb.api.db.pojos.Text;
-import com.ctapweb.api.servlets.ServletUtils;
 import com.ctapweb.api.servlets.exceptions.CTAPException;
+import com.ctapweb.api.servlets.utils.ServletUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -104,7 +104,7 @@ public class TextsCorpusServlet extends HttpServlet {
 			logger.trace("Getting texts from corpus {} for user {}:{}...", corpusId, userId, getCurrentUserEmail());
 			long insertedTextId = textTableOperations.addEntry(text);
 
-			response.setHeader("Link:", ServletUtils.createLinkHeader("/texts/corpus/" + insertedTextId, "self"));
+			response.addHeader("Link", ServletUtils.createLinkHeader("/texts/corpus/" + insertedTextId, "self"));
 			response.setStatus(response.SC_CREATED);
 
 		} catch (SQLException e) {

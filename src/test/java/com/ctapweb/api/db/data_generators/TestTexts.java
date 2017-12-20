@@ -37,7 +37,6 @@ public class TestTexts {
 					"Title " + i,
 					"Content of text " + i, 
 					tagId,
-					Text.STATUS_NOT_ANALYZED,
 					new Timestamp(new Date().getTime()));
 
 			textList.add(text);

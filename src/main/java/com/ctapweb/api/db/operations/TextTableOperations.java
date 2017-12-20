@@ -18,8 +18,8 @@ public class TextTableOperations extends TableOperations {
 	public static final String COLUMN_CORPUS_ID = "corpus_id";
 	public static final String COLUMN_TITLE = "title";
 	public static final String COLUMN_CONTENT = "content";
+	public static final String COLUMN_ANNOTATED_CONTENT = "annotated_content";
 	public static final String COLUMN_TAG_ID = "tag_id";
-	public static final String COLUMN_STATUS = "status";
 	public static final String COLUMN_UPDATE_TIMESTAMP = "update_timestamp";
 
 
@@ -55,10 +55,10 @@ public class TextTableOperations extends TableOperations {
 				+ "" + CorpusTableOperations.COLUMN_ID + ") ON DELETE CASCADE,"
 				+ COLUMN_TITLE + " TEXT NOT NULL, "
 				+ COLUMN_CONTENT + " TEXT,"
+				+ COLUMN_ANNOTATED_CONTENT + " TEXT,"
 				+ COLUMN_TAG_ID + " BIGINT REFERENCES " 
 				+ "" + tableNames.getTagTableName() + "("
 				+ "" + TagTableOperations.COLUMN_ID + ") ON DELETE CASCADE,"
-				+ COLUMN_STATUS + " VARCHAR(20),"
 				+ COLUMN_UPDATE_TIMESTAMP+ " TIMESTAMP NOT NULL)"; 
 
 		try(
@@ -117,8 +117,8 @@ public class TextTableOperations extends TableOperations {
 		String addEntryStr = "INSERT INTO " + tableName + " (" 
 				+ COLUMN_CORPUS_ID + "," + COLUMN_TITLE + ","
 				+ COLUMN_CONTENT + ","  + COLUMN_TAG_ID + ","
-				+ COLUMN_STATUS + "," + COLUMN_UPDATE_TIMESTAMP +") "
-				+ "VALUES(?, ?, ?, ?, ?, CURRENT_TIMESTAMP) RETURNING " + COLUMN_ID;
+				+ COLUMN_UPDATE_TIMESTAMP +") "
+				+ "VALUES(?, ?, ?, ?, CURRENT_TIMESTAMP) RETURNING " + COLUMN_ID;
 
 		try(
 				Connection conn = dataSource.getConnection();
@@ -135,7 +135,6 @@ public class TextTableOperations extends TableOperations {
 				ps.setLong(4, text.getTagId());
 			}
 
-			ps.setString(5, text.getStatus());
 
 			try(
 					ResultSet rs = ps.executeQuery();
@@ -177,7 +176,6 @@ public class TextTableOperations extends TableOperations {
 	public void updateContent(long textId, String newContent) throws SQLException {
 		String updateStr = "UPDATE " + tableName + " "
 				+ "SET " + COLUMN_CONTENT + " = ?, " 
-				+ COLUMN_STATUS + " = ?, "
 				+ COLUMN_UPDATE_TIMESTAMP + " = CURRENT_TIMESTAMP "
 				+ "WHERE " + COLUMN_ID + " = ?";
 		try (
@@ -186,8 +184,23 @@ public class TextTableOperations extends TableOperations {
 				) {
 
 			ps.setString(1, newContent);
-			ps.setString(2, Text.STATUS_NOT_ANALYZED);
-			ps.setLong(3, textId);
+			ps.setLong(2, textId);
+
+			ps.executeUpdate();
+		}
+	}
+
+	public void updateAnnotatedContent(long textId, String newAnnotatedContent) throws SQLException {
+		String updateStr = "UPDATE " + tableName + " "
+				+ "SET " + COLUMN_ANNOTATED_CONTENT + " = ? " 
+				+ "WHERE " + COLUMN_ID + " = ?";
+		try (
+				Connection conn = dataSource.getConnection();
+				PreparedStatement ps = conn.prepareStatement(updateStr);
+				) {
+
+			ps.setString(1, newAnnotatedContent);
+			ps.setLong(2, textId);
 
 			ps.executeUpdate();
 		}
@@ -232,23 +245,6 @@ public class TextTableOperations extends TableOperations {
 		}
 
 	}
-
-	public void updateStatus(long textId, String newStatus) throws SQLException {
-		String updateStr = "UPDATE " + tableName + " "
-				+ "SET " + COLUMN_STATUS + " = ? "
-				+ "WHERE " + COLUMN_ID + " = ?";
-		try (
-				Connection conn = dataSource.getConnection();
-				PreparedStatement ps = conn.prepareStatement(updateStr);
-				) {
-
-			ps.setString(1, newStatus);
-			ps.setLong(2, textId);
-
-			ps.executeUpdate();
-		}
-	}
-
 
 	@Override
 	public Text getEntry(long entryId) throws SQLException {
@@ -403,8 +399,8 @@ public class TextTableOperations extends TableOperations {
 					rs.getLong(COLUMN_CORPUS_ID),
 					rs.getString(COLUMN_TITLE),
 					rs.getString(COLUMN_CONTENT),
+						rs.getString(COLUMN_ANNOTATED_CONTENT),
 					rs.getLong(COLUMN_TAG_ID),
-					rs.getString(COLUMN_STATUS),
 					rs.getTimestamp(COLUMN_UPDATE_TIMESTAMP)
 					);
 		}
@@ -422,8 +418,8 @@ public class TextTableOperations extends TableOperations {
 						rs.getLong(COLUMN_CORPUS_ID),
 						rs.getString(COLUMN_TITLE),
 						rs.getString(COLUMN_CONTENT),
+						rs.getString(COLUMN_ANNOTATED_CONTENT),
 						rs.getLong(COLUMN_TAG_ID),
-						rs.getString(COLUMN_STATUS),
 						rs.getTimestamp(COLUMN_UPDATE_TIMESTAMP)
 						);
 				entryList.add(text);

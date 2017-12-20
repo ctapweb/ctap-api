@@ -16,8 +16,8 @@ public class TestMeasures {
 	 * @param language
 	 * @return
 	 */
-	public Measure generateMeasure(long categoryId, String language) {
-		return generateMeasures(categoryId, language,  1).get(0);
+	public Measure generateMeasure(long categoryId) {
+		return generateMeasures(categoryId, 1).get(0);
 	}
 
 	/**
@@ -27,14 +27,13 @@ public class TestMeasures {
 	 * @param size
 	 * @return
 	 */
-	public List<Measure> generateMeasures(long categoryId, String language, int size) {
+	public List<Measure> generateMeasures(long categoryId, int size) {
 		List<Measure> measureList = new ArrayList<>();
 
 		for(int i = 1; i <= size; i++) {
 			Measure measure = new Measure(i, 
 					categoryId,
-					language,
-					categoryId + language + " Measure Name " + i, 
+					"Measure Name " + i, 
 					"Description of measure " + i);
 
 			measureList.add(measure);

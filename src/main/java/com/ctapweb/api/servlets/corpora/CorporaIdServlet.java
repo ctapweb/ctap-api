@@ -18,8 +18,8 @@ import com.ctapweb.api.db.DataSourceManager;
 import com.ctapweb.api.db.operations.CorpusTableOperations;
 import com.ctapweb.api.db.operations.UserTableOperations;
 import com.ctapweb.api.db.pojos.Corpus;
-import com.ctapweb.api.servlets.ServletUtils;
 import com.ctapweb.api.servlets.exceptions.CTAPException;
+import com.ctapweb.api.servlets.utils.ServletUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -100,8 +100,8 @@ public class CorporaIdServlet extends HttpServlet {
 			logger.trace("Updating corpus {} for user {}: {}...", corpusId, userId, getCurrentUserEmail());
 			corpusTableOperations.updateEntry(corpus);
 			
-			//return the link of the inserted corpus
-			response.setHeader("Link:", ServletUtils.createLinkHeader("/corpora/" + corpusId, "self"));
+			//return the link of the updated corpus
+			response.setHeader("Link", ServletUtils.createLinkHeader("/corpora/" + corpusId, "self"));
 			response.setStatus(response.SC_OK);
 
 		} catch (SQLException e) {
